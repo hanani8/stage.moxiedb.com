@@ -1,0 +1,81 @@
+<div class="wrapper">
+  <app-iuser-navigation></app-iuser-navigation>
+  <!-- Sidebar -->
+  <app-iuser-sidebar></app-iuser-sidebar>
+
+  <div class="main-panel">
+    <div class="container">
+      <div class="page-inner">
+        <h4 class="page-title">Dashboard</h4>
+        <div class="page-category">Welcome! Your work all in one place.</div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">
+                  My Requests - Overall incoming status
+                </div>
+              </div>
+              <google-chart #chart
+              [title]="title"
+              [type]="type"
+              [data]="data"
+              [columnNames]="columnNames"
+              [options]="options"
+              [width]="width"
+              [height]="height">
+           </google-chart>
+            </div>
+          </div>
+
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">My Products</div>
+            </div>
+            <div class="card-body">
+              <div class="chart-container">
+                <div *ngFor="let product of products" class="row">
+                  <div class="col">
+                    <h4 class="ml-2  mt-2">{{ product.productName }}</h4>
+                  </div>
+                  <div class="col">
+                    <h4 class="ml-5 mt-2">{{ product.CASNumber }}</h4>
+                  </div>
+                </div>
+                <!-- <canvas id="barChart"></canvas> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Chart with HTML Legends</div>
+            </div>
+            <div class="card-body">
+              <div class="card-sub">
+                Sometimes you need a very complex legend. In these cases, it
+                makes sense to generate an HTML legend. Charts provide a
+                generateLegend() method on their prototype that returns an HTML
+                string for the legend.
+              </div>
+              <div class="chart-container">
+                <canvas id="htmlLegendsChart"></canvas>
+              </div>
+              <div id="myChartLegend"></div>
+            </div>
+          </div>
+        </div>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom template | don't include it in your project! -->
+
+  <!-- End Custom template -->
+</div>
+<!--   Core JS Files   -->

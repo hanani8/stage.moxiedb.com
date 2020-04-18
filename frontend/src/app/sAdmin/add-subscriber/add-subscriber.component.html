@@ -1,0 +1,121 @@
+<div class="wrapper">
+  <app-navigation></app-navigation>>
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>>
+  <div class="main-panel">
+    <div class="container">
+      <div class="page-inner">
+        <div class="page-header">
+          <h4 class="page-title">Add Subscriber Management</h4>
+          <ul class="breadcrumbs">
+            <li class="nav-home">
+              <a href="#">
+                <i class="flaticon-home"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Add Subscriber Organization</div>
+              </div>
+              <form #subForm="ngForm">
+                <!-- {{ subForm.value | json }} -->
+                <br />
+                <div class="card-body">
+                  <div class="form-group form-show-validation row">
+                    <label
+                      for="name"
+                      class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right"
+                      >Organization Name
+                      <span class="required-label">*</span></label
+                    >
+                    <div class="col-lg-4 col-md-9 col-sm-8">
+                      <input
+                        type="text"
+                        [ngModel]
+                        class="form-control"
+                        id="orgname"
+                        name="name"
+                        placeholder="Enter Username"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div class="separator-solid"></div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="card">
+                        <div class="card-header">
+                          <h4 class="card-title">List of Products</h4>
+                        </div>
+                        <div class="card-body">
+                          <dual-list
+                            [ngModel]
+                            class="form-control"
+                            [source]="source"
+                            [(destination)]="target"
+                            [format]="format"
+                            [filter]="filter"
+                            height="150px"
+                          ></dual-list>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="separator-solid"></div>
+                  <!-- <div class="form-group form-show-validation row">
+                    <label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right"
+                      >Upload Image <span class="required-label">*</span></label>
+                    <div class="col-lg-4 col-md-9 col-sm-8">
+                      <div class="input-file input-file-image">
+                        <img
+                          class="img-upload-preview img-circle"
+                          width="100"
+                          height="100"
+                          src="http://placehold.it/100x100"
+                          alt="preview"
+                        />
+                        <input
+                          type="file"
+                          class="form-control form-control-file"
+                          id="uploadImg"
+                          name="uploadImg"
+                          accept="image/*"
+                          required
+                        />
+                        <label
+                          for="uploadImg"
+                          class="btn btn-primary btn-round btn-lg"
+                          ><i class="fa fa-file-image"></i> Upload a
+                          Image</label
+                        >
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+                <div class="card-action">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <button
+                        type="button"
+                        (click)="onSubmit(subForm)"
+                        class="btn btn-success"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,245 @@
+<div class="wrapper">
+  <app-navigation></app-navigation>>
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+  <div class="main-panel">
+    <div class="container">
+      <div class="page-inner">
+        <div class="page-header">
+          <h4 class="page-title">Products</h4>
+          <ul class="breadcrumbs">
+            <li class="nav-home">
+              <a href="#">
+                <i class="flaticon-home"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="d-flex align-items-center form-group">
+                  <label class="mr-2" for="gsearch">Search Products : </label>
+                  <input
+                    type="search"
+                    class="form-control mr-5"
+                    placeholder="Search Text"
+                    [(ngModel)]="search"
+                    id="listSearch"
+                  />
+                  <!-- <h4 class="card-title">Add products</h4> -->
+
+                  <button
+                    class="btn btn-primary btn-round ml-5"
+                    [routerLink]="['/addProd']"
+                    routerLinkActive="router-link-active"
+                  >
+                    <i class="fa fa-plus"></i>
+                    Add Products
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table
+                    id="multi-filter-select"
+                    class="display table table-striped table-hover"
+                  >
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Product Name</th>
+                        <th>Product Type</th>
+                        <th>CAS Number</th>
+                        <th>Therapeutic Category</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="
+                          let product of products | search: search;
+                          index as i
+                        "
+                      >
+                        <td scope="row">{{ i + 1 }}</td>
+                        <!-- <td>{{ product._id}}</td> -->
+                        <td>{{ product.productName }}</td>
+                        <td>{{ product.productType }}</td>
+                        <td>{{ product.casNumber }}</td>
+                        <td>{{ product.therapeuticCategory }}</td>
+                        <td>
+                          <div class="form-button-action">
+                            <button
+                              type="button"
+                              data-target="#upmodel"
+                              data-toggle="modal"
+                              (click)="toUpdate(product)"
+                              class="btn btn-link btn-primary btn-lg"
+                              data-original-title="Edit Task"
+                            >
+                              <i class="fa fa-edit"></i>
+                            </button>
+                            <button
+                              type="button"
+                              data-toggle="modal" data-target="#modelId"
+                              title=""
+                              (click)="deleteProduct(product._id)"
+                              class="btn btn-link btn-danger"
+                              data-original-title="Remove"
+
+                            >
+                              <i class="fa fa-times"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom template | don't include it in your project! -->
+
+  <!-- End Custom template -->
+</div>
+
+<div
+  class="modal fade right side-modal"
+  id="upmodel"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-side modal-top-right" role="document">
+    <div class="modal-content">
+      <div style="background-color: rgb(18, 47, 86);" class="modal-header">
+        <h2 class="modal-title w-100 text-white" id="myModalLabel">
+          Edit Product
+        </h2>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form #pro="ngForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Product Name</label>
+            <input style="display: none;" name="_id" ngModel={{prod._id}} />
+            <input
+              class="form-control"
+              name="name"
+              ngModel="{{ prod.productName }}"
+            />
+          </div>
+          <div class="form-group">
+            <label>CAS number</label>
+            <input
+              class="form-control"
+              name="cas"
+              ngModel="{{ prod.casNumber }}"
+            />
+          </div>
+          <div class="form-group">
+            <label>Product Type</label>
+            <input
+              class="form-control"
+              name="productType"
+              ngModel="{{ prod.productType }}"
+            />
+          </div>
+          <div class="form-group">
+            <label>Composition Moleculer</label>
+            <input
+              class="form-control"
+              name="compositionMolecule"
+              ngModel="{{ prod.compositionMolecule }}"
+            />
+          </div>
+          <div class="form-group">
+            <label>Therapeutic Category</label>
+            <input
+              class="form-control"
+              name="therapeuticCategory"
+              ngModel="{{ prod.therapeuticCategory }}"
+            />
+          </div>
+          <div class="form-group">
+            <label>Dosage Form</label>
+            <input
+              class="form-control"
+              name="dosageForm"
+              ngModel="{{ prod.dosageForm }}"
+            />
+          </div>
+          <div class="form-group">
+            <label>NDC</label>
+            <input
+              class="form-control"
+              name="ndc"
+              ngModel="{{ prod.ndc }}"
+            />
+          </div>
+          <div class="form-group">
+            <label>Packing</label>
+            <input
+              class="form-control"
+              name="packing"
+              ngModel="{{ prod.packing }}"
+            />
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">
+            Close
+          </button>
+          <button (click)="productUpdate(pro)" type="button" class="btn btn-primary" data-dismiss="modal">
+            Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="modelId">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Video</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <i class="fa fa-exclamation-triangle text-danger"></i>&nbsp;Are Your
+        Sure To Delete?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          Close
+        </button>
+        <button (click)="finalDelete()" data-dismiss="modal" type="button" class="btn btn-danger">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

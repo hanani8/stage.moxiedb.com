@@ -1,0 +1,36 @@
+CSS
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.btn-primary {
+    float:right;
+}
+.status {
+  position: -webkit-sticky;
+  position:sticky;
+}
+
+.yes {
+	display: inline-block;
+	justify-content: space-between;
+}
+
+.example-card { 
+    left:300px;
+	width:400px; 
+	/* height:50px; */ 
+}
+.details {
+  display: block;
+}

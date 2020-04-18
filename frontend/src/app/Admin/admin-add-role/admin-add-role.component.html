@@ -1,0 +1,146 @@
+<div class="wrapper">
+  <app-admin-navigation></app-admin-navigation>
+
+  <!-- Sidebar -->
+  <app-admin-sidebar></app-admin-sidebar>>
+  <!-- End Sidebar -->
+  <div class="main-panel">
+    <div class="container">
+      <div class="page-inner">
+        <h4 class="page-title">Add Role</h4>
+        <div class="row">
+          <div class="col-md-10">
+            <div class="card card-with-nav">
+              <div class="card-header">
+                <div class="row row-nav-line">
+                  <ul class="nav nav-tabs nav-line nav-color-secondary w-100 pl-4" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active show" data-toggle="tab" href="#home" role="tab"
+                        aria-selected="true">Enter Details</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <form #roleForm="ngForm">
+                <div class="card-body">
+                  <div class="row mt-3">
+                    <div class="col-md-6">
+                      <div class="form-group form-group-default">
+                        <label>Role Name</label>
+                        <select (change)="funk($event)" [ngModel] class="form-control" id="gender" name="role">
+                          <option value="">&nbsp;</option>
+                          <option value="iuser">iuser</option>
+                          <option value="xuser">xuser</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group form-group-default">
+                        <label>Organization Name</label>
+                        <select [ngModel] class="form-control" id="org" name="organization">
+                          <option value="">&nbsp;</option>
+                          <div *ngIf="displayOrg; then thenblock; else elseblock"></div>
+
+                          <ng-template #thenblock>
+                            <option value="{{ organization }}">{{
+                              organization
+                            }}</option>
+                          </ng-template>
+                          <ng-template #elseblock>
+                            <option *ngFor="let organization of organizations" value="{{ organization.name }}">
+                              {{ organization.name }}</option>
+                          </ng-template>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-6">
+                      <div class="form-group form-group-default">
+                        <label>Full Name</label>
+                        <input [ngModel] type="text" class="form-control" name="name" placeholder="Eg: Hanani" />
+                      </div>
+                    </div>
+                    <!-- <div class="col-md-4">
+											<div class="form-group form-group-default">
+												<label>Birth Date</label>
+												<input type="text" class="form-control" id="datepicker" name="datepicker" value="03/21/1998" placeholder="Birth Date">
+											</div>
+										</div> -->
+
+                    <div class="col-md-4">
+                      <div class="form-group form-group-default">
+                        <label>Phone</label>
+                        <input [ngModel] type="text" class="form-control" name="phone"
+                          placeholder="Eg: +918897351040" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-6">
+                      <div class="form-group form-group-default">
+                        <label>Employee ID</label>
+                        <input [ngModel] type="text" class="form-control" name="employeeID" placeholder="Eg: 123-45" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group form-group-default">
+                        <label>Email ID</label>
+                        <input [ngModel] type="text" class="form-control" name="email"
+                          placeholder="Eg: hanani@moxiedb.com" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-6">
+                      <div class="form-group form-group-default">
+                        <label>Designation</label>
+                        <input [ngModel] type="text" class="form-control" id="gender" for="designation"
+                          name="designation" placeholder="Eg: General Manager" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group form-group-default">
+                        <label>Department</label>
+                        <input [ngModel] type="text" class="form-control" name="department"
+                          placeholder="Eg: Quality Affairs" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="separator-solid"></div>
+                  <div *ngIf="displaytable; then elseBlock; else thenBlock"></div>
+
+                  <ng-template #thenBlock>
+                    <h1>Users Allowed to deal with</h1>
+                    <div class="card-body">
+                      <dual-list [ngModel] class="form-control" [source]="sourceUsers" [(destination)]="targetUsers"
+                        [format]="format" [filter]="filter" height="150px"></dual-list>
+                    </div>
+                  </ng-template>
+
+                  <ng-template #elseBlock>
+                    <h1>Products</h1>
+                    <div class="card-body">
+                      <dual-list [ngModel] class="form-control" [source]="sourceProducts"
+                        [(destination)]="targetProducts" [format]="format" [filter]="filter" height="150px"></dual-list>
+                    </div>
+                  </ng-template>
+
+                  <div class="text-right mt-3 mb-3">
+                    <button (click)="onSubmit(roleForm)" class="btn btn-success mr-2">
+                      Add
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

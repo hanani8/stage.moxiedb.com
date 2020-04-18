@@ -1,0 +1,133 @@
+<div class="wrapper">
+  <app-xuser-navigation></app-xuser-navigation>
+
+  <!-- Sidebar -->
+  <app-xuser-sidebar></app-xuser-sidebar>>
+  <!-- End Sidebar -->
+  <div class="main-panel">
+    <div class="container">
+      <div class="page-inner">
+        <h4 class="page-title">Submit requests to supply chain partners</h4>
+        <div class="row">
+          <div class="col-md-10">
+            <div class="card card-with-nav">
+              <div class="card-header">
+                <div class="row row-nav-line">
+                  <ul
+                    class="nav nav-tabs nav-line nav-color-secondary w-100 pl-4"
+                    role="tablist"
+                  >
+                    <li class="nav-item">
+                      <a
+                        class="nav-link active show"
+                        data-toggle="tab"
+                        href="#home"
+                        role="tab"
+                        aria-selected="true"
+                      >
+                        Generate Ticket
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <form [formGroup]="genTkt" (ngSubmit)="onSubmit()">
+                <!-- {{ genTkt.value | json }} -->
+                <div class="card-body">
+                  <mat-form-field>
+                    <mat-label>Submit Request for</mat-label>
+                    <mat-select formControlName="documentNames" multiple>
+                      <mat-option
+                        *ngFor="let documentName of documentNames"
+                        [value]="documentName"
+                        >{{ documentName }}</mat-option
+                      >
+                    </mat-select>
+                  </mat-form-field>
+
+<br>
+                    <mat-form-field>
+                      <mat-label>Vendor Orgs</mat-label>
+                      <input matInput formControlName="vendorOrg">
+                    </mat-form-field>
+<br>
+                     <mat-form-field>
+                        <mat-label>Products</mat-label>
+                        <mat-select formControlName="products" multiple>
+                          <mat-option *ngFor="let product of products" [value]="product">{{product}}</mat-option>
+                      </mat-select>
+                     </mat-form-field>
+<br>
+                    <mat-form-field>
+                      <mat-label>Market</mat-label>
+                      <mat-select formControlName="market" id="market">
+                        <mat-option *ngFor="let market of markets" [value]="market">{{market}} </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+<br>
+                    <mat-form-field>
+                          <input matInput type="date" formControlName="date">
+                
+                    </mat-form-field>
+                    <!-- <pre>Model: {{ model | json }}</pre> -->
+<br>
+
+                    <mat-form-field>
+                      <mat-label>Criticality</mat-label>
+                      <mat-select formControlName="criticality" id="criticality">
+                        <mat-option *ngFor="let criticality of criticalities" [value]="criticality">{{criticality}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+<br>
+                    <mat-form-field appearance='fill'>
+                      <mat-label>Special Request :</mat-label>
+                      <textarea matInput
+                        formControlName="comment"
+                      ></textarea>
+                    </mat-form-field>
+<hr>
+<br>
+                  
+
+                  <h2>Respondent Details</h2>
+
+                  <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <mat-select
+                      formControlName="respondentName"
+                      id="respondentName"
+                    >
+                      <mat-option
+                        *ngFor="let respondentName of respondentNames"
+                        [value]="respondentName"
+                        >{{ respondentName }}</mat-option
+                      >
+                    </mat-select>
+                  </mat-form-field>
+
+<br>
+
+                  <mat-form-field>
+                    <mat-label>E-mail Address</mat-label>
+                    <input matInput
+                      formControlName="respondentEmail"
+                      id="respondentEmail"
+                    >
+                  </mat-form-field>
+<br>
+
+                  <mat-form-field>
+                    <mat-label>Contact Number</mat-label>
+                    <input matInput formControlName="respondentContact">
+                  </mat-form-field>
+                </div>
+                <button class="btn btn-success" type="submit">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

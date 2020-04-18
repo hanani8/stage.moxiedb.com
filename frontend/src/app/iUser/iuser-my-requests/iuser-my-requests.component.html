@@ -1,0 +1,95 @@
+<div class="wrapper">
+  <app-iuser-navigation></app-iuser-navigation>
+  <!-- Sidebar -->
+  <app-iuser-sidebar></app-iuser-sidebar>
+
+  <div class="main-panel">
+    <div class="container">
+      <div class="page-inner">
+        <div class="page-header">
+          <h4 class="page-title">Request Status</h4>
+          <ul class="breadcrumbs">
+            <li class="nav-home">
+              <a href="#">
+                <i class="flaticon-home"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                  <!-- <div class="row ml-3">
+                  </div> -->
+              </div>
+              <div class="row">
+              <div class="col-md-3">
+                <div class="ml-2 form-group">
+                    <h4 class="ml-4">Search by Organization:</h4>
+                    <input class="form-control ml-2" type="text" [(ngModel)]="searchTerm" />
+                </div>
+              </div>
+              <div class="col-md-3">
+               
+              </div>
+              <div class="col-md-3">
+                <div class="ml-2 form-group">
+                    <h3 class="ml-4">Search by Anything:</h3>
+                    <input class="form-control ml-2" type="text" [(ngModel)] = 'search'/>
+                </div>
+              </div>
+            </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table
+                    id="multi-filter-select"
+                    class="display table table-striped table-hover"
+                  >
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Document Name</th>
+                        <th>Organisation</th>
+                        <th>Product</th>
+                        <th>Requester</th>
+                        <th>Date required by-</th>
+                        <th>Criticality</th>
+                        <th>Comment</th>
+                        <th>Vendor Name</th>
+                        <th>Vendor Email</th>
+                        <th>Vendor Contact</th>
+                        <th>Object ID</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let request of requests | requestFilter: searchTerm | search : search ; index as i">
+                        <td scope="row">{{ i + 1 }}</td>
+                        <td><a href="/iuser/prg/{{request._id}}">{{ request.documentNames }}</a></td>
+                        <td><a>{{ request.vendorOrg | uppercase}}</a></td>
+                        <td><a>{{ request.products  }}</a></td>
+                        <td><a>{{ request.requesterName }}</a></td>
+                        <td><a>{{ request.date | date }}</a></td>
+                        <td><a>{{ request.criticality }}</a></td>
+                        <td><a>{{ request.comment }}</a></td>
+                        <td><a>{{ request.respondentName }}</a></td>
+                        <td><a>{{ request.respondentEmail }}</a></td>
+                        <td><a>{{ request.respondentContact }}</a></td>
+                        <td><a>{{request._id}}</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom template | don't include it in your project! -->
+
+  <!-- End Custom template -->
+</div>
+<!--   Core JS Files   -->

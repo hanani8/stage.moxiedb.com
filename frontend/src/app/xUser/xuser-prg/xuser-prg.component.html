@@ -1,0 +1,244 @@
+<div class="wrapper">
+  <app-xuser-navigation></app-xuser-navigation>
+  <!-- Sidebar -->
+  <app-xuser-sidebar></app-xuser-sidebar>
+  <div class="main-panel">
+    <div class="container">
+      <div class="page-inner">
+        <div class="card">
+          Request ID: {{ request._id }}
+          <p class="btn btn-danger">Submit by: {{ request.date }}</p>
+          <br />
+          <!--          Document Type:{{request.documentName}}
+
+        Company: {{request.companyName}}
+        
+         User: {{request.userId}} 
+        
+        Department: {{request.departmentName}} -->
+        </div>
+
+        <div class="card">
+          <div [ngClass]="setColor()">Status : {{ requestStatus }}</div>
+        </div>
+
+        <!-- <mat-expansion-panel>
+<mat-expansion-panel-header>
+    <mat-panel-title>
+    Request
+    </mat-panel-title>
+    <mat-panel-description>
+      Details
+    </mat-panel-description>
+</mat-expansion-panel-header> -->
+        <!-- Sent by:<div class="details">{{request.requesterName}}</div> -->
+        Sent for:<div class="details">{{request.respondentName}}</div>
+        <div class="details">Company: {{request.vendorOrg}}</div>
+        <div class="details">Document Type: {{ request.documentNames }}</div>
+        <div class="details">Product: {{ request.products }}</div>
+        <div class="details">Market: {{ request.market }}</div>
+        <div class="details">Date Required By: {{ request.date }}</div>
+        <div class="details">Criticality: {{ request.criticality }}</div>
+        <div class="details">Special Instructions: {{ request.comment }}</div>
+        <!-- </mat-expansion-panel> -->
+        <hr />
+
+        <div *ngFor="let interaction of interactions">
+          <div *ngIf="interaction == 'Request is Closed'; else elseBlock">
+            <mat-card class="example-card btn-danger">
+              <mat-card-content>
+                {{ interaction }}
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <ng-template #elseBlock>
+            <mat-card class="example-card">
+              <mat-card-content>
+                {{ interaction }}
+              </mat-card-content>
+            </mat-card>
+          </ng-template>
+          <hr />
+        </div>
+
+        <hr />
+
+        <mat-expansion-panel
+          [expanded]="step === 0"
+          (opened)="setStep(0)"
+          [disabled]="disabled"
+          hideToggle
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Take Action
+            </mat-panel-title>
+            <mat-panel-description>
+              Click here!
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="yes">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Upload Document
+                </mat-panel-title>
+                <mat-panel-description>
+                  Upload here!
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <form [formGroup]="myFormDocument">
+                <input
+                  type="file"
+                  formControlName="file"
+                  (change)="selectFile($event)"
+                />
+
+                <button
+                  type="submit"
+                  [disabled]="myFormDocument.pristine || myFormDocument.invalid"
+                  (click)="uploadDoc()"
+                  class="btn btn-primary"
+                >
+                  Submit
+                </button>
+              </form>
+            </mat-expansion-panel>
+          </div>
+
+          <div class="yes">
+            <mat-expansion-panel class="yes">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Comment
+                </mat-panel-title>
+                <mat-panel-description>
+                  Type here!
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <form [formGroup]="myFormComment" (ngSubmit)="addComment()">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Make Comments here!"
+                    formControlName="Comment"
+                  />
+                  <mat-hint>Please be careful it can't be changed!!!</mat-hint>
+                </mat-form-field>
+                <button
+                  class="btn btn-warning"
+                  [disabled]="myFormComment.pristine || myFormComment.invalid"
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </form>
+            </mat-expansion-panel>
+          </div>
+
+          <div class="yes">
+            <div *ngIf="requestStatus == 'Closed'; else elseBlock">
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Reopen
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Reopen the request here!
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div>
+                  <button class="btn btn-warning" (click)="reOpenRequest()">
+                    Reopen
+                  </button>
+                </div>
+              </mat-expansion-panel>
+            </div>
+            <ng-template #elseBlock>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Close
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Close the request here!
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div>
+                  <button class="btn btn-danger" (click)="closeRequest()">
+                    Close
+                  </button>
+                </div>
+              </mat-expansion-panel>
+            </ng-template>
+          </div>
+
+          <div class="yes">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Received Documents
+                </mat-panel-title>
+                <mat-panel-description>
+                  Download the documents here!
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <button class="btn btn-primary" (click)="downloadDoc(request._id)">
+                Download Doc
+              </button>
+              <div *ngIf="downloadURL">
+                <a href="{{ downloadURL }}">Download Doc1 here</a>
+              </div>
+            </mat-expansion-panel>
+          </div>
+        </mat-expansion-panel>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="wrapper">
+    <div>Count:</div>
+    <div>Status:</div>
+    <div>Type:</div>
+    <div>Organization:</div>
+    <div>Name:</div>
+    <div>Product:</div>
+    <div>DeliveryAddress:</div>
+    <div>Instructions:</div>
+    <div>Vendor Name:</div>
+    <div>Vendor Email:</div>
+    <div>Vendor Mobile No:</div>
+    <div>Criticality:</div>
+    <div>Market:</div>
+    <div>Action:</div>
+    <div>Downloaded Documents: </div>
+    <div>Comments:</div>
+    <div class="btn btn-primary btn-round ml-auto mr-2">Upload Document</div>
+    <div class="btn btn-primary btn-round ml-auto mr-2">Comment</div>
+    <div class="btn btn-primary btn-round ml-auto mr-2">Close</div>
+</div> -->
+<!-- Value: {{ myForm.value | json}}
+<hr>
+
+<mat-form-field class="full">
+    <input matInput placeholder="email" formControlName="email">
+</mat-form-field>
+<div formArrayName="phones">
+    <div *ngFor="let phone of phoneForms.controls; let i = index" [formGroupName]="i">
+        <mat-form-field>
+            <input matInput placeholder="area" formControlName="area">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="prefix" formControlName="prefix">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="line" formControlName="line">
+        </mat-form-field>
+
+        <button mat-raised-button color="warn" (click)="deletePhone(i)">Delete</button>
+    </div>
+</div>
+
+<button mat-raised-button ="primary" (click)="addPhone()">Add Phone Number</button> -->

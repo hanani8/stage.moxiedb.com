@@ -1,0 +1,88 @@
+<div class="sidebar sidebar-style-2">
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+            <div class="user">
+                <div class="avatar-sm float-left mr-2">
+                    <img src="https://via.placeholder.com/50" alt="..." class="avatar-img rounded-circle">
+                </div>
+                <div class="info">
+                    <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                        <span>
+                            External User
+                            <span class="user-level">Better call Saul</span>
+                            <span class="caret"></span>
+                        </span>
+                    </a>
+                    <div class="clearfix"></div>
+
+                    <div class="collapse in" id="collapseExample">
+                        <ul class="nav">
+                            <li>
+                                <a href="#profile">
+                                    <span class="link-collapse">My Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#edit">
+                                    <span class="link-collapse">Edit Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#settings">
+                                    <span class="link-collapse">Settings</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav nav-primary">
+                <li class="nav-item active">
+
+                    <a data-toggle="collapse"  [routerLink]="['/xuser']" routerLinkActive="router-link-active"   routerLinkActive="router-link-active"  href="#dashboard" class="collapsed" aria-expanded="false">
+
+                        <i class="fas fa-home"></i>
+                        <p>Dashboard</p>
+                    </a>
+
+                </li>
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </span>
+                    <h4 class="text-section">Components</h4>
+                </li>
+
+                <li class="nav-item">
+                    <a data-toggle="collapse" [routerLink]="['/my-requests']" routerLinkActive="router-link-active"    routerLinkActive="router-link-active"  >
+                        <i class="fas fa-th-list"></i>
+                        <p>My Requests</p>
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a data-toggle="collapse" [routerLink]="['/generate-ticket']"  routerLinkActive="router-link-active"  href="#roleManage">
+                        <i class="fas fa-font"></i>
+                        <p>Generate Ticket</p>
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a data-toggle="collapse"  routerLinkActive="router-link-active"  href="#sidebarLayouts">
+                        <i class="fas fa-file-alt"></i>
+                        <p>My Orders</p>
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a data-toggle="collapse"  routerLinkActive="router-link-active"  href="#sidebarLayouts">
+                        <i class="fas fa-file-alt"></i>
+                        <p>Coorporate Details</p>
+                    </a>
+
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
