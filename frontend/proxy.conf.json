@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "ec2-18-219-222-239.us-east-2.compute.amazonaws.com",
+    "target": "https://stage.moxiedb.com",
     "secure": false
   }
 }

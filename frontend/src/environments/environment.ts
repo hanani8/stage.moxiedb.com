@@ -8,9 +8,9 @@ export const adminEnvironment = {
   sso_api_username: '3b0ib0kfo4n4km2k2i0g31hc8u',
   sso_api_pwd: 'a6tfcsv09mktpbhe0o1ropa5ki61ibnhq0dk3bj28g4rqlm9ue9',
 
-  loginURL: 'https://moxiedb-admin.auth.us-east-2.amazoncognito.com/login?client_id=3b0ib0kfo4n4km2k2i0g31hc8u&response_type=code&scope=openid+profile&redirect_uri=http://localhost:3000/admin-utility',
+  loginURL: 'https://moxiedb-admin.auth.us-east-2.amazoncognito.com/login?client_id=3b0ib0kfo4n4km2k2i0g31hc8u&response_type=code&scope=openid+profile&redirect_uri=https://stage.moxiedb.com/admin-utility',
 
-  redirectURL: 'http://localhost:3000/admin-utility',
+  redirectURL: 'https://stage.moxiedb.com/admin-utility',
 
   cognitoTokenURL: 'https://moxiedb-admin.auth.us-east-2.amazoncognito.com/oauth2/token',
 
@@ -24,9 +24,9 @@ export const iUserEnvironment = {
   sso_api_username: '6tgfkisrs55u5ovgv6dt1h8hbu',
   sso_api_pwd: '15qdb9o7ccg66la4h3315q9q3rbfduelpuv2afmd9j865o8pcnvl',
 
-  loginURL: 'https://iuser-moxiedb.auth.us-east-2.amazoncognito.com/login?client_id=6tgfkisrs55u5ovgv6dt1h8hbu&response_type=code&scope=openid+profile&redirect_uri=http://localhost:3000/iuser-utility',
+  loginURL: 'https://iuser-moxiedb.auth.us-east-2.amazoncognito.com/login?client_id=6tgfkisrs55u5ovgv6dt1h8hbu&response_type=code&scope=openid+profile&redirect_uri=https://stage.moxiedb.com/iuser-utility',
 
-  redirectURL: 'http://localhost:3000/iuser-utility',
+  redirectURL: 'https://stage.moxiedb.com/iuser-utility',
 
   cognitoTokenURL: 'https://iuser-moxiedb.auth.us-east-2.amazoncognito.com/oauth2/token',
 
@@ -40,9 +40,9 @@ export const xUserEnvironment = {
   sso_api_username: '531teggr74n1fnpba8epi4cea2',
   sso_api_pwd: '1lrhu34ujoe4l1qkva1odnoo12ssrnm9hbj00emq3u4k9hkb3mu6',
 
-  loginURL: 'https://xuser-moxiedb.auth.us-east-2.amazoncognito.com/login?client_id=531teggr74n1fnpba8epi4cea2&response_type=code&scope=openid+profile&redirect_uri=http://localhost:3000/xuser-utility',
+  loginURL: 'https://xuser-moxiedb.auth.us-east-2.amazoncognito.com/login?client_id=531teggr74n1fnpba8epi4cea2&response_type=code&scope=openid+profile&redirect_uri=https://stage.moxiedb.com/xuser-utility',
 
-  redirectURL: 'http://localhost:3000/xuser-utility',
+  redirectURL: 'https://stage.moxiedb.com/xuser-utility',
 
   cognitoTokenURL: 'https://xuser-moxiedb.auth.us-east-2.amazoncognito.com/oauth2/token',
 
