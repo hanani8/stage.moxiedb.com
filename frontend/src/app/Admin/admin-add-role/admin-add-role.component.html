@@ -110,6 +110,18 @@
                       </div>
                     </div>
                   </div>
+                  
+                  <div class="separator-solid"></div>
+                  <h3>Provide Temporary Password:</h3>
+
+                  <div class="form-group form-show-validation row">
+                    <label for="email" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Temporary Password:</label>
+                    <div class="col-lg-4 col-md-9 col-sm-8">
+                      <input type="text" class="form-control" name="tempPass" ngModel id="tempPass"
+                        placeholder="Enter temporary password" required>
+
+                    </div>
+                  </div>
 
                   <div class="separator-solid"></div>
                   <div *ngIf="displaytable; then elseBlock; else thenBlock"></div>
