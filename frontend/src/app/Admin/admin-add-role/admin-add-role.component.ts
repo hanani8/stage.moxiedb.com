@@ -27,6 +27,14 @@ export class AdminAddRoleComponent implements OnInit {
   displayOrg: boolean;
   displaytable: boolean;
 
+
+  AWS.config.apiVersions = {
+  cognitoidentityserviceprovider: '2016-04-18',
+  // other service API versions
+};
+
+var cognitoserviceidentityprovider = new AWS.CognitoIdentityServiceProvider();
+
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
@@ -70,6 +78,33 @@ export class AdminAddRoleComponent implements OnInit {
 
 
   onSubmit(roleForm) {
+  var poolID = (this.displayOrg == true) ? 'us-east-2_bM76EZtTH': 'us-east-2_oHX7Q4Vbo';
+  var params = {
+  UserPoolId: poolID,
+  Username: roleForm.name, 
+  DesiredDeliveryMediums: [
+    "EMAIL"
+  ],
+  ForceAliasCreation: false,
+  MessageAction: "RESEND",
+  TemporaryPassword: roleForm.tempPass,
+  UserAttributes: [
+    {
+      Name: 'EMAIL',
+      Value: roleForm.email
+    },
+    {
+    Name: 'custom:role',
+    Value: roleForm.role
+    }
+  ]
+  }
+  
+  cognitoserviceidentityprovider.adminCreateUser(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});
+
     console.log(roleForm.value);
     roleForm.value.users = this.targetUsers;
     roleForm.value.products = this.targetProducts;
