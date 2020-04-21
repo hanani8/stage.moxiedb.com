@@ -19,6 +19,7 @@ import { IuserRedirectComponent } from './utility/iuser-redirect/iuser-redirect.
 import { XuserRedirectComponent } from './utility/xuser-redirect/xuser-redirect.component';
 // import { AuthGuard } from './auth.guard';
 import { XUserModule } from 'src/app/xUser/x-user.module';
+import { SadminRedirectComponent } from './utility/sadmin-redirect/sadmin-redirect.component';
 
 
 
@@ -29,6 +30,7 @@ import { XUserModule } from 'src/app/xUser/x-user.module';
     AdminRedirectComponent,
     IuserRedirectComponent,
     XuserRedirectComponent,
+    SadminRedirectComponent,
   ],
   imports: [
     BrowserModule,

@@ -63,7 +63,7 @@ const signedUrlExpireSeconds = 60;
 
 
 var uri = "mongodb://moxie:moxie%4012345@cluster0-shard-00-00-pvm3m.mongodb.net:27017,cluster0-shard-00-01-pvm3m.mongodb.net:27017,cluster0-shard-00-02-pvm3m.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority";
-mongoose.connect(uri, { useNewUrlParser: true},function(err, client) {
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true},function(err, client) {
   console.log("Connected to the database");
 });
 

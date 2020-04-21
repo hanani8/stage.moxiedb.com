@@ -33,23 +33,28 @@ import { GenerateTicketComponent } from './xUser/generate-ticket/generate-ticket
 import { XuserDashboardComponent } from './xUser/xuser-dashboard/xuser-dashboard.component';
 import { XuserPrgComponent } from './xUser/xuser-prg/xuser-prg.component';
 import { XuserMyRequestsComponent } from './xUser/xuser-my-requests/xuser-my-requests.component';
+import { SadminRedirectComponent } from './utility/sadmin-redirect/sadmin-redirect.component';
+import { SadminGuardService } from './guards/sadmin-guard.service';
+import { SadminTokenService } from './tokenResolver/sadmin-token.service';
 
 
 
 
 const routes: Routes = [
-  {path: '', component: DashboardComponent},
+  { path: '', component: DashboardComponent, canActivate: [SadminGuardService] },
+  { path: 'sadmin-utility', component: SadminRedirectComponent, resolve: { access: SadminTokenService } },
   { path: 'admin-utility', component: AdminRedirectComponent, resolve: { access: TokenService } },
   { path: 'iuser-utility', component: IuserRedirectComponent, resolve: { access: IuserTokenService } },
   { path: 'xuser-utility', component: XuserRedirectComponent, resolve: { access: XuserTokenService } },
 
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'orgManagement', component: SubsManageComponent },
-  { path: 'addSubs', component: AddSubscriberComponent },
-  { path: 'products', component: ProductsComponent },
-  { path: 'addProd', component: AddProductComponent },
-  { path: 'adminAssign', component: AdminAssignmentComponent },
-  { path: 'addAdmin', component: AddAdminComponent },
+
+  { path: 'dashboard', component: DashboardComponent, canActivate: [SadminGuardService] },
+  { path: 'orgManagement', component: SubsManageComponent, canActivate: [SadminGuardService] },
+  { path: 'addSubs', component: AddSubscriberComponent, canActivate: [SadminGuardService] },
+  { path: 'products', component: ProductsComponent, canActivate: [SadminGuardService] },
+  { path: 'addProd', component: AddProductComponent, canActivate: [SadminGuardService] },
+  { path: 'adminAssign', component: AdminAssignmentComponent, canActivate: [SadminGuardService] },
+  { path: 'addAdmin', component: AddAdminComponent, canActivate: [SadminGuardService] },
   { path: 'admin', component: AdminDashboardComponent, canActivate: [AdminGuardService] },
   { path: 'admin/organizationManagement', component: OrganizationManagementComponent, canActivate: [AdminGuardService] },
   { path: 'admin/addCustomer', component: AddCustomerComponent, canActivate: [AdminGuardService] },
@@ -63,10 +68,10 @@ const routes: Routes = [
   { path: 'genTkt', component: GenTicketComponent, canActivate: [IuserGuardService] },
   { path: 'iuser-products', component: IuserProductsComponent, canActivate: [IuserGuardService] },
 
-  {path: 'xuser/prg/:id', component: XuserPrgComponent, canActivate:[XuserGuardService] },
-  {path: 'xuser', component: XuserDashboardComponent, canActivate:[XuserGuardService] },
-  {path: 'generate-ticket', component: GenerateTicketComponent, canActivate:[XuserGuardService] },
-  {path: 'my-requests', component: XuserMyRequestsComponent, canActivate:[XuserGuardService] }
+  { path: 'xuser/prg/:id', component: XuserPrgComponent, canActivate: [XuserGuardService] },
+  { path: 'xuser', component: XuserDashboardComponent, canActivate: [XuserGuardService] },
+  { path: 'generate-ticket', component: GenerateTicketComponent, canActivate: [XuserGuardService] },
+  { path: 'my-requests', component: XuserMyRequestsComponent, canActivate: [XuserGuardService] }
 
 ];
 
