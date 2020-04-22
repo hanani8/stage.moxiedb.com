@@ -10380,7 +10380,7 @@ class XuserPrgComponent {
         this.http.post(this.baseURL + '/upload', { File: `${file.name}` }, this.header).subscribe(data => { console.log(data); });
     }
     getDoc(id) {
-        const key = this.myFormDownload.value;
+        const key = this.myFormDownload.value.serial;
         this.uploadDocService.downloadFile(id, key).subscribe(data => {
             this.downloadURL = data;
             console.log(data);

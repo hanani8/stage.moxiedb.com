@@ -20668,7 +20668,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function getDoc(id) {
           var _this35 = this;
 
-          var key = this.myFormDownload.value;
+          var key = this.myFormDownload.value.serial;
           this.uploadDocService.downloadFile(id, key).subscribe(function (data) {
             _this35.downloadURL = data;
             console.log(data);

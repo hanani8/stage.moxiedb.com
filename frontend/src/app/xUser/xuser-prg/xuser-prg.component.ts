@@ -160,7 +160,7 @@ export class XuserPrgComponent implements OnInit {
   }
 
   getDoc(id) {
-    const key = this.myFormDownload.value;
+    const key = this.myFormDownload.value.serial;
     this.uploadDocService.downloadFile(id, key).subscribe(data => {
       this.downloadURL = data;
       console.log(data);
