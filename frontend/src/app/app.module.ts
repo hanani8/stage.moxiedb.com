@@ -7,11 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { AdminModule } from 'src/app/Admin/admin.module';
 import { IUserModule } from 'src/app/iUser/i-user.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { AmplifyAngularModule, AmplifyService, AmplifyModules } from 'aws-amplify-angular';
-import Auth from '@aws-amplify/auth';
-import Interactions from '@aws-amplify/interactions';
-import Storage from '@aws-amplify/storage';
 // import { CognitoService } from './serviceAws/cognito.service';
 import { TokenService } from './tokenResolver/token.service';
 import { AdminRedirectComponent } from './utility/admin-redirect/admin-redirect.component';
@@ -40,8 +35,7 @@ import { SadminRedirectComponent } from './utility/sadmin-redirect/sadmin-redire
     AdminModule,
     IUserModule,
     BrowserAnimationsModule,
-    AmplifyAngularModule,
-    XUserModule,
+    XUserModule
   ],
   providers: [TokenService],
   bootstrap: [AppComponent]
