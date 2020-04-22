@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 export class XuserPrgComponent implements OnInit {
   myFormDocument: FormGroup;
   myFormComment: FormGroup;
+  myFormDownload: FormGroup;
   request: request;
   interactions: Interaction;
   step = 0;
@@ -66,16 +67,15 @@ export class XuserPrgComponent implements OnInit {
     this.myFormDocument = this.fb.group({
       file: [null, Validators.required]
     })
+    this.myFormDownload = this.fb.group({
+    serial: [null, Validators.required]
+    })
   }
 
   selectFile(event) {
     this.selectedFiles = event.target.files;
     console.log(this.selectedFiles.item(0));
     this.currentFileUpload = this.selectedFiles.item(0);
-  }
-
-  get Comment() {
-    return this.myFormComment.get('Comment');
   }
 
   addComment() {
@@ -159,8 +159,9 @@ export class XuserPrgComponent implements OnInit {
     this.http.post(this.baseURL + '/upload', {File:`${file.name}`}, this.header).subscribe(data => {console.log(data)})
   }
 
-  downloadDoc(id) {
-    this.uploadDocService.downloadFile(id).subscribe(data => {
+  getDoc(id) {
+    const key = this.myFormDownload.value;
+    this.uploadDocService.downloadFile(id, key).subscribe(data => {
       this.downloadURL = data;
       console.log(data);
       console.log(id);

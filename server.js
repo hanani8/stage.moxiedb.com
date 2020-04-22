@@ -80,15 +80,14 @@ app.use('/api/xuser', authenticatedRouteX);
 
 app.use('/api/xrequest', authenticatedRouteXR);
 
-app.get('/api/docURL/:id',function(req,res){
-  console.log(req.params);
+app.get('/api/docURL/:id/:key',function(req,res){
   let id = req.params.id;
-  console.log(id);
+  console.log(req.params.key)
+  var no = Number(req.params.key);
+  console.log(no)
   var key = null;
 Request.findById(id,function(err, data){
-  console.log(data);
-  console.log(data.uploads);
-  key = data.uploads[0];
+  key = data.uploads[no];
   console.log(key);
 }).then(function getUrl(){
   const aws = require('aws-sdk');
@@ -98,8 +97,7 @@ aws.config.update({
     accessKeyId: 'AKIA4SAVCJANYHGMDTPZ',
     signatureVersion: 'v4',
     region: 'us-east-2' //E.g us-east-1
-})
-const keys = 'Screenshot from 2020-04-05 20-14-46.png';
+});
 const bucket = 'document-upload-tryout';
 const signedUrlExpireSeconds = 60;
 const url = s3.getSignedUrl('getObject', {

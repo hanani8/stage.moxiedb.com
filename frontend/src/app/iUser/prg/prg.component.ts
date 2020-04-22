@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 export class PRGComponent implements OnInit {
   myFormDocument: FormGroup;
   myFormComment: FormGroup;
+  myFormDownload: FormGroup;
   request: request;
   interactions: Interaction;
   step = 0;
@@ -68,6 +69,9 @@ export class PRGComponent implements OnInit {
     });
     this.myFormDocument = this.fb.group({
       file: [null, Validators.required]
+    });
+    this.myFormDownload = this.fb.group({
+    serial: [null, Validators.required]
     })
   }
 
@@ -178,8 +182,10 @@ export class PRGComponent implements OnInit {
     })
   }
 
-  downloadDoc(id) {
-    this.uploadDocService.downloadFile(id).subscribe((data) => {
+  getDoc(id) {
+  const key = this.myFormDownload.value.serial;
+  console.log(key);
+    this.uploadDocService.downloadFile(id, key).subscribe((data) => {
       this.downloadURL = data;
       console.log(data);
       console.log(id);
