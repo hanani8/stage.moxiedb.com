@@ -22,7 +22,7 @@ const corsOptions = {
 //body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(process.cwd()+"/prod-build/frontend/dist/moxiedb"));
+app.use(express.static(process.cwd()+"/frontend/dist/moxiedb"));
 
 dotenv.config();
 app.use(cors());
@@ -112,7 +112,7 @@ res.json(url);
 })
 
 app.get("*", (req, res) => {
-  res.sendFile(process.cwd()+"/prod-build/frontend/dist/moxiedb/index.html");
+  res.sendFile(process.cwd()+"/frontend/dist/moxiedb/index.html");
 });
 
 const PORT = 3000;
