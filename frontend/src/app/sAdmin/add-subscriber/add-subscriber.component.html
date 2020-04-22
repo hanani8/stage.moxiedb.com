@@ -27,22 +27,11 @@
                 <br />
                 <div class="card-body">
                   <div class="form-group form-show-validation row">
-                    <label
-                      for="name"
-                      class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right"
-                      >Organization Name
-                      <span class="required-label">*</span></label
-                    >
+                    <label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Organization Name
+                      <span class="required-label">*</span></label>
                     <div class="col-lg-4 col-md-9 col-sm-8">
-                      <input
-                        type="text"
-                        [ngModel]
-                        class="form-control"
-                        id="orgname"
-                        name="name"
-                        placeholder="Enter Username"
-                        required
-                      />
+                      <input type="text" [ngModel] class="form-control" id="orgname" name="name"
+                        placeholder="Enter Username" required />
                     </div>
                   </div>
 
@@ -54,15 +43,8 @@
                           <h4 class="card-title">List of Products</h4>
                         </div>
                         <div class="card-body">
-                          <dual-list
-                            [ngModel]
-                            class="form-control"
-                            [source]="source"
-                            [(destination)]="target"
-                            [format]="format"
-                            [filter]="filter"
-                            height="150px"
-                          ></dual-list>
+                          <dual-list [ngModel] class="form-control" [source]="source" [(destination)]="target"
+                            [format]="format" [filter]="filter" height="150px"></dual-list>
                         </div>
                       </div>
                     </div>
@@ -101,11 +83,7 @@
                 <div class="card-action">
                   <div class="row">
                     <div class="col-md-12">
-                      <button
-                        type="button"
-                        (click)="onSubmit(subForm)"
-                        class="btn btn-success"
-                      >
+                      <button type="button" (click)="onSubmit(subForm)" class="btn btn-success">
                         Submit
                       </button>
                     </div>

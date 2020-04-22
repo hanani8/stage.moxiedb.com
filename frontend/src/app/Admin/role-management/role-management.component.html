@@ -78,10 +78,10 @@
                             <!-- <button type="button" title="" class="btn btn-link " data-original-title="Remove">
                               <i class="fa fa-toggle-on" aria-hidden="true"></i>
                             </button> -->
-                            <button type="button" title="" class="btn btn-link " data-original-title="Remove">
+                            <!-- <button type="button" title="" class="btn btn-link " data-original-title="Remove">
                               <i class="fa fa-eye" aria-hidden="true"></i>
 
-                            </button>
+                            </button> -->
                           </div>
                         </td>
                       </tr>
@@ -115,17 +115,16 @@
         <form>
           <div class="modal-body">
             <div class="form-group">
-              <label>Name</label>
+              <label>Name : {{roll.name}} </label>
               <input style="display: none;" name="_id" ngModel="{{roll._id}}" />
-              <input class="form-control" name="name" ngModel="{{ roll.name}}" />
             </div>
             <div class="form-group">
-              <label>Role</label>
-              <input class="form-control" name="role" ngModel="{{ roll.role}}" />
+              <label>Role: {{roll.name}}</label>
+              <!-- <input class="form-control" name="role" ngModel="{{ roll.role}}" /> -->
             </div>
             <div class="form-group">
-              <label>Organization</label>
-              <input class="form-control" name="org" ngModel="{{ roll.organization}}" />
+              <label>Organization: {{roll.organization}}</label>
+              <!-- <input class="form-control" name="org" ngModel="{{ roll.organization}}" /> -->
             </div>
             <div class="form-group">
               <label>Contact</label>

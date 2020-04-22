@@ -15,10 +15,10 @@ import { FormsModule } from '@angular/forms';
 export class AdminAssignmentComponent implements OnInit {
 
   public search:any = '';
-  admins:any = []; 
+  admins:any = [];
   private baseURL = "/api"
 
- 
+
   data: any;
   adDetail: any = [];
 

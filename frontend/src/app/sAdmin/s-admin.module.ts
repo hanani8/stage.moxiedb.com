@@ -29,7 +29,7 @@ import { AngularDualListBoxModule } from 'angular-dual-listbox';
     AddProductComponent,
     AdminAssignmentComponent,
     AddAdminComponent,
-    SearchPipe
+    SearchPipe,
   ],
   imports: [
     CommonModule,

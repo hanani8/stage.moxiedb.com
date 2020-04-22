@@ -14,7 +14,7 @@ const cognitoExpress = new CognitoExpress({
 authenticatedRouteX.use(function (req, res, next) {
     let token = req.headers.authorization;
     let accessTokenFromClient = token.substring(7);
-        // console.log(token)
+    // console.log(token)
     //I'm passing in the access token in header under key accessToken
     //Fail if token not present in header. 
     if (!accessTokenFromClient) return res.status(401).send("Access Token missing from header");
@@ -31,23 +31,25 @@ authenticatedRouteX.use(function (req, res, next) {
     });
 });
 
-authenticatedRouteX.get('/products', (req,res) => {
+authenticatedRouteX.get('/products', (req, res) => {
     const name = res.locals.user['cognito:username'];
     let organization = null;
-    Role.findOne({"name":name}, (err,data) => {
-        if(err) return console.log(err);
+    Role.findOne({ "name": name }, (err, data) => {
+        if (err) return console.log(err);
         organization = (data.organization);
-    }).then(() => {CustomerOrg.findOne({"name":`${organization}`}, (err,data) => {
-        if(err) return console.log(err);
-        res.json(data.products);
-    })}).catch(err => console.log(err))
+    }).then(() => {
+        CustomerOrg.findOne({ "name": `${organization}` }, (err, data) => {
+            if (err) return console.log(err);
+            res.json(data.products);
+        })
+    }).catch(err => console.log(err))
 })
 
-authenticatedRouteX.get('/roles', (req,res) => {
+authenticatedRouteX.get('/roles', (req, res) => {
     const name = res.locals.user['cognito:username'];
     var responseData;
-    Role.findOne({"name":name}, (err,data) => {
-        if(err) return console.log(err);
+    Role.findOne({ "name": name }, (err, data) => {
+        if (err) return console.log(err);
         res.json(data.users);
     }).catch(err => console.log(err))
 })

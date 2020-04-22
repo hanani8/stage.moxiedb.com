@@ -51,6 +51,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [SadminGuardService] },
   { path: 'orgManagement', component: SubsManageComponent, canActivate: [SadminGuardService] },
   { path: 'addSubs', component: AddSubscriberComponent, canActivate: [SadminGuardService] },
+
   { path: 'products', component: ProductsComponent, canActivate: [SadminGuardService] },
   { path: 'addProd', component: AddProductComponent, canActivate: [SadminGuardService] },
   { path: 'adminAssign', component: AdminAssignmentComponent, canActivate: [SadminGuardService] },
