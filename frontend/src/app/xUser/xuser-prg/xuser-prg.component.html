@@ -184,7 +184,7 @@
                   Download the documents here!
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              <form [formGroup]="myFormDocument" (ngSubmit)="getDoc(request._id)">
+              <form [formGroup]="myFormDownload" (ngSubmit)="getDoc(request._id)">
                 <mat-form-field>
                   <input
                     matInput
@@ -192,7 +192,7 @@
                   />
                   <mat-hint>Input the S.No of the document to be downloaded</mat-hint>
                 </mat-form-field>
-              <button class="btn btn-primary" [disabled]="myFormDocument.pristine || myFormDocument.invalid" type="submit">
+              <button class="btn btn-primary" [disabled]="myFormDownload.pristine || myFormDownload.invalid" type="submit">
                 Download Doc
               </button>
               <div *ngIf="downloadURL">
