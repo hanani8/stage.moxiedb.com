@@ -2,6 +2,22 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+export const sadminEnvironment = {
+  production: false,
+
+  sso_api_username: '7elt7v1gnt5ov610jr5ojrie9j',
+  sso_api_pwd: '17p2f2dalafughtubvol5pep05a31981hhlddevedo8ak2fh0c0k',
+
+  loginURL: 'https://sadmin-moxie.auth.us-east-2.amazoncognito.com/login?client_id=7elt7v1gnt5ov610jr5ojrie9j&response_type=code&scope=email+openid+profile&redirect_uri=https://stage.moxiedb.com/sadmin-utility',
+
+  redirectURL: 'https://stage.moxiedb.com/sadmin-utility',
+
+  cognitoTokenURL: 'https://sadmin-moxie.auth.us-east-2.amazoncognito.com/oauth2/token',
+
+  logout: 'https://sadmin-moxie.auth.us-east-2.amazoncognito.com/login?' + 'client_id=7elt7v1gnt5ov610jr5ojrie9j' + 'logout_url=https://moxiedb.com',
+
+}
+
 export const adminEnvironment = {
   production: false,
 

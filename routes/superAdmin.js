@@ -8,7 +8,7 @@ const CognitoExpress = require("cognito-express");
 
 const cognitoExpress = new CognitoExpress({
     region: "us-east-2",
-    cognitoUserPoolId: "us-east-2_hKGBBXcu3",
+    cognitoUserPoolId: "us-east-2_SDqqsNinX",
     tokenUse: "id", //Possible Values: access | id
     tokenExpiration: 3600000 //Up to default expiration of 1 hour (3600000 ms)
 });
@@ -38,17 +38,20 @@ authenticatedRouteSA.use(function (req, res, next) {
 
 
 authenticatedRouteSA.post('/products', (req, res) => {
-    var product = new Product(req.body);
-    product.save().catch(err => console.log(err))
-    res.status(201).send(product)
+    if (res.locals.user['custom:role'] == 'sadmin') {
+
+        var product = new Product(req.body);
+        product.save().catch(err => console.log(err))
+        res.status(201).send(product)
+    }
     // console.log(product)
 })
 
 authenticatedRouteSA.get('/products', (req, res) => {
 
-    if (res.locals.user['custom:role'] == 'admin') {
+    if (res.locals.user['custom:role'] == 'sadmin') {
         Product.find({}, (err, data) => {
-            if(err) return console.log(err);
+            if (err) return console.log(err);
             res.json({ data })
         }).catch(err => console.log(err))
     } else
@@ -61,10 +64,10 @@ authenticatedRouteSA.get('/products', (req, res) => {
 
 
 authenticatedRouteSA.put('/products', (req, res) => {
-    if (res.locals.user['custom:role'] == 'admin') {
+    if (res.locals.user['custom:role'] == 'sadmin') {
 
         Product.findById(req.body._id, (err, data) => {
-            if(err) return console.log(err);
+            if (err) return console.log(err);
             data.productName = req.body.name
             data.casNumber = req.body.cas;
             data.productType = req.body.productType;
@@ -81,10 +84,10 @@ authenticatedRouteSA.put('/products', (req, res) => {
 });
 
 authenticatedRouteSA.delete('/products/:id', (req, res) => {
-    if (res.locals.user['custom:role'] == 'admin') {
+    if (res.locals.user['custom:role'] == 'sadmin') {
         var id = req.params.id
         Product.findByIdAndDelete(id, (err, data) => {
-            if(err) return console.log(err);
+            if (err) return console.log(err);
             res.status(200).json({ data })
         })
     }
@@ -92,46 +95,56 @@ authenticatedRouteSA.delete('/products/:id', (req, res) => {
 
 
 authenticatedRouteSA.post('/subscriberOrgs', (req, res) => {
-    console.log(req.body);
-    var subscriberOrg = new SubscriberOrg(req.body);
-    subscriberOrg.save().then(console.log("Data is saved"));
-    res.status(201).send(subscriberOrg);
+    if (res.locals.user['custom:role'] == 'sadmin') {
+
+        console.log(req.body);
+        var subscriberOrg = new SubscriberOrg(req.body);
+        subscriberOrg.save().then(console.log("Data is saved"));
+        res.status(201).send(subscriberOrg);
+    }
 })
 
 
 authenticatedRouteSA.get('/subscriberOrgs', (req, res) => {
-    SubscriberOrg.find({}, (err, data) => {
-        if(err) return console.log(err)
-        res.json({ data });
-    })
+    if (res.locals.user['custom:role'] == 'sadmin') {
+
+        SubscriberOrg.find({}, (err, data) => {
+            if (err) return console.log(err)
+            res.json({ data });
+
+        })
+    }
 })
 
 
 authenticatedRouteSA.delete('/subscriberOrgs/:id', (req, res) => {
-    if (res.locals.user['custom:role'] == 'admin') {
+    if (res.locals.user['custom:role'] == 'sadmin') {
         var id = req.params.id
         SubscriberOrg.findByIdAndDelete(id, (err, data) => {
-            if(err) return console.log(err);
+            if (err) return console.log(err);
             res.status(200).json({ data })
         })
     }
 })
 
 authenticatedRouteSA.post('/addAdmin', (req, res) => {
-    const org = req.body.orgName;
-    const admin = req.body;
-    SubscriberOrg.findOneAndUpdate({ name: org }, { Admin: admin }, function (err, data) {
-        if (err) return console.log(err);
-        console.log(data)
-    })
+    if (res.locals.user['custom:role'] == 'sadmin') {
+
+        const org = req.body.orgName;
+        const admin = req.body;
+        SubscriberOrg.findOneAndUpdate({ name: org }, { Admin: admin }, function (err, data) {
+            if (err) return console.log(err);
+            console.log(data)
+        })
+    }
 })
 
 
 authenticatedRouteSA.delete('/subscriberOrgs/admin/:id', (req, res) => {
-    if (res.locals.user['custom:role'] == 'admin') {
+    if (res.locals.user['custom:role'] == 'sadmin') {
         var id = req.params.id
         SubscriberOrg.findByIdAndDelete(id, (err, data) => {
-            if(err) return console.log(err);
+            if (err) return console.log(err);
             res.status(200).json({ data })
         })
     }
