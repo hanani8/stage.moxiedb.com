@@ -116,6 +116,25 @@ authenticatedRouteSA.get('/subscriberOrgs', (req, res) => {
     }
 })
 
+authenticatedRouteSA.put('/subscriberOrgs', (req, res) => {
+    if (res.locals.user['custom:role'] == 'sadmin') {
+
+        SubscriberOrg.findById(req.body._id, (err, data) => {
+            if (err) return console.log(err);
+            console.log(data.name)
+            console.log(data.products)
+            console.log(req.body)
+
+            data.products = req.body.products;
+            data.name = req.body.orgName
+           
+            data.save().catch(err => console.log(err));
+            res.status(201).send(data);
+
+        });
+    }
+});
+
 
 authenticatedRouteSA.delete('/subscriberOrgs/:id', (req, res) => {
     if (res.locals.user['custom:role'] == 'sadmin') {

@@ -14,13 +14,14 @@ export class GenTicketComponent implements OnInit {
 
   private baseURL = "/api/iuser";
   private _url = "/api";
+  respondentDetails: any;
 
   constructor(private fb: FormBuilder, private http: HttpClient) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.genTkt = this.fb.group({
-      documentNames : '',
-      vendorOrg : '',
+      documentNames: '',
+      vendorOrg: '',
       date: '',
       products: '',
       market: '',
@@ -35,39 +36,44 @@ export class GenTicketComponent implements OnInit {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     };
     this.http.get(this.baseURL + '/products', header).subscribe(data => this.products = data);
-    this.http.get(this.baseURL + '/roles', header).subscribe(data => 
-    this.respondentNames = data)
+    this.http.get(this.baseURL + '/roles', header).subscribe(data =>
+      this.respondentNames = data)
   }
 
 
-  documentNames:any= [
-  'DMF',
-  'Quality Affairs',
-  'COA',
-  'Equipments'
+  documentNames: any = [
+    'DMF',
+    'Quality Affairs',
+    'COA',
+    'Equipments'
   ]
 
   products: any = [
-]
+  ]
 
-  markets: any = ['US','Europe','India','Canada','China']
+  markets: any = ['US', 'Europe', 'India', 'Canada', 'China']
 
-  criticalities: any = ["Intermediate","Fast","Advance"]
+  criticalities: any = ["Intermediate", "Fast", "Advance"]
 
   respondentNames: any = []
 
-  respondentEmails: any = ["yes@gmail.com","bank@gmail.com","comeon@gmail.com"]
-  
-  respondentContacts: any= ["990","880","660"]
+  respondentEmails: any = ["yes@gmail.com", "bank@gmail.com", "comeon@gmail.com"]
 
-  onSubmit(){
+  respondentContacts: any = ["990", "880", "660"]
+
+  onSubmit() {
     console.log(this.genTkt.value);
     var token = window.localStorage.getItem('tokenID');
     var header = {
-    headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
+      headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     }
     this.genTkt.value.requestStatus = "New Request";
-    this.http.post(this._url+ '/request' , this.genTkt.value, header).subscribe();
+    this.http.post(this._url + '/request', this.genTkt.value, header).subscribe();
+  }
+
+
+  giveDetails() {
+    console.log(this.respondentDetails)
   }
 }
 

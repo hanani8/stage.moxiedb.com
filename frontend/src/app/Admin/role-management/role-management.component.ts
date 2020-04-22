@@ -11,8 +11,8 @@ import { DualListComponent } from 'angular-dual-listbox';
 export class RoleManagementComponent implements OnInit {
 
 
-roles:any = [];
-private url = "/api"
+  roles: any = [];
+  private url = "/api"
 
 
   public search: any = '';
@@ -40,8 +40,8 @@ private url = "/api"
     var header = {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     };
-    this.http.get(this.url + '/admin/roles', header).subscribe((data) => {this.roles = data},(error) => {
-    console.error(error)
+    this.http.get(this.url + '/admin/roles', header).subscribe((data) => { this.roles = data }, (error) => {
+      console.error(error)
     })
   }
 
@@ -67,8 +67,8 @@ private url = "/api"
     this.http.delete(this.url + '/roles/' + this.data, header).subscribe((data) => {
       console.log(this.data)
       this.ngOnInit()
-    },(error) => {
-    console.error(error)
+    }, (error) => {
+      console.error(error)
     })
   }
 }
