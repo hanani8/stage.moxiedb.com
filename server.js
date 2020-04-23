@@ -80,34 +80,34 @@ app.use('/api/xuser', authenticatedRouteX);
 
 app.use('/api/xrequest', authenticatedRouteXR);
 
-app.get('/api/docURL/:id/:key',function(req,res){
-  let id = req.params.id;
-  console.log(req.params.key)
-  var no = Number(req.params.key);
-  console.log(no)
-  var key = null;
-Request.findById(id,function(err, data){
-  key = data.uploads[no];
-  console.log(key);
-}).then(function getUrl(){
+app.get('/api/docURL/:id/:key',async function(req,res){
   const aws = require('aws-sdk');
-const s3  = new aws.S3();
-aws.config.update({
-      secretAccessKey: 'Bk3UhOP0Okei2Y9kbwQgobpCdlB4hLRtpfjACU+6',
-    accessKeyId: 'AKIA4SAVCJANYHGMDTPZ',
-    signatureVersion: 'v4',
-    region: 'us-east-2' //E.g us-east-1
-});
-const bucket = 'document-upload-tryout';
-const signedUrlExpireSeconds = 60;
-const url = s3.getSignedUrl('getObject', {
-  Bucket: bucket,
-  Key: key,
-  Expires: signedUrlExpireSeconds
-})
-res.json(url);
-}).catch(err => console.log(err))
-})
+  const s3  = new aws.S3();
+  aws.config.update({
+     secretAccessKey: 'Bk3UhOP0Okei2Y9kbwQgobpCdlB4hLRtpfjACU+6',
+     accessKeyId: 'AKIA4SAVCJANYHGMDTPZ',
+     signatureVersion: 'v4',
+     region: 'us-east-2' //E.g us-east-1
+  });
+  const bucket = 'document-upload-tryout';
+  const signedUrlExpireSeconds = 60;
+  const id = await req.params.id;
+  const no = await Number(req.params.key);
+  let key = null;
+  Request.findById(id,async function(err, data){
+    key = await data.uploads[no];
+  });
+  function getURL(){
+  const url = s3.getSignedUrl('getObject', {
+   Bucket: bucket,
+   Key: key,
+   Expires: signedUrlExpireSeconds
+   })
+   res.json(url);;
+   console.log(url);
+   };
+   setTimeout(getURL, 2000);
+  })
 
 app.get("*", (req, res) => {
   res.sendFile(process.cwd()+"/frontend/dist/moxiedb/index.html");

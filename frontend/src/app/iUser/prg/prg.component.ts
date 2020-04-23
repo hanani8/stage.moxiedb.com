@@ -41,8 +41,6 @@ export class PRGComponent implements OnInit {
 
   ngOnInit() {
   this.requestID = (this.router.url).substring(11);
-  console.log(this.requestID);
-  
   this.baseURL = `/api/request/${this.requestID}`;
   this.baseStatusURL = `/api/request/requestStatus/${this.requestID}`;
   console.log(this.baseURL);

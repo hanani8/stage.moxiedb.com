@@ -43,15 +43,13 @@ authenticatedRouteA.use(function (req, res, next) {
 
 
 
-authenticatedRouteA.get('/products', (req, res) => {
+authenticatedRouteA.get('/products',async(req, res) => {
 
-    const name = res.locals.user['cognito:username'];
+    const name = await res.locals.user['cognito:username'];
     if (res.locals.user['custom:role'] == 'admin') {
-
-        SubscriberOrg.findOne({"Admin.name":name}, (err, data) => {
+     SubscriberOrg.findOne({"Admin.name":name}, (err, data) => {
             res.json(data.products);
-
-        })
+       })
     } else 
     return false
     // console.log(req.headers.authorization)
