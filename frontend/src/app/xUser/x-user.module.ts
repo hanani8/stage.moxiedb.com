@@ -18,7 +18,8 @@ import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SAdminModule } from '../sAdmin/s-admin.module';
+import { SharedModuleModule } from '../shared-module/shared-module.module';
+// import { SAdminModule } from '../sAdmin/s-admin.module';
 
 
 
@@ -38,6 +39,8 @@ import { SAdminModule } from '../sAdmin/s-admin.module';
     RouterModule,
     FormsModule,
     MatTableModule,
-    SAdminModule],
+    SharedModuleModule
+    ],
+    exports: [SharedModuleModule]
 })
 export class XUserModule { }

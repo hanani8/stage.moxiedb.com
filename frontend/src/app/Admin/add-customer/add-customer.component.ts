@@ -3,6 +3,8 @@ import { Product } from 'src/app/model/Product';
 import { ProductsService } from 'src/app/services/products.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DualListComponent } from 'angular-dual-listbox';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-customer',
@@ -23,7 +25,7 @@ export class AddCustomerComponent implements OnInit {
 private _url: string = "/api";
 
 
-  constructor(private productsService: ProductsService, private http: HttpClient) { }
+  constructor(private productsService: ProductsService, private http: HttpClient,  private tos: ToastrService, private router: Router) { }
 
   ngOnInit() {
     var token = window.localStorage.getItem('tokenID');
@@ -47,6 +49,8 @@ private _url: string = "/api";
    this.http.post(this._url + '/admin/addCustomerOrg', subForm.value,header).subscribe((error) => {
     console.error(error)
     });
+    this.tos.success( 'Organization Added!');
+    this.router.navigate(['/admin/organizationManagement'])
 
   }
 

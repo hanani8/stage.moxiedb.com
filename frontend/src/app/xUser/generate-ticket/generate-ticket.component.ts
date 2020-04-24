@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-generate-ticket',
@@ -14,7 +16,7 @@ export class GenerateTicketComponent implements OnInit {
 
   private baseURL = '/api/xuser';
   private _url = '/api';
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  constructor(private fb: FormBuilder, private http: HttpClient,  private tos: ToastrService, private router: Router) { }
 
   ngOnInit() {
   this.genTkt = this.fb.group({
@@ -34,7 +36,7 @@ export class GenerateTicketComponent implements OnInit {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     };
     this.http.get(this.baseURL + '/products', header).subscribe(data => this.products = data);
-    this.http.get(this.baseURL + '/roles', header).subscribe(data => 
+    this.http.get(this.baseURL + '/roles', header).subscribe(data =>
     this.respondentNames = data)
   }
 
@@ -56,7 +58,7 @@ export class GenerateTicketComponent implements OnInit {
   respondentNames: any = []
 
   respondentEmails: any = ["yes@gmail.com","bank@gmail.com","comeon@gmail.com"]
-  
+
   respondentContacts: any= ["990","880","660"]
 
   onSubmit(){
@@ -67,11 +69,13 @@ export class GenerateTicketComponent implements OnInit {
     }
     this.genTkt.value.requestStatus = "New Request";
     this.http.post(this._url + '/xrequest', this.genTkt.value, header).subscribe();
+    this.tos.success( 'Request has been sent!');
+    this.router.navigate(['/my-requests'])
   }
 }
 
 
 
-  
- 
-    
+
+
+

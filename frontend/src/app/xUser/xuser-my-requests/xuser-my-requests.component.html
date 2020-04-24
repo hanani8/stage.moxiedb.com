@@ -20,32 +20,22 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                  <!-- <div class="row ml-3">
+                <!-- <div class="row ml-3">
                   </div> -->
               </div>
               <div class="row">
-              <div class="col-md-3">
-                <div class="ml-2 form-group">
-                    <h4 class="ml-4">Search by Organization:</h4>
-                    <input class="form-control ml-2" type="text" [(ngModel)]="searchTerm" />
+
+
+                <div class="col-md-6">
+                  <div class="ml-2 form-group d-flex align-items-center">
+                    <label class="ml-4">Search by Anything:</label>
+                    <input class="form-control ml-2" type="text" [(ngModel)]="searchField" />
+                  </div>
                 </div>
               </div>
-              <div class="col-md-3">
-               
-              </div>
-              <div class="col-md-3">
-                <div class="ml-2 form-group">
-                    <h3 class="ml-4">Search by Anything:</h3>
-                    <input class="form-control ml-2" type="text" [(ngModel)] = "search"/>
-                </div>
-              </div>
-            </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table
-                    id="multi-filter-select"
-                    class="display table table-striped table-hover"
-                  >
+                  <table id="multi-filter-select" class="display table table-striped table-hover">
                     <thead>
                       <tr>
                         <th>ID</th>
@@ -63,7 +53,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let request of requests | search : search ; index as i">
+                      <tr *ngFor="let request of requests |search:searchField ; index as i">
                         <td scope="row">{{ i + 1 }}</td>
                         <td><a href="/xuser/prg/{{request._id}}">{{ request.documentNames }}</a></td>
                         <td><a>{{ request.vendorOrg | uppercase}}</a></td>

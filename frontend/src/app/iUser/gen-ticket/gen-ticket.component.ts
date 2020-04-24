@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gen-ticket',
@@ -16,7 +18,7 @@ export class GenTicketComponent implements OnInit {
   private _url = "/api";
   respondentDetails: any;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  constructor(private fb: FormBuilder, private http: HttpClient,  private tos: ToastrService, private router: Router) { }
 
   ngOnInit() {
     this.genTkt = this.fb.group({
@@ -69,6 +71,8 @@ export class GenTicketComponent implements OnInit {
     }
     this.genTkt.value.requestStatus = "New Request";
     this.http.post(this._url + '/request', this.genTkt.value, header).subscribe();
+    this.tos.success( 'Request has been sent!');
+    this.router.navigate(['/myRequest'])
   }
 
 

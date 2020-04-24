@@ -20,6 +20,12 @@ import { XuserRedirectComponent } from './utility/xuser-redirect/xuser-redirect.
 // import { AuthGuard } from './auth.guard';
 import { XUserModule } from 'src/app/xUser/x-user.module';
 import { SadminRedirectComponent } from './utility/sadmin-redirect/sadmin-redirect.component';
+import {
+  ToastrModule,
+  ToastNoAnimation,
+  ToastNoAnimationModule
+} from 'ngx-toastr';
+
 
 
 
@@ -42,6 +48,8 @@ import { SadminRedirectComponent } from './utility/sadmin-redirect/sadmin-redire
     BrowserAnimationsModule,
     AmplifyAngularModule,
     XUserModule,
+    ToastrModule.forRoot(),
+
   ],
   providers: [TokenService],
   bootstrap: [AppComponent]

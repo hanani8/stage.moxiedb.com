@@ -12,10 +12,12 @@ import { AddSubscriberComponent } from 'src/app/sAdmin/add-subscriber/add-subscr
 import { ProductsComponent } from 'src/app/sAdmin/products/products.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { AdminAssignmentComponent } from './admin-assignment/admin-assignment.component';
-import { HttpClientModule} from '@angular/common/http'
-import { SearchPipe } from 'src/app/search.pipe';
+import { HttpClientModule } from '@angular/common/http';
 import { AddAdminComponent } from './add-admin/add-admin.component';
 import { AngularDualListBoxModule } from 'angular-dual-listbox';
+import { SharedModuleModule } from '../shared-module/shared-module.module';
+
+
 
 
 @NgModule({
@@ -29,7 +31,6 @@ import { AngularDualListBoxModule } from 'angular-dual-listbox';
     AddProductComponent,
     AdminAssignmentComponent,
     AddAdminComponent,
-    SearchPipe,
   ],
   imports: [
     CommonModule,
@@ -37,7 +38,8 @@ import { AngularDualListBoxModule } from 'angular-dual-listbox';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AngularDualListBoxModule
+    AngularDualListBoxModule,
+    SharedModuleModule,
   ],
   exports: [
     SidebarComponent,
@@ -46,7 +48,7 @@ import { AngularDualListBoxModule } from 'angular-dual-listbox';
     DashboardComponent,
     AddSubscriberComponent,
     ProductsComponent,
-    SearchPipe
+    SharedModuleModule
   ]
 })
 export class SAdminModule { }

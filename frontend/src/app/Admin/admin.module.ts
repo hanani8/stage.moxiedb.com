@@ -6,7 +6,7 @@ import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
 import { AdminNavigationComponent } from './admin-navigation/admin-navigation.component';
 
 import { OrganizationManagementComponent } from './organization-management/organization-management.component';
-import { SAdminModule } from 'src/app/sAdmin/s-admin.module';
+// import { SAdminModule } from 'src/app/sAdmin/s-admin.module';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { AngularDualListBoxModule } from 'angular-dual-listbox';
 import { RoleManagementComponent } from './role-management/role-management.component';
@@ -15,6 +15,9 @@ import { AdminAddRoleComponent } from './admin-add-role/admin-add-role.component
 import { AccessControlComponent } from './access-control/access-control.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { BrowserModule } from '@angular/platform-browser';
+import { SharedModuleModule} from '../shared-module/shared-module.module'
+
+
 
 
 
@@ -27,22 +30,24 @@ import { BrowserModule } from '@angular/platform-browser';
     AddCustomerComponent,
     RoleManagementComponent,
     AdminAddRoleComponent,
-    AccessControlComponent
+    AccessControlComponent,
+    // SharedModuleModule
   ],
   imports: [
     CommonModule,
     RouterModule,
-    SAdminModule,
     FormsModule,
     GoogleChartsModule,
     AngularDualListBoxModule,
-    BrowserModule
+    BrowserModule,
+    SharedModuleModule
 
   ],
 
   exports: [
     AdminDashboardComponent,
-    OrganizationManagementComponent
+    OrganizationManagementComponent,
+    SharedModuleModule
   ]
 })
 export class AdminModule { }

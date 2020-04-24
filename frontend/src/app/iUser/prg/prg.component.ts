@@ -6,6 +6,7 @@ import { Interaction } from 'src/app/model/interaction';
 import { InteractionsService } from 'src/app/services/interactions.service';
 import { HttpClient, HttpResponse, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { UploadDocService } from 'src/app/services/upload-doc.service';
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
 @Component({
@@ -30,7 +31,7 @@ export class PRGComponent implements OnInit {
   progress: { percentage: number } = { percentage: 0 };
   downloadURL;
 
-  constructor(private fb: FormBuilder, private requestsService: RequestsService, private interactionsService: InteractionsService, private http: HttpClient, private uploadDocService: UploadDocService, private router:Router) { }
+  constructor(private fb: FormBuilder, private requestsService: RequestsService, private interactionsService: InteractionsService, private http: HttpClient, private uploadDocService: UploadDocService, private router:Router,  private tos: ToastrService) { }
 
   token = window.localStorage.getItem('tokenID')
   header = {
@@ -41,7 +42,7 @@ export class PRGComponent implements OnInit {
   ngOnInit() {
   this.requestID = (this.router.url).substring(11);
   console.log(this.requestID);
-  
+
   this.baseURL = `/api/request/${this.requestID}`;
   this.baseStatusURL = `/api/request/requestStatus/${this.requestID}`;
   console.log(this.baseURL);
@@ -176,6 +177,8 @@ export class PRGComponent implements OnInit {
     this.http.post(this.baseURL + '/upload', {File:`${file.name}`}, this.header).subscribe((data)=> {console.log(data)},(error) => {
     console.error(error);
     })
+    this.tos.success( 'Document Uploaded!');
+    // this.router.navigate([''])
   }
 
   downloadDoc(id) {
@@ -186,6 +189,8 @@ export class PRGComponent implements OnInit {
     },(error) => {
     console.error(error);
     })
+    this.tos.success( 'Document Downloaded!');
+    // this.router.navigate([''])
   }
 
 

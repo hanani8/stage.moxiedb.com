@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 import * as AWS from 'aws-sdk';
 AWS.config.update({region:'us-east-2',secretAccessKey: 'Bk3UhOP0Okei2Y9kbwQgobpCdlB4hLRtpfjACU+6',
 accessKeyId: 'AKIA4SAVCJANYHGMDTPZ'});
@@ -14,7 +16,7 @@ export class AddAdminComponent implements OnInit {
 
   subscribers: any = [];
   private baseURL = "/api";
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private tos: ToastrService, private router: Router) { }
 
 
 
@@ -64,5 +66,7 @@ export class AddAdminComponent implements OnInit {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     }
     this.http.post(this.baseURL + '/superAdmin/addAdmin', adminForm.value, header).subscribe()
+    this.tos.success( 'Admin Added!');
+    this.router.navigate(['/adminAssign'])
   }
 }

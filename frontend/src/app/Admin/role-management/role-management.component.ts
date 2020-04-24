@@ -15,7 +15,7 @@ export class RoleManagementComponent implements OnInit {
   private url = "/api"
 
 
-  public search: any = '';
+  public searchField: any = '';
   users: any = [];
   filter = true;
   format: any = DualListComponent.DEFAULT_FORMAT;
@@ -78,40 +78,37 @@ export class RoleManagementComponent implements OnInit {
     this.confirmed = this.confirmedStations;
   }
 
+
+
   private prepareUserStations() {
     // this.userExists = JSON.parse(JSON.stringify(this.userStations));
 
     this.confirmedStations = new Array<any>();
     this.sourceStations = new Array<any>();
-
     // console.log(JSON.stringify(this.userExists[0]))
     // console.log(JSON.stringify(this.userStations[0]))
-
     for (let i = 0; i < this.userStations.length; i++) {
       for (let j = 0; j < this.userExists.length; j++) {
-
-        if (this.userExists[j] == this.userStations[i]) {
-          this.confirmedStations.push(this.exists[j])
-        } else {
+        if (this.userExists[j] !== this.userStations[i]) {
           this.sourceStations.push(this.userStations[i])
         }
       }
     }
 
     this.source = this.sourceStations;
-    this.confirmed = this.confirmedStations;
+    this.confirmed = this.userExists;
   }
+
+
 
   toUpdate(role) {
     this.roll = role;
     if (this.roll.role == 'iuser') {
       this.exists = this.roll.products
-      console.log(this.exists)
-      // console.log(this.exists)
-      // this.prepareStation()
+      this.prepareStation()
     } else if (this.roll.role == 'xuser') {
       this.userExists = this.roll.users;
-      // console.log(this.exists)
+      console.log(this.userExists)
       // console.log(this.userStations)
       this.prepareUserStations()
     }

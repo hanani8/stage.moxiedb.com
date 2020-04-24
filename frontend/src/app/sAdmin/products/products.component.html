@@ -21,7 +21,7 @@
               <div class="card-header">
                 <div class="d-flex align-items-center form-group">
                   <label class="mr-2" for="gsearch">Search Products : </label>
-                  <input type="search" class="form-control mr-5" placeholder="Search Text" [(ngModel)]="search"
+                  <input type="search" class="form-control mr-5" placeholder="Search Text" [(ngModel)]="searchField"
                     id="listSearch" />
                   <!-- <h4 class="card-title">Add products</h4> -->
 
@@ -47,7 +47,7 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="
-                          let product of products | search: search;
+                          let product of products | search: searchField;
                           index as i
                         ">
                         <td scope="row">{{ i + 1 }}</td>

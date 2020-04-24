@@ -31,12 +31,12 @@
                 </div>
               </div>
               <div class="col-md-3">
-               
+
               </div>
               <div class="col-md-3">
                 <div class="ml-2 form-group">
                     <h3 class="ml-4">Search by Anything:</h3>
-                    <input class="form-control ml-2" type="text" [(ngModel)] = 'search'/>
+                    <input class="form-control ml-2" type="text" [(ngModel)]="searchField" />
                 </div>
               </div>
             </div>
@@ -63,7 +63,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let request of requests | requestFilter: searchTerm | search : search ; index as i">
+                      <tr *ngFor="let request of requests | requestFilter: searchTerm |search:searchField ; index as i">
                         <td scope="row">{{ i + 1 }}</td>
                         <td><a href="/iuser/prg/{{request._id}}">{{ request.documentNames }}</a></td>
                         <td><a>{{ request.vendorOrg | uppercase}}</a></td>

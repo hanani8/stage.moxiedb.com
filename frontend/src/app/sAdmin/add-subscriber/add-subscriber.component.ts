@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 import { DualListComponent } from 'angular-dual-listbox';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-subscriber',
@@ -22,7 +24,7 @@ export class AddSubscriberComponent implements OnInit {
 
 
   private baseURL = "/api"
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private tos: ToastrService, private router: Router) { }
 
   ngOnInit() {
     var token = window.localStorage.getItem('tokenID')
@@ -45,6 +47,8 @@ export class AddSubscriberComponent implements OnInit {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     }
     this.http.post(this.baseURL + '/superAdmin/subscriberOrgs', subForm.value, header).subscribe();
+    this.tos.success( 'Subscriber Added!');
+    this.router.navigate(['/orgManagement'])
   }
 
 }
