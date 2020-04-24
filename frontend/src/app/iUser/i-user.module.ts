@@ -6,10 +6,9 @@ import { IuserSidebarComponent } from './iuser-sidebar/iuser-sidebar.component';
 import { IuserNavigationComponent } from './iuser-navigation/iuser-navigation.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IuserMyRequestsComponent } from './iuser-my-requests/iuser-my-requests.component';
-import { RouterModule } from '@angular/router';
+import { Routes,RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
@@ -21,11 +20,17 @@ import { MatTableModule } from '@angular/material/table';
 import { IuserProductsComponent } from './iuser-products/iuser-products.component'
 import { RequestFilterPipe } from './iuser-my-requests/request-filter.pipe';
 import { fromEventPattern } from 'rxjs';
-import { BrowserModule } from '@angular/platform-browser';
 import { SAdminModule } from '../sAdmin/s-admin.module';
 import { GoogleChartsModule } from 'angular-google-charts';
-// import { MatSliderModule } from '@angular/material/slider';
-// import {AmplifyAngularModule } from 'aws-amplify-angular'
+import { IuserGuardService } from '../guards/iuser-guard.service';
+
+export const ROUTES:Routes = [
+  { path: '', component: IuserDashboardComponent,canActivate: [IuserGuardService] },
+  { path: 'prg/:id', component: PRGComponent,canActivate: [IuserGuardService] },
+  { path: 'myRequest', component: IuserMyRequestsComponent,canActivate: [IuserGuardService] },
+  { path: 'genTkt', component: GenTicketComponent,canActivate: [IuserGuardService] },
+  { path: 'products', component: IuserProductsComponent,canActivate: [IuserGuardService] }
+]
 
 
 
@@ -43,11 +48,11 @@ import { GoogleChartsModule } from 'angular-google-charts';
   ],
   imports: [
     CommonModule,
+    RouterModule.forChild(ROUTES),
     ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
     MatExpansionModule,
-    BrowserAnimationsModule,
     MatCardModule,
     MatSelectModule,
     CommonModule,
@@ -56,11 +61,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
     FormsModule,
     MatTableModule,
     SAdminModule,
-    BrowserModule,
     GoogleChartsModule
-    // AmplifyAngularModule
-
-  ],
+],
 
 
 })
