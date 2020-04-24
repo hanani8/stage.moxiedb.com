@@ -184,12 +184,21 @@
                   Download the documents here!
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              <button class="btn btn-primary" (click)="downloadDoc(request._id)">
+              <form [formGroup]="myFormDownload" (ngSubmit)="getDoc(request._id)">
+                <mat-form-field>
+                  <input
+                    matInput
+                    formControlName="serial"
+                  />
+                  <mat-hint>Input the S.No of the document to be downloaded</mat-hint>
+                </mat-form-field>
+              <button class="btn btn-primary" [disabled]="myFormDownload.pristine || myFormDownload.invalid" type="submit">
                 Download Doc
               </button>
               <div *ngIf="downloadURL">
                 <a href="{{ downloadURL }}">Download Doc1 here</a>
               </div>
+            </form>
             </mat-expansion-panel>
           </div>
         </mat-expansion-panel>

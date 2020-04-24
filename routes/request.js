@@ -70,7 +70,7 @@ authenticatedRouteR.post('/:id', (req, res) => {
     let comment = req.body.Comment;
     let id = req.params.id;
     console.log(id);
-    Request.findOneAndUpdate(id, { $push: { allComments: comment } }, function (err, data) {
+    Request.findByIdAndUpdate(id, { $push: { allComments: comment } }, function (err, data) {
       if (err) { console.log("Something went wrong") }
       else {
         console.log("seems okay for now");
@@ -83,7 +83,7 @@ authenticatedRouteR.post('/:id/upload', (req,res) => {
   if (res.locals.user['custom:role'] == 'iuser') {
     let filename = req.body.File;
     let id = req.params.id;
-    Request.findOneAndUpdate(id, { $push: { uploads: filename}}, function(err,data) {
+    Request.findByIdAndUpdate(id, { $push: { uploads: filename}}, function(err,data) {
       if(err) { console.log("Something went wrong")}
         else {
           console.log("upload seems okay for now")
@@ -109,7 +109,7 @@ authenticatedRouteR.post('/requestStatus/:id', (req, res) => {
     let id = req.params.id;
     let updatedRequestStatus = req.body.requestStatus;
     console.log(req.body);
-    Request.findOneAndUpdate(id, { requestStatus: updatedRequestStatus }, function (err, data) {
+    Request.findByIdAndUpdate(id, { requestStatus: updatedRequestStatus }, function (err, data) {
       console.log(data);
       console.log(id);
       console.log(updatedRequestStatus);

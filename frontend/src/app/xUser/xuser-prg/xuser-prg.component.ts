@@ -18,6 +18,7 @@ import { ToastrService } from 'ngx-toastr';
 export class XuserPrgComponent implements OnInit {
   myFormDocument: FormGroup;
   myFormComment: FormGroup;
+  myFormDownload: FormGroup;
   request: request;
   interactions: Interaction;
   step = 0;
@@ -67,16 +68,15 @@ export class XuserPrgComponent implements OnInit {
     this.myFormDocument = this.fb.group({
       file: [null, Validators.required]
     })
+    this.myFormDownload = this.fb.group({
+    serial: [null, Validators.required]
+    })
   }
 
   selectFile(event) {
     this.selectedFiles = event.target.files;
     console.log(this.selectedFiles.item(0));
     this.currentFileUpload = this.selectedFiles.item(0);
-  }
-
-  get Comment() {
-    return this.myFormComment.get('Comment');
   }
 
   addComment() {
@@ -162,8 +162,9 @@ export class XuserPrgComponent implements OnInit {
     // this.router.navigate(['/my-requests'])
   }
 
-  downloadDoc(id) {
-    this.uploadDocService.downloadFile(id).subscribe(data => {
+  getDoc(id) {
+    const key = this.myFormDownload.value.serial;
+    this.uploadDocService.downloadFile(id, key).subscribe(data => {
       this.downloadURL = data;
       console.log(data);
       console.log(id);

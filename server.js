@@ -63,7 +63,7 @@ const signedUrlExpireSeconds = 60;
 
 
 var uri = "mongodb://moxie:moxie%4012345@cluster0-shard-00-00-pvm3m.mongodb.net:27017,cluster0-shard-00-01-pvm3m.mongodb.net:27017,cluster0-shard-00-02-pvm3m.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority";
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true},function(err, client) {
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false},function(err, client) {
   console.log("Connected to the database");
 });
 
@@ -80,41 +80,39 @@ app.use('/api/xuser', authenticatedRouteX);
 
 app.use('/api/xrequest', authenticatedRouteXR);
 
-app.get('/api/docURL/:id',function(req,res){
-  console.log(req.params);
-  let id = req.params.id;
-  console.log(id);
-  var key = null;
-Request.findById(id,function(err, data){
-  console.log(data);
-  console.log(data.uploads);
-  key = data.uploads[0];
-  console.log(key);
-}).then(function getUrl(){
+app.get('/api/docURL/:id/:key',async function(req,res){
   const aws = require('aws-sdk');
-const s3  = new aws.S3();
-aws.config.update({
-      secretAccessKey: 'Bk3UhOP0Okei2Y9kbwQgobpCdlB4hLRtpfjACU+6',
-    accessKeyId: 'AKIA4SAVCJANYHGMDTPZ',
-    signatureVersion: 'v4',
-    region: 'us-east-2' //E.g us-east-1
-})
-const keys = 'Screenshot from 2020-04-05 20-14-46.png';
-const bucket = 'document-upload-tryout';
-const signedUrlExpireSeconds = 60;
-const url = s3.getSignedUrl('getObject', {
-  Bucket: bucket,
-  Key: key,
-  Expires: signedUrlExpireSeconds
-})
-res.json(url);
-}).catch(err => console.log(err))
-})
+  const s3  = new aws.S3();
+  aws.config.update({
+     secretAccessKey: 'Bk3UhOP0Okei2Y9kbwQgobpCdlB4hLRtpfjACU+6',
+     accessKeyId: 'AKIA4SAVCJANYHGMDTPZ',
+     signatureVersion: 'v4',
+     region: 'us-east-2' //E.g us-east-1
+  });
+  const bucket = 'document-upload-tryout';
+  const signedUrlExpireSeconds = 60;
+  const id = await req.params.id;
+  const no = await Number(req.params.key);
+  let key = null;
+  Request.findById(id,async function(err, data){
+    key = await data.uploads[no];
+  });
+  function getURL(){
+  const url = s3.getSignedUrl('getObject', {
+   Bucket: bucket,
+   Key: key,
+   Expires: signedUrlExpireSeconds
+   })
+   res.json(url);;
+   console.log(url);
+   };
+   setTimeout(getURL, 2000);
+  })
 
 app.get("*", (req, res) => {
   res.sendFile(process.cwd()+"/frontend/dist/moxiedb/index.html");
 });
 
-
-http.createServer(app).listen(process.env.PORT || 3000);
-console.log("BackEnd Server Is On=", process.env.PORT || 3000);
+const PORT = 3000;
+http.createServer(app).listen(process.env.PORT || PORT);
+console.log("BackEnd Server Is On=", process.env.PORT || PORT);

@@ -45,8 +45,8 @@ uploadFile(file) {
 
 
 
-downloadFile(id) :Observable<any>{
-
-return this.http.get<any>(`/api/docURL/${id}`);
+downloadFile(id, key) :Observable<any>{
+console.log(key);
+return this.http.get<any>(`/api/docURL/${id}/${key}`);
  }
 }

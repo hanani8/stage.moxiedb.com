@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { RouterModule } from '@angular/router';
+import { Routes,RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SidebarComponent } from 'src/app/sAdmin/sidebar/sidebar.component';
@@ -16,8 +16,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddAdminComponent } from './add-admin/add-admin.component';
 import { AngularDualListBoxModule } from 'angular-dual-listbox';
 import { SharedModuleModule } from '../shared-module/shared-module.module';
-
-
+import { SadminGuardService } from '../guards/sadmin-guard.service';
+export const ROUTES:Routes = [
+  { path: 'dashboard', component: DashboardComponent, canActivate: [SadminGuardService]},
+  { path: 'orgManagement', component: SubsManageComponent, canActivate: [SadminGuardService]},
+  { path: 'addSubs', component: AddSubscriberComponent, canActivate: [SadminGuardService]},
+  { path: 'products', component: ProductsComponent, canActivate: [SadminGuardService]},
+  { path: 'addProd', component: AddProductComponent, canActivate: [SadminGuardService]},
+  { path: 'adminAssign', component: AdminAssignmentComponent, canActivate: [SadminGuardService]},
+  { path: 'addAdmin', component: AddAdminComponent, canActivate: [SadminGuardService]}
+]
 
 
 @NgModule({
@@ -33,6 +41,7 @@ import { SharedModuleModule } from '../shared-module/shared-module.module';
     AddAdminComponent,
   ],
   imports: [
+    RouterModule.forChild(ROUTES),
     CommonModule,
     RouterModule,
     FormsModule,
@@ -41,14 +50,6 @@ import { SharedModuleModule } from '../shared-module/shared-module.module';
     AngularDualListBoxModule,
     SharedModuleModule,
   ],
-  exports: [
-    SidebarComponent,
-    NavigationComponent,
-    SubsManageComponent,
-    DashboardComponent,
-    AddSubscriberComponent,
-    ProductsComponent,
-    SharedModuleModule
-  ]
+  exports: []
 })
 export class SAdminModule { }
