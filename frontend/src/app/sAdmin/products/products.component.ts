@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { FormsModule, FormControl } from '@angular/forms';
 
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -10,7 +11,7 @@ import { FormsModule, FormControl } from '@angular/forms';
 export class ProductsComponent implements OnInit {
   private baseURL: string = "/api"
   products: any = [];
-  public search: any = '';
+  public searchField: any = '';
   prod: any = []
   data: any;
   constructor(private http: HttpClient) {

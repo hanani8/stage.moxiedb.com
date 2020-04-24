@@ -12,12 +12,11 @@ import { AddSubscriberComponent } from 'src/app/sAdmin/add-subscriber/add-subscr
 import { ProductsComponent } from 'src/app/sAdmin/products/products.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { AdminAssignmentComponent } from './admin-assignment/admin-assignment.component';
-import { HttpClientModule} from '@angular/common/http'
-import { SearchPipe } from 'src/app/search.pipe';
+import { HttpClientModule } from '@angular/common/http';
 import { AddAdminComponent } from './add-admin/add-admin.component';
 import { AngularDualListBoxModule } from 'angular-dual-listbox';
+import { SharedModuleModule } from '../shared-module/shared-module.module';
 import { SadminGuardService } from '../guards/sadmin-guard.service';
-
 export const ROUTES:Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [SadminGuardService]},
   { path: 'orgManagement', component: SubsManageComponent, canActivate: [SadminGuardService]},
@@ -40,7 +39,6 @@ export const ROUTES:Routes = [
     AddProductComponent,
     AdminAssignmentComponent,
     AddAdminComponent,
-    SearchPipe,
   ],
   imports: [
     RouterModule.forChild(ROUTES),
@@ -49,10 +47,9 @@ export const ROUTES:Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AngularDualListBoxModule
+    AngularDualListBoxModule,
+    SharedModuleModule,
   ],
-  exports: [
-    SearchPipe
-  ]
+  exports: []
 })
 export class SAdminModule { }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -8,19 +10,25 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AddProductComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private tos: ToastrService, private router: Router) { }
   private baseURL = "/api"
 
   ngOnInit(): void {
   }
 
 
-  onSubmit(prodForm){
+  onSubmit(prodForm) {
     console.log(prodForm.value);
     var token = window.localStorage.getItem('tokenID')
     var header = {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     }
-    this.http.post(this.baseURL+ '/superAdmin/products' , prodForm.value, header).subscribe();
+    this.http.post(this.baseURL + '/superAdmin/products', prodForm.value, header).subscribe();
+    this.tos.success( 'Product Added!');
+    this.router.navigate(['/products'])
   }
+
+
+
 }
+

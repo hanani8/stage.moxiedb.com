@@ -20,7 +20,7 @@
               <div class="card-header">
                 <div class="d-flex align-items-center">
                   <label class="mr-2" for="gsearch">Search Customer Organization: </label>
-                  <input type="search" id="gsearch" name="gsearch" [(ngModel)]='search'>
+                  <input type="search" id="gsearch" name="gsearch" [(ngModel)]="searchField">
 
                   <button class="btn btn-primary btn-rount ml-auto" [routerLink]="['/admin/addCustomer']"
                     routerLinkActive="router-link-active" data-toggle="modal" data-target="#addRowModal">
@@ -43,11 +43,11 @@
                     </thead>
                     <tbody>
 
-                      <tr *ngFor="let customer of customers | search:search">
+                      <tr *ngFor="let customer of customers |search:searchField">
                         <td>{{customer.name}}</td>
 
                         <td>
-                          <p *ngFor="let product of customer.products  | search:search">{{product}}</p>
+                          <p *ngFor="let product of customer.products  ">{{product}}</p>
                         </td>
 
                         <td>
@@ -85,7 +85,7 @@
     <div class="modal-content">
       <div style="background-color: rgb(18, 47, 86);" class="modal-header">
         <h2 class="modal-title w-100 text-white" id="myModalLabel">
-          Edit Product
+          Edit Organization Details
         </h2>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>

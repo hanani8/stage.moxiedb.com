@@ -20,8 +20,8 @@ import { MatTableModule } from '@angular/material/table';
 import { IuserProductsComponent } from './iuser-products/iuser-products.component'
 import { RequestFilterPipe } from './iuser-my-requests/request-filter.pipe';
 import { fromEventPattern } from 'rxjs';
-import { SAdminModule } from '../sAdmin/s-admin.module';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { SharedModuleModule } from '../shared-module/shared-module.module'
 import { IuserGuardService } from '../guards/iuser-guard.service';
 
 export const ROUTES:Routes = [
@@ -31,6 +31,7 @@ export const ROUTES:Routes = [
   { path: 'genTkt', component: GenTicketComponent,canActivate: [IuserGuardService] },
   { path: 'products', component: IuserProductsComponent,canActivate: [IuserGuardService] }
 ]
+
 
 
 
@@ -60,10 +61,9 @@ export const ROUTES:Routes = [
     RouterModule,
     FormsModule,
     MatTableModule,
-    SAdminModule,
-    GoogleChartsModule
-],
-
-
+    GoogleChartsModule,
+    SharedModuleModule
+  ],
+  exports: []
 })
 export class IUserModule { }

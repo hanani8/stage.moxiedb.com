@@ -10,7 +10,7 @@ import { DualListComponent } from 'angular-dual-listbox';
 })
 export class SubsManageComponent implements OnInit {
 
-  public search: any = '';
+  public searchField: any = '';
   subscribers: any = [];
   private baseURL = "/api"
   products: any = [];

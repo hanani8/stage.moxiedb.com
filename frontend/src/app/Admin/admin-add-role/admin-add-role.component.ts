@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DualListComponent } from 'angular-dual-listbox';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 import * as AWS from 'aws-sdk';
 AWS.config.update({
   region: 'us-east-2', secretAccessKey: 'Bk3UhOP0Okei2Y9kbwQgobpCdlB4hLRtpfjACU+6',
@@ -41,7 +43,7 @@ export class AdminAddRoleComponent implements OnInit {
 
   });
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,  private tos: ToastrService, private router: Router) { }
 
   ngOnInit() {
     var token = window.localStorage.getItem('tokenID');
@@ -122,6 +124,8 @@ export class AdminAddRoleComponent implements OnInit {
     this.http.post(this._url + '/admin/addRole', roleForm.value, header).subscribe((error) => {
       console.error(error)
     });
+    this.tos.success( 'Organization Role Added!');
+    this.router.navigate(['/admin/roleManage'])
 
   }
 

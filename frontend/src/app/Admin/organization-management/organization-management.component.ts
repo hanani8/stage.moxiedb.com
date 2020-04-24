@@ -13,7 +13,7 @@ import { exists } from 'fs';
 })
 export class OrganizationManagementComponent implements OnInit {
 
-  public search: any = '';
+  public searchField: any = '';
   customers: any = [];
   private _url = "/api"
 
@@ -74,7 +74,7 @@ export class OrganizationManagementComponent implements OnInit {
     this.prepareStation()
   }
 
-  cusUpdate(cust){
+  cusUpdate(cust) {
     cust.value.products = this.confirmed;
     var token = window.localStorage.getItem('tokenID')
     var header = {

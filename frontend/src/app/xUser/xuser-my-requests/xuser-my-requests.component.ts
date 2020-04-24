@@ -1,5 +1,5 @@
 import { Component, OnInit, PipeTransform } from '@angular/core';
-import { HttpClient,HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { DecimalPipe } from '@angular/common';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -26,20 +26,20 @@ interface Request {
 })
 export class XuserMyRequestsComponent implements OnInit {
 
-private baseURL: string = "/api"
+  private baseURL: string = "/api"
 
   requests: any = [];
-  public search:any = '';
+  public searchField: any = '';
   searchTerm: string;
   searchMarket: string;
   constructor(private http: HttpClient) { }
 
-  ngOnInit(){
-  var token = window.localStorage.getItem('tokenID');
+  ngOnInit() {
+    var token = window.localStorage.getItem('tokenID');
     var header = {
-    headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
+      headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     }
-    
+
 
     this.http.get(this.baseURL + '/xrequest', header).subscribe(request => {
       this.requests = request['data']

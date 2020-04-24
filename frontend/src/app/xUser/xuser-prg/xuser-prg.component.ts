@@ -7,6 +7,7 @@ import { InteractionsService } from 'src/app/services/interactions.service';
 import { HttpClient, HttpResponse, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { UploadDocService } from 'src/app/services/upload-doc.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-xuser-prg',
@@ -32,7 +33,7 @@ export class XuserPrgComponent implements OnInit {
   progress: { percentage: number } = { percentage: 0 };
   downloadURL;
 
-  constructor(private fb: FormBuilder, private xrequestsService: XrequestsService, private interactionsService: InteractionsService, private http: HttpClient, private uploadDocService: UploadDocService, private router:Router) { }
+  constructor(private fb: FormBuilder, private xrequestsService: XrequestsService, private interactionsService: InteractionsService, private http: HttpClient, private uploadDocService: UploadDocService, private router:Router,  private tos: ToastrService) { }
 
   token = window.localStorage.getItem('tokenID')
   header = {
@@ -157,6 +158,8 @@ export class XuserPrgComponent implements OnInit {
     this.uploadDocService.uploadFile(file);
     this.http.post(this.baseURL, { Comment: `Document ${file.name} is Uploaded` }, this.header).subscribe();
     this.http.post(this.baseURL + '/upload', {File:`${file.name}`}, this.header).subscribe(data => {console.log(data)})
+    this.tos.success( 'Document uploaded!');
+    // this.router.navigate(['/my-requests'])
   }
 
   getDoc(id) {
@@ -166,6 +169,8 @@ export class XuserPrgComponent implements OnInit {
       console.log(data);
       console.log(id);
     })
+    this.tos.success( 'Document downloaded!');
+    // this.router.navigate(['/my-requests'])
   }
 }
 

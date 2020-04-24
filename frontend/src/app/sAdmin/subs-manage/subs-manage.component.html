@@ -22,7 +22,7 @@
                 <div class="d-flex align-items-center">
                   <!-- <h4 class="card-title">Subscribers</h4> -->
                   <label class="mr-2" for="gsearch">Search Organization :</label>
-                  <input type="search" id="gsearch" [(ngModel)]="search" />
+                  <input type="search" id="gsearch" [(ngModel)]="searchField" />
                   <br />
 
                   <button class="btn btn-primary btn-round ml-auto" [routerLink]="['/sadmin/addSubs']"
@@ -43,11 +43,13 @@
                       </tr>
                     </thead>
 
+
+
                     <tbody>
-                      <tr *ngFor="let subscriber of subscribers | search: search">
+                      <tr *ngFor="let subscriber of subscribers | search:searchField">
                         <td>{{ subscriber.name }}</td>
                         <td>
-                          <div *ngFor="let product of subscriber.products">
+                          <div *ngFor="let product of subscriber.products ">
                             {{ product }}
                           </div>
                         </td>
@@ -101,8 +103,8 @@
           <div class="form-group">
 
             <label>Products</label>
-            <dual-list [ngModel] class="form-control" [source]="source" [(destination)]="confirmed"
-            [format]="format" [filter]="filter" height="200px"></dual-list>
+            <dual-list [ngModel] class="form-control" [source]="source" [(destination)]="confirmed" [format]="format"
+              [filter]="filter" height="200px"></dual-list>
             <!-- <input class="form-control" name="products" ngModel="{{ subDetails.products }}" /> -->
           </div>
         </div>

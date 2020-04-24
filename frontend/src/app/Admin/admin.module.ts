@@ -4,9 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
 import { AdminNavigationComponent } from './admin-navigation/admin-navigation.component';
-
 import { OrganizationManagementComponent } from './organization-management/organization-management.component';
-import { SAdminModule } from 'src/app/sAdmin/s-admin.module';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { AngularDualListBoxModule } from 'angular-dual-listbox';
 import { RoleManagementComponent } from './role-management/role-management.component';
@@ -14,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { AdminAddRoleComponent } from './admin-add-role/admin-add-role.component';
 import { AccessControlComponent } from './access-control/access-control.component';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { SharedModuleModule} from '../shared-module/shared-module.module'
 import { AdminGuardService } from '../guards/admin-guard.service';
 
 
@@ -36,19 +35,18 @@ export const ROUTES:Routes = [
     AddCustomerComponent,
     RoleManagementComponent,
     AdminAddRoleComponent,
-    AccessControlComponent
+    AccessControlComponent,
+    // SharedModuleModule
   ],
   imports: [
     RouterModule.forChild(ROUTES),
     CommonModule,
     RouterModule,
-    SAdminModule,
     FormsModule,
     GoogleChartsModule,
-    AngularDualListBoxModule
+    AngularDualListBoxModule,
+    SharedModuleModule
   ],
-
-  exports: [
-  ]
+  exports: []
 })
 export class AdminModule { }

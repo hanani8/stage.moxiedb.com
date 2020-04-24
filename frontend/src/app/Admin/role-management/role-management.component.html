@@ -23,7 +23,7 @@
                 <div class="d-flex align-items-center">
                   <!-- <h4 class="card-title">Subscribers</h4> -->
                   <label class="mr-2" for="gsearch">Search :</label>
-                  <input type="search" id="gsearch" name="gsearch" [(ngModel)]='search'>
+                  <input type="search" id="gsearch" name="gsearch" [(ngModel)]="searchField">
                   <br />
 
                   <button class="btn btn-primary btn-round ml-auto mr-2" [routerLink]="['/admin/addRole']"
@@ -53,7 +53,7 @@
                     </thead>
 
                     <tbody>
-                      <tr *ngFor="let role of roles  | search:search">
+                      <tr *ngFor="let role of roles  |search:searchField ">
                         <td>{{role.name}}</td>
                         <td>{{role.role}}</td>
                         <td>{{role.organization}}</td>
@@ -106,7 +106,7 @@
       <div class="modal-content">
         <div style="background-color: rgb(18, 47, 86);" class="modal-header">
           <h2 class="modal-title w-100 text-white" id="myModalLabel">
-            Edit Product
+            Edit Role Mangement Details
           </h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -119,7 +119,7 @@
               <input style="display: none;" name="_id" ngModel="{{roll._id}}" />
             </div>
             <div class="form-group">
-              <label>Role: {{roll.name}}</label>
+              <label>Role: {{roll.role}}</label>
               <!-- <input class="form-control" name="role" ngModel="{{ roll.role}}" /> -->
             </div>
             <div class="form-group">
@@ -148,7 +148,7 @@
             </div>
             <div class="form-group">
               <div class="card-body">
-                <dual-list [ngModel] class="form-control" [source]="editUsers" [(destination)]="editUsers"
+                <dual-list [ngModel] class="form-control" [source]="source" [(destination)]="confirmed"
                   [format]="format" [filter]="filter" height="150px"></dual-list>
               </div>
             </div>

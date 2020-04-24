@@ -32,7 +32,7 @@ export class IuserMyRequestsComponent implements OnInit {
   private baseURL: string = "/api"
 
   requests: any = [];
-  public search:any = '';
+  public searchField:any = '';
   searchTerm: string;
   searchMarket: string;
 
@@ -43,7 +43,7 @@ export class IuserMyRequestsComponent implements OnInit {
   //     req.vendorOrg.toLowerCase().indexOf(searchString.toLowerCase()) !== -1)
   // }
 
-   
+
   // get searchTerm(): string {
   //   return this._searchTerm;
   // }
@@ -72,14 +72,14 @@ export class IuserMyRequestsComponent implements OnInit {
     var header = {
     headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     }
-    
+
 
     this.http.get(this.baseURL + '/request', header).subscribe(request => {
       this.requests = request['data']
       // console.log(this.requests)
     });
 
-    
+
 
 
   }
