@@ -1,4 +1,5 @@
 const express = require("express");
+const compression = require('compression');
 const bodyParser = require("body-parser");
 const http = require("http");
 const path = require('path');
@@ -18,6 +19,8 @@ const corsOptions = {
   origin: 'http://localhost:4200',
   optionsSuccessStatus: 200
 }
+
+app.use(compression());
 
 //body-parser
 app.use(bodyParser.json());
@@ -68,6 +71,10 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, useFind
 });
 
 
+app.use('/subscriber', (req,res) => {
+  res.sendFile(process.cwd()+"/subLogin.html")
+});
+
 app.use('/api/superAdmin', authenticatedRouteSA);
 
 app.use('/api/request', authenticatedRouteR);
@@ -107,10 +114,10 @@ app.get('/api/docURL/:id/:key',async function(req,res){
    console.log(url);
    };
    setTimeout(getURL, 2000);
-  })
+  });
 
-app.get("*", (req, res) => {
-  res.sendFile(process.cwd()+"/frontend/dist/moxiedb/index.html");
+app.use('*', (req, res) => {
+  res.sendFile(process.cwd()+"/mainLogin.html")
 });
 
 const PORT = 3000;

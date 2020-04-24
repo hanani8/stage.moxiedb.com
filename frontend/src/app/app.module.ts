@@ -7,12 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { AdminModule } from 'src/app/Admin/admin.module';
 import { IUserModule } from 'src/app/iUser/i-user.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { CognitoService } from './serviceAws/cognito.service';
 import { TokenService } from './tokenResolver/token.service';
 import { AdminRedirectComponent } from './utility/admin-redirect/admin-redirect.component';
 import { IuserRedirectComponent } from './utility/iuser-redirect/iuser-redirect.component';
 import { XuserRedirectComponent } from './utility/xuser-redirect/xuser-redirect.component';
-// import { AuthGuard } from './auth.guard';
 import { XUserModule } from 'src/app/xUser/x-user.module';
 import { SadminRedirectComponent } from './utility/sadmin-redirect/sadmin-redirect.component';
 import {
@@ -20,6 +18,7 @@ import {
   ToastNoAnimation,
   ToastNoAnimationModule
 } from 'ngx-toastr';
+import { BaseUtilityComponent } from './utility/base-utility/base-utility.component';
 
 
 
@@ -32,6 +31,7 @@ import {
     IuserRedirectComponent,
     XuserRedirectComponent,
     SadminRedirectComponent,
+    BaseUtilityComponent,
   ],
   imports: [
     BrowserModule,
