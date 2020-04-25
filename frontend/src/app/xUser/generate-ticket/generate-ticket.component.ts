@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -20,16 +20,16 @@ export class GenerateTicketComponent implements OnInit {
 
   ngOnInit() {
   this.genTkt = this.fb.group({
-      documentNames : '',
-      vendorOrg : '',
-      date: '',
-      products: '',
-      market: '',
-      criticality: '',
-      comment: '',
-      respondentName: '',
-      respondentEmail: '',
-      respondentContact: '',
+      documentNames : [null, Validators.required],
+      vendorOrg : [null, Validators.required],
+      date: [null, Validators.required],
+      products: [null, Validators.required],
+      market: [null, Validators.required],
+      criticality: [null, Validators.required],
+      comment: [null, Validators.required],
+      respondentName: [null, Validators.required],
+      respondentEmail: [null, Validators.required],
+      respondentContact: [null, Validators.required],
     });
     var token = window.localStorage.getItem('tokenID');
     var header = {
