@@ -18,6 +18,7 @@ import { AngularDualListBoxModule } from 'angular-dual-listbox';
 import { SharedModuleModule } from '../shared-module/shared-module.module';
 import { SadminGuardService } from '../guards/sadmin-guard.service';
 export const ROUTES:Routes = [
+  {path: '', children: [
   { path: 'dashboard', component: DashboardComponent, canActivate: [SadminGuardService]},
   { path: 'orgManagement', component: SubsManageComponent, canActivate: [SadminGuardService]},
   { path: 'addSubs', component: AddSubscriberComponent, canActivate: [SadminGuardService]},
@@ -25,6 +26,8 @@ export const ROUTES:Routes = [
   { path: 'addProd', component: AddProductComponent, canActivate: [SadminGuardService]},
   { path: 'adminAssign', component: AdminAssignmentComponent, canActivate: [SadminGuardService]},
   { path: 'addAdmin', component: AddAdminComponent, canActivate: [SadminGuardService]}
+  ], canActivate: [SadminGuardService]}
+  
 ]
 
 
@@ -50,6 +53,6 @@ export const ROUTES:Routes = [
     AngularDualListBoxModule,
     SharedModuleModule,
   ],
-  exports: []
+  exports: [RouterModule]
 })
 export class SAdminModule { }

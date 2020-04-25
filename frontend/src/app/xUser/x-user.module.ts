@@ -21,10 +21,13 @@ import { SharedModuleModule } from '../shared-module/shared-module.module';
 import { XuserGuardService } from '../guards/xuser-guard.service';
 
 export const ROUTES:Routes = [
-  { path: '', component: XuserDashboardComponent,canActivate: [XuserGuardService]},
-  { path: 'prg/:id', component: XuserPrgComponent,canActivate: [XuserGuardService]},
-  { path: 'generate-ticket', component: GenerateTicketComponent,canActivate: [XuserGuardService]},
-  { path: 'my-requests', component: XuserMyRequestsComponent,canActivate: [XuserGuardService]}
+  {path: '', children: [
+    {path: '', redirectTo: 'dashboard', pathMatch:'full'},
+    { path: 'dashboard', component: XuserDashboardComponent,canActivate: [XuserGuardService]},
+    { path: 'prg/:id', component: XuserPrgComponent,canActivate: [XuserGuardService]},
+    { path: 'generate-ticket', component: GenerateTicketComponent,canActivate: [XuserGuardService]},
+    { path: 'my-requests', component: XuserMyRequestsComponent,canActivate: [XuserGuardService]}
+  ]}
 ]
 
 @NgModule({
@@ -45,6 +48,6 @@ export const ROUTES:Routes = [
     MatTableModule,
     SharedModuleModule
     ],
-    exports: []
+    exports: [RouterModule]
 })
 export class XUserModule { }
