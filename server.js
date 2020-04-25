@@ -29,6 +29,7 @@ app.use(express.static(process.cwd()+"/frontend/dist/moxiedb"));
 
 dotenv.config();
 app.use(cors());
+app.use(compression());
 // app.use(cors());
 
 const aws = require('aws-sdk');
