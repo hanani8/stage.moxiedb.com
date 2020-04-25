@@ -16,10 +16,10 @@ const routes: Routes = [
   { path: 'admin-utility', component: AdminRedirectComponent, resolve: { access: TokenService } },
   { path: 'iuser-utility', component: IuserRedirectComponent, resolve: { access: IuserTokenService } },
   { path: 'xuser-utility', component: XuserRedirectComponent, resolve: { access: XuserTokenService } },
-  {path: 'sadmin', loadChildren:'./sAdmin/s-admin.module#SAdminModule'},
-  { path: 'iuser', loadChildren:'./iUser/i-user.module#IUserModule'},
-  { path: 'admin', loadChildren: './Admin/admin.module#AdminModule'},
-  { path: 'xuser', loadChildren: './xUser/x-user.module#XUserModule'}
+  {path: 'sadmin', loadChildren:() => import('./sAdmin/s-admin.module').then(mod => mod.SAdminModule)},
+  { path: 'iuser', loadChildren:() => import('./iUser/i-user.module').then(mod => mod.IUserModule)},
+  { path: 'admin', loadChildren:() => import('./Admin/admin.module').then(mod => mod.AdminModule)},
+  { path: 'xuser', loadChildren:() => import('./xUser/x-user.module').then(mod => mod.XUserModule)}
 ];
 
 @NgModule({

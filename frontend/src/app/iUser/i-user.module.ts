@@ -25,11 +25,14 @@ import { SharedModuleModule } from '../shared-module/shared-module.module'
 import { IuserGuardService } from '../guards/iuser-guard.service';
 
 export const ROUTES:Routes = [
-  { path: '', component: IuserDashboardComponent,canActivate: [IuserGuardService] },
-  { path: 'prg/:id', component: PRGComponent,canActivate: [IuserGuardService] },
-  { path: 'myRequest', component: IuserMyRequestsComponent,canActivate: [IuserGuardService] },
-  { path: 'genTkt', component: GenTicketComponent,canActivate: [IuserGuardService] },
-  { path: 'products', component: IuserProductsComponent,canActivate: [IuserGuardService] }
+  {path: '', children: [
+    {path: '', redirectTo:'dashboard', pathMatch:'full'},
+    { path: 'dashboard', component: IuserDashboardComponent,canActivate: [IuserGuardService] },
+    { path: 'prg/:id', component: PRGComponent,canActivate: [IuserGuardService] },
+    { path: 'myRequest', component: IuserMyRequestsComponent,canActivate: [IuserGuardService] },
+    { path: 'genTkt', component: GenTicketComponent,canActivate: [IuserGuardService] },
+    { path: 'products', component: IuserProductsComponent,canActivate: [IuserGuardService] }
+  ], canActivate:[IuserGuardService]}
 ]
 
 
@@ -64,6 +67,6 @@ export const ROUTES:Routes = [
     GoogleChartsModule,
     SharedModuleModule
   ],
-  exports: []
+  exports: [RouterModule]
 })
 export class IUserModule { }

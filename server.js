@@ -20,7 +20,7 @@ const corsOptions = {
   optionsSuccessStatus: 200
 }
 
-app.use(compression());
+
 
 //body-parser
 app.use(bodyParser.json());
@@ -75,6 +75,10 @@ app.use('/subscriber', (req,res) => {
   res.sendFile(process.cwd()+"/subLogin.html")
 });
 
+app.use('/login', (req,res) => {
+  res.sendFile(process.cwd()+"/mainLogin.html")
+});
+
 app.use('/api/superAdmin', authenticatedRouteSA);
 
 app.use('/api/request', authenticatedRouteR);
@@ -116,9 +120,9 @@ app.get('/api/docURL/:id/:key',async function(req,res){
    setTimeout(getURL, 2000);
   });
 
-app.use('*', (req, res) => {
-  res.sendFile(process.cwd()+"/mainLogin.html")
-});
+app.use('*', (req,res) => {
+  res.sendFile(process.cwd()+'/frontend/dist/moxiedb/index.html');
+})
 
 const PORT = 3000;
 http.createServer(app).listen(process.env.PORT || PORT);

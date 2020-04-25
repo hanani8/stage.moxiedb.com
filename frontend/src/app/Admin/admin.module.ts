@@ -17,12 +17,15 @@ import { AdminGuardService } from '../guards/admin-guard.service';
 
 
 export const ROUTES:Routes = [
-  { path: '', component: AdminDashboardComponent,canActivate: [AdminGuardService]},
-  { path: 'organizationManagement', component: OrganizationManagementComponent,canActivate: [AdminGuardService]},
-  { path: 'addCustomer', component: AddCustomerComponent,canActivate: [AdminGuardService]},
-  { path: 'roleManage', component: RoleManagementComponent,canActivate: [AdminGuardService]},
-  { path: 'addRole', component: AdminAddRoleComponent,canActivate: [AdminGuardService]},
-  { path: 'accessControl', component: AccessControlComponent,canActivate: [AdminGuardService]}
+  {path: '', children: [
+   {path: '', redirectTo:'dashboard', pathMatch:'full'},
+   { path: 'dashboard', component: AdminDashboardComponent,canActivate: [AdminGuardService]},
+   { path: 'organizationManagement', component: OrganizationManagementComponent,canActivate: [AdminGuardService]},
+   { path: 'addCustomer', component: AddCustomerComponent,canActivate: [AdminGuardService]},
+   { path: 'roleManage', component: RoleManagementComponent,canActivate: [AdminGuardService]},
+   { path: 'addRole', component: AdminAddRoleComponent,canActivate: [AdminGuardService]},
+   { path: 'accessControl', component: AccessControlComponent,canActivate: [AdminGuardService]}
+  ], canActivate: [AdminGuardService] }
 ]
 
 
@@ -47,6 +50,6 @@ export const ROUTES:Routes = [
     AngularDualListBoxModule,
     SharedModuleModule
   ],
-  exports: []
+  exports: [RouterModule]
 })
 export class AdminModule { }
