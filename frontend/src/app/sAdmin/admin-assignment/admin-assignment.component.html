@@ -7,25 +7,19 @@
       <div class="page-inner">
         <div class="page-header">
           <h4 class="page-title">Assigning Admin</h4>
-          <ul class="breadcrumbs">
-            <li class="nav-home">
-              <a href="#">
-                <i class="flaticon-home"></i>
-              </a>
-            </li>
-          </ul>
+
         </div>
         <div class="row">
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <div class="d-flex align-items-center">
-                  <!-- <h4 class="card-title">Subscribers</h4> -->
-                  <label class="mr-2" for="gsearch">Search :</label>
-                  <input type="search" id="gsearch" name="gsearch" [(ngModel)]="search" />
+                <div class="d-flex align-items-center form-group">
+                    <label class="mr-2" for="gsearch">Search :</label>
+                    <input class="form-control mr-5"  type="search" id="gsearch" name="gsearch" [(ngModel)]="search" />
+
                   <br />
 
-                  <button class="btn btn-primary btn-round ml-auto mr-2" [routerLink]="['/sadmin/addAdmin']"
+                  <button class="btn btn-primary btn-round  mr-2 ml-5" [routerLink]="['/sadmin/addAdmin']"
                     routerLinkActive="router-link-active" data-toggle="modal" data-target="#addRowModal">
                     <i class="fa fa-plus"></i>
                     Add Admin
