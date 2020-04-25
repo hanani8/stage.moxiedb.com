@@ -1,94 +1,78 @@
-
-	<div class="wrapper sidebar_minimize">
-		<app-navigation></app-navigation>
-		<!-- Sidebar -->
-		<app-sidebar></app-sidebar>
-		<div class="main-panel">
-			<div class="container">
-				<div class="page-inner">
-					<div class="page-header">
-						<h4 class="page-title">Add Products</h4>
-						<ul class="breadcrumbs">
-							<li class="nav-home">
-								<a href="#">
-									<i class="flaticon-home"></i>
-								</a>
-							</li>
-							
-						</ul>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<form #prodForm="ngForm">
-								
-								<div class="card">
-									<div class="card-header">
-										<div class="card-title">Form Elements</div>
-									</div>
-									<div class="card-body">
-										<div class="row">
-											<div class="col-md-6 col-lg-6">
-												
-												<div class="form-group">
-													<label for="product">Product Name</label>
-													<input type="text" class="form-control" ngModel name="productName" placeholder="Product Name">
-												</div>
-												<div class="form-group">
-													<label for="cas">CAS</label>
-													<input type="text" class="form-control" ngModel name="casNumber" placeholder="Enter CAS Number">
-												</div>
-												<div class="form-group">
-													<label for="type">Product Type</label>
-													<input type="text" class="form-control" ngModel name="productType" placeholder="Enter Product Type">
-												</div>
-												<div class="form-group">
-													<label for="molecule">Composition Molecule</label>
-													<input type="text" class="form-control" ngModel name="compositionMolecule" placeholder="Composition Molecule included">
-												</div>
-												<div class="form-group">
-													<label for="therapeutic">Therapeutic category</label>
-													<input type="text" class="form-control" ngModel name="therapeuticCategory" placeholder="Enter category of the product">
-												</div>
-											
-												<div class="form-group">
-													<label for="dosage">Dosage Form</label>
-													<input type="text" class="form-control" ngModel name="dosageForm" placeholder="Enter Dosage Form">
-												</div>
-												
-												<div class="form-group">
-													<label for="ndc">NDC</label>
-													<input type="text" class="form-control" ngModel name="ndc" placeholder="National Drug Code">
-												</div>
-												<div class="form-group">
-													<label for="ndc">Packing</label>
-													<input type="text" class="form-control" ngModel name="packing" placeholder="Packing type">
-												</div>
-												
-												<div class="form-check">
-													<label class="form-check-label">
-														<input class="form-check-input" name="terms" ngModel type="checkbox" value="">
-														<span class="form-check-sign">Agree with terms and conditions</span>
-													</label>
-												</div>
-											</div>
-											
-										</div>
-									</div>
-									<div class="card-action">
-										<button type="button" (click)="onSubmit(prodForm)" class="btn btn-success">Add</button>
-										<!-- <button class="btn btn-danger">Cancel</button> -->
-									</div>
-								</div>
-							</form>
-							
-						</div>
-					</div>
-			
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-	
+<div class="wrapper sidebar_minimize">
+  <app-navigation></app-navigation>
+  <app-sidebar></app-sidebar>
+  <div class="main-panel">
+    <div class="container">
+      <div class="page-inner">
+        <div class="row">
+          <div class="col-md-12">
+            <form #prodForm="ngForm">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Add a Product</div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6 col-lg-6" [hidden]="prodForm.submitted">
+                      <div class="form-group">
+                        <label for="product">Product Name</label>
+                        <input type="text" class="form-control" ngModel name="productName" required
+                          placeholder="Product Name">
+                      </div>
+                      <div class="form-group">
+                        <label for="cas">CAS</label>
+                        <input type="text" class="form-control" ngModel name="casNumber" required
+                          placeholder="Enter CAS Number">
+                      </div>
+                      <div class="form-group">
+                        <label for="type">Product Type</label>
+                        <input type="text" class="form-control" ngModel name="productType" required
+                          placeholder="Enter Product Type">
+                      </div>
+                      <div class="form-group">
+                        <label for="molecule">Composition Molecule</label>
+                        <input type="text" class="form-control" ngModel name="compositionMolecule" required
+                          placeholder="Composition Molecule included">
+                      </div>
+                      <div class="form-group">
+                        <label for="therapeutic">Therapeutic category</label>
+                        <input type="text" class="form-control" ngModel name="therapeuticCategory" required
+                          placeholder="Enter category of the product">
+                      </div>
+                      <div class="form-group">
+                        <label for="dosage">Dosage Form</label>
+                        <input type="text" class="form-control" ngModel name="dosageForm" required
+                          placeholder="Enter Dosage Form">
+                      </div>
+                      <div class="form-group">
+                        <label for="ndc">NDC</label>
+                        <input type="text" class="form-control" ngModel name="ndc" required
+                          placeholder="National Drug Code">
+                      </div>
+                      <div class="form-group">
+                        <label for="ndc">Packing</label>
+                        <input type="text" class="form-control" ngModel name="packing" required
+                          placeholder="Packing type">
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" name="terms" ngModel required type="checkbox" value="">
+                          <span class="form-check-sign">Agree with terms and conditions</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-action">
+                  <button type="button" [disabled]="prodForm.invalid" (click)="onSubmit(prodForm)"
+                    class="btn btn-success">Add Product</button>
+                  <!-- <button class="btn btn-danger">Cancel</button> -->
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,21 +7,14 @@
       <div class="page-inner">
         <div class="page-header">
           <h4 class="page-title">Assign Admin</h4>
-          <ul class="breadcrumbs">
-            <li class="nav-home">
-              <a href="#">
-                <i class="flaticon-home"></i>
-              </a>
-            </li>
-
-          </ul>
+        
         </div>
         <div class="row">
           <div class="col-md-12">
             <div class="card">
 
               <form #adminForm="ngForm">
-                <div class="card-body">
+                <div class="card-body" [hidden]="adminForm.submitted">
                   <div class="form-group form-show-validation row">
                     <label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Name </label>
                     <div class="col-lg-4 col-md-9 col-sm-8">
@@ -78,7 +71,7 @@
                 <div class="card-action">
                   <div class="row">
                     <div class="col-md-12">
-                      <button type="submit" (click)="onSubmit(adminForm)" class="btn btn-success">Add</button>
+                      <button type="submit" [disabled]="adminForm.invalid" (click)="onSubmit(adminForm)" class="btn btn-success">Add</button>
                     </div>
                   </div>
                 </div>

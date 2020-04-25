@@ -22,12 +22,12 @@
                 </div>
               </div>
               <form #roleForm="ngForm">
-                <div class="card-body">
+                <div class="card-body" [hidden]="roleForm.submitted">
                   <div class="row mt-3">
                     <div class="col-md-6">
                       <div class="form-group form-group-default">
                         <label>Role Name</label>
-                        <select (change)="funk($event)" [ngModel] class="form-control" id="gender" name="role">
+                        <select (change)="funk($event)" required [ngModel] class="form-control" id="gender" name="role">
                           <option value="">&nbsp;</option>
                           <option value="iuser">iuser</option>
                           <option value="xuser">xuser</option>
@@ -38,7 +38,7 @@
                     <div class="col-md-6">
                       <div class="form-group form-group-default">
                         <label>Organization Name</label>
-                        <select [ngModel] class="form-control" id="org" name="organization">
+                        <select [ngModel] class="form-control" required id="org" name="organization">
                           <option value="">&nbsp;</option>
                           <div *ngIf="displayOrg; then thenblock; else elseblock"></div>
 
@@ -48,7 +48,7 @@
                             }}</option>
                           </ng-template>
                           <ng-template #elseblock>
-                            <option *ngFor="let organization of organizations" value="{{ organization.name }}">
+                            <option *ngFor="let organization of organizations"  value="{{ organization.name }}">
                               {{ organization.name }}</option>
                           </ng-template>
                         </select>
@@ -59,20 +59,13 @@
                     <div class="col-md-6">
                       <div class="form-group form-group-default">
                         <label>Full Name</label>
-                        <input [ngModel] type="text" class="form-control" name="name" placeholder="Eg: Hanani" />
+                        <input [ngModel] type="text" required class="form-control" name="name" placeholder="Eg: Hanani" />
                       </div>
                     </div>
-                    <!-- <div class="col-md-4">
-											<div class="form-group form-group-default">
-												<label>Birth Date</label>
-												<input type="text" class="form-control" id="datepicker" name="datepicker" value="03/21/1998" placeholder="Birth Date">
-											</div>
-										</div> -->
-
                     <div class="col-md-4">
                       <div class="form-group form-group-default">
                         <label>Phone</label>
-                        <input [ngModel] type="text" class="form-control" name="phone"
+                        <input [ngModel] type="text" required class="form-control" name="phone"
                           placeholder="Eg: +918897351040" />
                       </div>
                     </div>
@@ -81,14 +74,14 @@
                     <div class="col-md-6">
                       <div class="form-group form-group-default">
                         <label>Employee ID</label>
-                        <input [ngModel] type="text" class="form-control" name="employeeID" placeholder="Eg: 123-45" />
+                        <input [ngModel] type="text" required class="form-control" name="employeeID" placeholder="Eg: 123-45" />
                       </div>
                     </div>
 
                     <div class="col-md-4">
                       <div class="form-group form-group-default">
                         <label>Email ID</label>
-                        <input [ngModel] type="text" class="form-control" name="email"
+                        <input [ngModel] type="text" required class="form-control" name="email"
                           placeholder="Eg: hanani@moxiedb.com" />
                       </div>
                     </div>
@@ -97,7 +90,7 @@
                     <div class="col-md-6">
                       <div class="form-group form-group-default">
                         <label>Designation</label>
-                        <input [ngModel] type="text" class="form-control" id="gender" for="designation"
+                        <input [ngModel] type="text" required class="form-control" id="gender" for="designation"
                           name="designation" placeholder="Eg: General Manager" />
                       </div>
                     </div>
@@ -105,19 +98,19 @@
                     <div class="col-md-4">
                       <div class="form-group form-group-default">
                         <label>Department</label>
-                        <input [ngModel] type="text" class="form-control" name="department"
+                        <input [ngModel] type="text" required class="form-control" name="department"
                           placeholder="Eg: Quality Affairs" />
                       </div>
                     </div>
                   </div>
-                  
+
                   <div class="separator-solid"></div>
                   <h3>Provide Temporary Password:</h3>
 
                   <div class="form-group form-show-validation row">
                     <label for="email" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Temporary Password:</label>
                     <div class="col-lg-4 col-md-9 col-sm-8">
-                      <input type="text" class="form-control" name="tempPass" ngModel id="tempPass"
+                      <input type="text" class="form-control" required name="tempPass" ngModel id="tempPass"
                         placeholder="Enter temporary password" required>
 
                     </div>
@@ -143,8 +136,8 @@
                   </ng-template>
 
                   <div class="text-right mt-3 mb-3">
-                    <button (click)="onSubmit(roleForm)" class="btn btn-success mr-2">
-                      Add
+                    <button (click)="onSubmit(roleForm)" [disabled]="roleForm.invalid" class="btn btn-success mr-2">
+                      Add Role
                     </button>
                   </div>
                 </div>
