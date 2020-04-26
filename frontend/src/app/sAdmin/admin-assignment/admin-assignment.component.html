@@ -14,8 +14,8 @@
             <div class="card">
               <div class="card-header">
                 <div class="d-flex align-items-center form-group">
-                    <label class="mr-2" for="gsearch">Search :</label>
-                    <input class="form-control mr-5"  type="search" id="gsearch" name="gsearch" [(ngModel)]="search" />
+                  <label class="mr-2" for="gsearch">Search :</label>
+                  <input class="form-control mr-5" type="search" id="gsearch" name="gsearch" [(ngModel)]="search" />
 
                   <br />
 
@@ -50,11 +50,11 @@
                         <td>{{ admin.Admin.orgName }}</td>
                         <td>
                           <div class="form-button-action">
-                            <!-- <button type="button" data-toggle="tooltip" data-target="#upmodel" data-toggle="modal"
+                            <button type="button" data-toggle="tooltip" data-target="#upmodel" data-toggle="modal"
                               (click)="toUpdate(admin)" class="btn btn-link btn-primary btn-lg"
                               data-original-title="Edit Task">
                               <i class="fa fa-edit"></i>
-                            </button> -->
+                            </button>
                             <button type="button" data-toggle="modal" data-target="#modelId" title=""
                               (click)="deleteAdmin(admin._id)" class="btn btn-link btn-danger"
                               data-original-title="Remove">
@@ -89,23 +89,25 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form>
+      <form #sub="ngForm">
         <div class="modal-body">
           <div class="form-group">
-            <label>Name</label>
+            <label>Name : {{adDetail.name}}</label>
             <input style="display: none;" name="_id" ngModel="{{adDetail._id}}" />
-            <input class="form-control" name="adName" ngModel="{{adDetail.name}}" />
+            <!-- <input class="form-control" name="adName" ngModel="{{adDetail.name}}" /> -->
           </div>
-          <div class="form-group" >
+          <div class="form-group">
             <label>Email</label>
+            <!-- <div *ngFor="let adm of adDetail.Admin"> -->
             <input class="form-control" name="email" ngModel="{{adDetail.email}}" />
+          <!-- </div> -->
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">
             Close
           </button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">
+          <button type="button" class="btn btn-primary" (click)="subUpdate(sub)" data-dismiss="modal">
             Save Changes
           </button>
         </div>

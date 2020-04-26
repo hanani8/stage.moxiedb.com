@@ -42,6 +42,19 @@ export class AdminAssignmentComponent implements OnInit {
     this.adDetail = admin
   }
 
+  subUpdate(sub){
+
+    console.log(sub.value)
+    var token = window.localStorage.getItem('tokenID')
+    var header = {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    }
+    this.http.put(this.baseURL + '/superAdmin/admin', sub.value, header).subscribe(product => {
+      this.ngOnInit();
+
+    })
+  }
+
 
 
   deleteAdmin(_id) {
