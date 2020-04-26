@@ -87,6 +87,7 @@ export class RoleManagementComponent implements OnInit {
     this.sourceStations = new Array<any>();
     // console.log(JSON.stringify(this.userExists[0]))
     // console.log(JSON.stringify(this.userStations[0]))
+
     for (let i = 0; i < this.userStations.length; i++) {
       for (let j = 0; j < this.userExists.length; j++) {
         if (this.userExists[j] !== this.userStations[i]) {
@@ -94,6 +95,7 @@ export class RoleManagementComponent implements OnInit {
         }
       }
     }
+    // this.sourceStations.push(this.userStations)
 
     this.source = this.sourceStations;
     this.confirmed = this.userExists;
@@ -109,10 +111,29 @@ export class RoleManagementComponent implements OnInit {
     } else if (this.roll.role == 'xuser') {
       this.userExists = this.roll.users;
       console.log(this.userExists)
+      console.log(this.userStations)
       // console.log(this.userStations)
       this.prepareUserStations()
     }
 
+  }
+
+  cusUpdate(roleEdit) {
+    if (roleEdit.value.role == 'iuser') {
+      roleEdit.value.products = this.confirmed
+      console.log(roleEdit.value)
+    } else if (roleEdit.value.role == 'xuser') {
+      roleEdit.value.users = this.confirmed
+      console.log(roleEdit.value)
+    }
+    var token = window.localStorage.getItem('tokenID')
+    var header = {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    }
+    this.http.put(this.url + '/admin/roles', roleEdit.value, header).subscribe(role => {
+      this.ngOnInit();
+
+    })
   }
 
 
@@ -126,7 +147,7 @@ export class RoleManagementComponent implements OnInit {
     var header = {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     };
-    this.http.delete(this.url + '/roles/' + this.data, header).subscribe((data) => {
+    this.http.delete(this.url + '/admin/roles/' + this.data, header).subscribe((data) => {
       console.log(this.data)
       this.ngOnInit()
     }, (error) => {
@@ -134,3 +155,5 @@ export class RoleManagementComponent implements OnInit {
     })
   }
 }
+
+

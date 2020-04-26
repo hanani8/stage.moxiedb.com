@@ -158,6 +158,21 @@ authenticatedRouteSA.post('/addAdmin', (req, res) => {
     }
 })
 
+authenticatedRouteSA.put('/admin', (req, res) => {
+    if (res.locals.user['custom:role'] == 'sadmin') {
+
+        SubscriberOrg.findById(req.body._id, (err, data) => {
+            if (err) return console.log(err);
+            // console.log(data.Admin.email)
+            // console.log(req.body)
+            data.Admin.email = req.body.email;
+            data.save().catch(err => console.log(err));
+            res.status(201).send(data);
+
+        });
+    }
+});
+
 
 authenticatedRouteSA.delete('/subscriberOrgs/admin/:id', (req, res) => {
     if (res.locals.user['custom:role'] == 'sadmin') {
