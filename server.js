@@ -1,4 +1,5 @@
 const express = require("express");
+const compression = require('compression');
 const bodyParser = require("body-parser");
 const http = require("http");
 const path = require('path');
@@ -19,6 +20,8 @@ const corsOptions = {
   optionsSuccessStatus: 200
 }
 
+
+
 //body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,6 +29,7 @@ app.use(express.static(process.cwd()+"/frontend/dist/moxiedb"));
 
 dotenv.config();
 app.use(cors());
+app.use(compression());
 // app.use(cors());
 
 const aws = require('aws-sdk');
@@ -68,6 +72,14 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, useFind
 });
 
 
+app.use('/subscriber', (req,res) => {
+  res.sendFile(process.cwd()+"/subLogin.html")
+});
+
+app.use('/login', (req,res) => {
+  res.sendFile(process.cwd()+"/mainLogin.html")
+});
+
 app.use('/api/superAdmin', authenticatedRouteSA);
 
 app.use('/api/request', authenticatedRouteR);
@@ -107,11 +119,11 @@ app.get('/api/docURL/:id/:key',async function(req,res){
    console.log(url);
    };
    setTimeout(getURL, 2000);
-  })
+  });
 
-app.get("*", (req, res) => {
-  res.sendFile(process.cwd()+"/frontend/dist/moxiedb/index.html");
-});
+app.use('*', (req,res) => {
+  res.sendFile(process.cwd()+'/frontend/dist/moxiedb/index.html');
+})
 
 const PORT = 3000;
 http.createServer(app).listen(process.env.PORT || PORT);
