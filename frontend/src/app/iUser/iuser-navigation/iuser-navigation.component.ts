@@ -17,7 +17,7 @@ export class IuserNavigationComponent implements OnInit {
   window.localStorage.removeItem('token');
   window.localStorage.removeItem('tokenID');
   window.localStorage.removeItem('tokenRefresh');
-  this.router.navigate(['/']);
+  window.location.assign('https://iuser-moxiedb.auth.us-east-2.amazoncognito.com/logout?client_id=6tgfkisrs55u5ovgv6dt1h8hbu&logout_uri=https://stage.moxiedb.com')
   }
-
 }
+

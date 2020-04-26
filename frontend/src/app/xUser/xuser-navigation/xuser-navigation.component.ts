@@ -17,7 +17,7 @@ export class XuserNavigationComponent implements OnInit {
   window.localStorage.removeItem('token');
   window.localStorage.removeItem('tokenID');
   window.localStorage.removeItem('tokenRefresh');
-  this.router.navigate(['/']);
+  window.location.assign('https://xuser-moxiedb.auth.us-east-2.amazoncognito.com/logout?client_id=531teggr74n1fnpba8epi4cea2&logout_uri=https://stage.moxiedb.com')
   }
 
 }

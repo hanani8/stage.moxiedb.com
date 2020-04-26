@@ -15,7 +15,7 @@ export class SadminGuardService {
       const token = localStorage.getItem('tokenID');
       const tokenPayload = decode(token);
       console.log(tokenPayload['custom:role'])
-      if (tokenPayload['custom:role'] == 'sadmin' && tokenPayload['exp'] < (Math.round(new Date().getTime()/1000))) {
+      if (tokenPayload['custom:role'] == 'sadmin' && tokenPayload['exp'] > (Math.round(new Date().getTime()/1000))) {
         return true;
       }
       else {
