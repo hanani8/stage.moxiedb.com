@@ -17,7 +17,7 @@ export class XuserGuardService {
     const token = localStorage.getItem('tokenID');
     const tokenPayload = decode(token);
     console.log(tokenPayload['custom:role'])
-    if(tokenPayload['custom:role'] == 'xuser') {
+    if(tokenPayload['custom:role'] == 'xuser' && tokenPayload['exp'] < (Math.round(new Date().getTime()/1000))) {
       return true;
     } 
     else 

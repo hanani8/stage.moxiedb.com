@@ -17,7 +17,7 @@ export class IuserGuardService {
     const token = localStorage.getItem('tokenID');
     const tokenPayload = decode(token);
     console.log(tokenPayload['custom:role'])
-    if(tokenPayload['custom:role'] == 'iuser') {
+    if(tokenPayload['custom:role'] == 'iuser' && tokenPayload['exp'] < (Math.round(new Date().getTime()/1000))) {
       return true;
     } 
     else 
