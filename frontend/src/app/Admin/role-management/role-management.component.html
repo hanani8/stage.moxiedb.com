@@ -112,7 +112,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form>
+        <form #roleEdit= "ngForm">
           <div class="modal-body">
             <div class="form-group">
               <label>Name : {{roll.name}} </label>
@@ -120,7 +120,7 @@
             </div>
             <div class="form-group">
               <label>Role: {{roll.role}}</label>
-              <!-- <input class="form-control" name="role" ngModel="{{ roll.role}}" /> -->
+              <input class="form-control" style="display: none;" name="role" ngModel="{{ roll.role}}" />
             </div>
             <div class="form-group">
               <label>Organization: {{roll.organization}}</label>
@@ -157,7 +157,7 @@
             <button type="button" class="btn btn-primary" data-dismiss="modal">
               Close
             </button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal">
+            <button (click)="cusUpdate(roleEdit)" type="button" class="btn btn-primary" data-dismiss="modal">
               Save Changes
             </button>
           </div>

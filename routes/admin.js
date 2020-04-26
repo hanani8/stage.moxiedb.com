@@ -43,42 +43,42 @@ authenticatedRouteA.use(function (req, res, next) {
 
 
 
-authenticatedRouteA.get('/products',async(req, res) => {
+authenticatedRouteA.get('/products', async (req, res) => {
 
     const name = await res.locals.user['cognito:username'];
     if (res.locals.user['custom:role'] == 'admin') {
-     SubscriberOrg.findOne({"Admin.name":name}, (err, data) => {
+        SubscriberOrg.findOne({ "Admin.name": name }, (err, data) => {
             res.json(data.products);
-       })
-    } else 
-    return false
+        })
+    } else
+        return false
     // console.log(req.headers.authorization)
     // console.log(res.locals.user)
     console.log(res.locals.user['custom:role'])
 })
 
-authenticatedRouteA.post('/addCustomerOrg',(req,res) => {
+authenticatedRouteA.post('/addCustomerOrg', (req, res) => {
     let formdata = req.body;
     var name = res.locals.user['cognito:username'];
     formdata.Admin = name;
-    SubscriberOrg.findOne({"Admin.name":name}, (err,data) => {
+    SubscriberOrg.findOne({ "Admin.name": name }, (err, data) => {
         formdata.customerOf = data.name;
-    }).then(function addCustomer(){
+    }).then(function addCustomer() {
         var customerOrg = new CustomerOrg(formdata);
         customerOrg.save().then(console.log("Data is saved")).catch(err => console.log(err));
         res.status(201).send(customerOrg);
     }).catch(err => console.log(err))
- 
-    
+
+
 })
 
-authenticatedRouteA.get('/customerOrgs', (req,res) => {
+authenticatedRouteA.get('/customerOrgs', (req, res) => {
     var name = res.locals.user['cognito:username'];
-  if (res.locals.user['custom:role'] == 'admin') {
-    CustomerOrg.find({"Admin":name}, (err,data) => {
-        res.json(data);
-    }).catch(err => console.log(err))
-  }  
+    if (res.locals.user['custom:role'] == 'admin') {
+        CustomerOrg.find({ "Admin": name }, (err, data) => {
+            res.json(data);
+        }).catch(err => console.log(err))
+    }
 })
 
 
@@ -93,7 +93,7 @@ authenticatedRouteA.put('/customerOrgs', (req, res) => {
 
             data.products = req.body.products;
             data.name = req.body.name
-           
+
             data.save().catch(err => console.log(err));
             res.status(201).send(data);
 
@@ -110,54 +110,81 @@ authenticatedRouteA.delete('/customerOrgs/:id', (req, res) => {
     }
 })
 
-authenticatedRouteA.get('/customerOrgsForAddRole', (req,res) => {
+authenticatedRouteA.get('/customerOrgsForAddRole', (req, res) => {
     var name = res.locals.user['cognito:username'];
-     if (res.locals.user['custom:role'] == 'admin') {
-        CustomerOrg.find({"Admin":name}, (err,data) => {
-        res.json(data);
+    if (res.locals.user['custom:role'] == 'admin') {
+        CustomerOrg.find({ "Admin": name }, (err, data) => {
+            res.json(data);
         }).catch(err => console.log(err))
-    }  
+    }
 })
 
-authenticatedRouteA.get('/customerOrgForAddRole', (req,res) => {
+authenticatedRouteA.get('/customerOrgForAddRole', (req, res) => {
     var name = res.locals.user['cognito:username'];
-    if (res.locals.user['custom:role'] == 'admin'){
-        SubscriberOrg.findOne({"Admin.name":name}, (err, data) => {
+    if (res.locals.user['custom:role'] == 'admin') {
+        SubscriberOrg.findOne({ "Admin.name": name }, (err, data) => {
             res.json(data.name);
         }).catch(err => console.log(err))
     }
 })
 
-authenticatedRouteA.post('/addRole',(req,res) => {
+authenticatedRouteA.post('/addRole', (req, res) => {
     var name = res.locals.user['cognito:username'];
-    if (res.locals.user['custom:role'] == 'admin'){
+    if (res.locals.user['custom:role'] == 'admin') {
         req.body.Admin = name;
-       const role = new Role(req.body);
-       role.save().then(console.log("Data is saved")).catch(err => console.log(err));
+        const role = new Role(req.body);
+        role.save().then(console.log("Data is saved")).catch(err => console.log(err));
         res.status(201).send(role);
-    } 
-})
-
-
-
-
-authenticatedRouteA.get('/addRoleProducts', (req,res) => {
-    var name = res.locals.user['cognito:username'];
-    if(res.locals.user['custom:role'] == 'admin'){
-      SubscriberOrg.findOne({"Admin.name":name}, (err, data) => {
-        res.json(data.products);
-      }).catch(err => console.log(err))
     }
 })
 
-authenticatedRouteA.get('/roles',(req,res) => {
+
+
+authenticatedRouteA.get('/addRoleProducts', (req, res) => {
     var name = res.locals.user['cognito:username'];
-    if (res.locals.user['custom:role'] == 'admin'){
-        Role.find({"Admin":name}, (err, data) => {
+    if (res.locals.user['custom:role'] == 'admin') {
+        SubscriberOrg.findOne({ "Admin.name": name }, (err, data) => {
+            res.json(data.products);
+        }).catch(err => console.log(err))
+    }
+})
+
+authenticatedRouteA.get('/roles', (req, res) => {
+    var name = res.locals.user['cognito:username'];
+    if (res.locals.user['custom:role'] == 'admin') {
+        Role.find({ "Admin": name }, (err, data) => {
             res.json(data);
         }).catch(err => console.log(err));
     }
 })
+
+
+authenticatedRouteA.put('/roles', (req, res) => {
+    if (res.locals.user['custom:role'] == 'admin') {
+
+
+        Role.findById(req.body._id, (err, data) => {
+            if (err) return console.log(err);
+
+            let User = req.body.users
+            for (i = 0; i < User.length; i++) {
+                data.users.push(User[i])
+            }
+            data.products = req.body.products
+            data.department = req.body.department;
+            data.designation = req.body.designation;
+            data.phone = req.body.phone;
+            data.employeeID = req.body.emp;
+            data.phone = req.body.phone;
+
+            data.save().catch(err => console.log(err));
+            res.status(201).send(data);
+
+        });
+    }
+});
+
+
 
 authenticatedRouteA.delete('/roles/:id', (req, res) => {
     if (res.locals.user['custom:role'] == 'admin') {
@@ -168,10 +195,10 @@ authenticatedRouteA.delete('/roles/:id', (req, res) => {
     }
 })
 
-authenticatedRouteA.get('/accesscontrolusers',(req,res) => {
+authenticatedRouteA.get('/accesscontrolusers', (req, res) => {
     var name = res.locals.user['cognito:username'];
-    if (res.locals.user['custom:role'] == 'admin'){
-        Role.find({$and:[{"role":'iuser'},{"Admin":name}]}, (err, data) => {
+    if (res.locals.user['custom:role'] == 'admin') {
+        Role.find({ $and: [{ "role": 'iuser' }, { "Admin": name }] }, (err, data) => {
             res.json(data);
         }).catch(err => console.log(err))
     }
