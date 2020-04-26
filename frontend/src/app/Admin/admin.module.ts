@@ -10,7 +10,6 @@ import { AngularDualListBoxModule } from 'angular-dual-listbox';
 import { RoleManagementComponent } from './role-management/role-management.component';
 import { FormsModule } from '@angular/forms';
 import { AdminAddRoleComponent } from './admin-add-role/admin-add-role.component';
-import { AccessControlComponent } from './access-control/access-control.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { SharedModuleModule} from '../shared-module/shared-module.module'
 import { AdminGuardService } from '../guards/admin-guard.service';
@@ -23,8 +22,7 @@ export const ROUTES:Routes = [
    { path: 'organizationManagement', component: OrganizationManagementComponent,canActivate: [AdminGuardService]},
    { path: 'addCustomer', component: AddCustomerComponent,canActivate: [AdminGuardService]},
    { path: 'roleManage', component: RoleManagementComponent,canActivate: [AdminGuardService]},
-   { path: 'addRole', component: AdminAddRoleComponent,canActivate: [AdminGuardService]},
-   { path: 'accessControl', component: AccessControlComponent,canActivate: [AdminGuardService]}
+   { path: 'addRole', component: AdminAddRoleComponent,canActivate: [AdminGuardService]}
   ], canActivate: [AdminGuardService] }
 ]
 
@@ -38,8 +36,6 @@ export const ROUTES:Routes = [
     AddCustomerComponent,
     RoleManagementComponent,
     AdminAddRoleComponent,
-    AccessControlComponent,
-    // SharedModuleModule
   ],
   imports: [
     RouterModule.forChild(ROUTES),
