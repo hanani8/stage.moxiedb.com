@@ -32,6 +32,7 @@ export class IuserMyRequestsComponent implements OnInit {
   private baseURL: string = "/api"
 
   requests: any = [];
+  cachedRequests: any = [];
   public searchField:any = '';
   searchTerm: string;
   searchMarket: string;
@@ -65,23 +66,44 @@ export class IuserMyRequestsComponent implements OnInit {
   // };
 
 
-  constructor(private http: HttpClient) { }
+constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     var token = window.localStorage.getItem('tokenID');
     var header = {
     headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     }
-
-
     this.http.get(this.baseURL + '/request', header).subscribe(request => {
-      this.requests = request['data']
-      // console.log(this.requests)
+      this.cachedRequests = request['data'];
+      this.requests = this.cachedRequests;
     });
+  }
 
+  transfer() {
+  for(let request of this.cachedRequests){
+  this.requests.push(request);
+  }
+  }
 
+  filter($event) {
+  console.log($event.target.value);
+  if($event.target.value == ''){
+  this.requests = this.requests;
+  }
+  else{
+  this.requests = this.cachedRequests.filter((item) => item.requestStatus == $event.target.value);
+  }
+  }
 
-
+  filter1($event) {
+  console.log($event.target.value);
+  if($event.target.value == ''){
+  this.requests = this.requests;
+  }
+  else{
+  this.requests = this.cachedRequests.filter((item) => item.requestStatus == $event.target.value);
+  }
   }
 }
+
 
