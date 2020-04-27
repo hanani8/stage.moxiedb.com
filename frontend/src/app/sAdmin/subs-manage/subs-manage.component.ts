@@ -59,13 +59,26 @@ export class SubsManageComponent implements OnInit {
   private prepareStation() {
     this.confirmedStations = new Array<any>();
     this.sourceStations = new Array<any>();
-
-    for (let i = 0; i < this.stations.length; i++) {
-      for (let j = 0; j < this.exists.length; j++) {
-        if (this.exists[j] == this.stations[i]) {
-          this.confirmedStations.push(this.exists[j])
-        } else {
-          this.sourceStations.push(this.stations[i])
+    if (this.exists.length == 1) {
+      // this.sourceStations.push(this.exists[0])
+      console.log(this.exists[0])
+      console.log(this.stations)
+      for (let p = 0; p < this.stations.length; p++) {
+        // console.log(this.stations[p])
+        if (this.stations[p] == this.exists[0]) {
+          this.confirmedStations.push(this.stations[p])
+          console.log(this.confirmedStations)
+        }
+        this.sourceStations.push(this.stations[p])
+      }
+    } else {
+      for (let i = 0; i < this.stations.length; i++) {
+        for (let j = 0; j <= this.exists.length; j++) {
+          if (this.exists[j] == this.stations[i]) {
+            this.confirmedStations.push(this.exists[j])
+          } else if (this.exists[j] !== this.stations[i]) {
+            this.sourceStations.push(this.stations[i])
+          }
         }
       }
     }
@@ -81,7 +94,7 @@ export class SubsManageComponent implements OnInit {
 
   }
 
-  subsUpdate(subs){
+  subsUpdate(subs) {
     subs.value.products = this.confirmed;
     var token = window.localStorage.getItem('tokenID')
     var header = {

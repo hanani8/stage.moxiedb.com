@@ -1,49 +1,52 @@
 <div class="sidebar sidebar-style-2">
-    <div class="sidebar-wrapper scrollbar scrollbar-inner">
-        <div class="sidebar-content">
-            <div class="user">
-                <div class="info">
-                    <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-                        <span>
-                            Internal User
-                        </span>
-                    </a>
-                    <div class="clearfix"></div>
+  <div class="sidebar-wrapper scrollbar scrollbar-inner">
+    <div class="sidebar-content">
+      <div class="user">
+        <div class="info">
+          <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+            <span>
+              Internal User
+            </span>
+          </a>
+          <div class="clearfix"></div>
 
-                </div>
-            </div>
-            <ul class="nav nav-primary">
-                <li class="nav-item active">
-
-                    <a data-toggle="collapse"  [routerLink]="['/iuser']" routerLinkActive="router-link-active"   routerLinkActive="router-link-active"  href="#dashboard" class="collapsed" aria-expanded="false">
-
-                        <i class="fas fa-home"></i>
-                        <p>Dashboard</p>
-                    </a>
-
-                </li>
-                <li class="nav-section">
-                    <span class="sidebar-mini-icon">
-                        <i class="fa fa-ellipsis-h"></i>
-                    </span>
-                    <h4 class="text-section">Components</h4>
-                </li>
-
-                <li class="nav-item">
-                    <a data-toggle="collapse" [routerLink]="['/iuser/myRequest']" routerLinkActive="router-link-active"    routerLinkActive="router-link-active"  >
-                        <i class="fas fa-th-list"></i>
-                        <p>My Requests</p>
-                    </a>
-
-                </li>
-                <li class="nav-item">
-                    <a data-toggle="collapse" [routerLink]="['/iuser/products']" routerLinkActive="router-link-active"  href="#roleManage">
-                        <i class="fas fa-font"></i>
-                        <p>My Products</p>
-                    </a>
-
-                </li>
-            </ul>
         </div>
+      </div>
+      <ul class="nav nav-primary">
+        <li class="nav-item active">
+
+          <a data-toggle="collapse" [routerLink]="['/iuser']" routerLinkActive="router-link-active"
+            routerLinkActive="router-link-active" href="#dashboard" class="collapsed" aria-expanded="false">
+
+            <i class="material-icons">dashboard</i>
+            <p>Dashboard</p>
+          </a>
+
+        </li>
+        <li class="nav-section">
+          <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+          </span>
+          <h4 class="text-section">Components</h4>
+        </li>
+
+        <li class="nav-item">
+          <a data-toggle="collapse" [routerLink]="['/iuser/myRequest']" routerLinkActive="router-link-active"
+            routerLinkActive="router-link-active">
+            <i class="material-icons">markunread</i>
+            <p>My Requests</p>
+          </a>
+
+        </li>
+        <li class="nav-item">
+          <a data-toggle="collapse" [routerLink]="['/iuser/products']" routerLinkActive="router-link-active"
+            href="#roleManage">
+            <i class="material-icons">add_circle</i>
+            <p>My Products</p>
+          </a>
+
+        </li>
+      </ul>
     </div>
+  </div>
 </div>
