@@ -51,23 +51,6 @@ export class OrganizationManagementComponent implements OnInit {
     this.confirmedStations = new Array<any>();
     this.sourceStations = new Array<any>();
 
-    // if (this.exists.length == 0) {
-    //   this.sourceStations.push(this.stations)
-    // }
-    // else {
-    //   for (let i = 0; i < this.stations.length; i++) {
-    //     for (let j = 0; j < this.exists.length; j++) {
-    //       if (this.stations[i] == this.exists[j]) {
-    //         this.confirmedStations.push(this.stations[i])
-    //       } else if (this.stations[i] !== this.exists[j]) {
-    //         this.sourceStations.push(this.stations[i])
-    //       }
-    //     }
-    //     return;
-    //   }
-    //   this.source = this.sourceStations;
-    //   this.confirmed = this.confirmedStations;
-    // }
 
 
       if (this.exists.length == 1) {
