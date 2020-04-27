@@ -51,17 +51,55 @@ export class OrganizationManagementComponent implements OnInit {
     this.confirmedStations = new Array<any>();
     this.sourceStations = new Array<any>();
 
-    for (let i = 0; i < this.stations.length; i++) {
-      for (let j = 0; j < this.exists.length; j++) {
-        if (this.exists[j] == this.stations[i]) {
-          this.confirmedStations.push(this.exists[j])
-        } else {
-          this.sourceStations.push(this.stations[i])
+    // if (this.exists.length == 0) {
+    //   this.sourceStations.push(this.stations)
+    // }
+    // else {
+    //   for (let i = 0; i < this.stations.length; i++) {
+    //     for (let j = 0; j < this.exists.length; j++) {
+    //       if (this.stations[i] == this.exists[j]) {
+    //         this.confirmedStations.push(this.stations[i])
+    //       } else if (this.stations[i] !== this.exists[j]) {
+    //         this.sourceStations.push(this.stations[i])
+    //       }
+    //     }
+    //     return;
+    //   }
+    //   this.source = this.sourceStations;
+    //   this.confirmed = this.confirmedStations;
+    // }
+
+
+      if (this.exists.length == 1) {
+        // this.sourceStations.push(this.exists[0])
+        console.log(this.exists[0])
+        console.log(this.stations)
+        for (let p = 0; p < this.stations.length; p++) {
+          // console.log(this.stations[p])
+
+          if (this.stations[p] == this.exists[0]){
+            this.confirmedStations.push(this.stations[p])
+            console.log(this.confirmedStations)
+
+          }
+            this.sourceStations.push(this.stations[p])
+
+        }
+
+      } else {
+        for (let i = 0; i < this.stations.length; i++) {
+          for (let j = 0; j <= this.exists.length; j++) {
+            if (this.stations[i] == this.exists[j]) {
+              this.confirmedStations.push(this.stations[i])
+            } else if (this.stations[i] !== this.exists[j]) {
+              this.sourceStations.push(this.stations[i])
+            }
+          }
         }
       }
-    }
-    this.source = this.sourceStations;
-    this.confirmed = this.confirmedStations;
+
+      this.source = this.sourceStations;
+      this.confirmed = this.confirmedStations;
   }
 
 
