@@ -11,7 +11,7 @@
               <div class="card-header">
                 <div class="card-title">Add Subscriber Organization</div>
               </div>
-              <form #subForm="ngForm">
+              <form  #subForm="ngForm">
                 <!-- {{ subForm.value | json }} -->
                 <br />
                 <div class="card-body" [hidden]="subForm.submitted">
@@ -31,8 +31,8 @@
                         <div class="card-header">
                           <h4 class="card-title">List of Products</h4>
                         </div>
-                        <div class="card-body">
-                          <dual-list [ngModel] class="form-control" [source]="source" [(destination)]="target"
+                        <div class="card-body" >
+                          <dual-list [ngModel]  class="form-control"  [source]="source" [(destination)]="target"
                             [format]="format" [filter]="filter" height="150px"></dual-list>
                         </div>
                       </div>
