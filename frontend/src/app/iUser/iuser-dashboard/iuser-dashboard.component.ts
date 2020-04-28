@@ -19,21 +19,21 @@ export class IuserDashboardComponent implements OnInit {
   title = 'Requests (in numbers)';
   type = 'BarChart';
   data = [
-     ["Regulatory Affairs", 900, 390],
-     ["Quality Affairs", 1000, 400],
-     ["COA", 1170, 440],
-     ["DMF", 1250, 480],
-     ["Samples", 1530, 540]
+    ["Regulatory Affairs", 900, 390],
+    ["Quality Affairs", 1000, 400],
+    ["COA", 1170, 440],
+    ["DMF", 1250, 480],
+    ["Samples", 1530, 540]
   ];
-  columnNames = ['Year', 'Completed','In-process'];
+  columnNames = ['Year', 'Completed', 'In-process'];
   options = {
-     hAxis: {
-        title: 'Year'
-     },
-     vAxis:{
-        minValue:0
-     },
-     isStacked:true
+    hAxis: {
+      title: 'Year'
+    },
+    vAxis: {
+      minValue: 0
+    },
+    isStacked: true
   };
   width = 550;
   height = 400;
