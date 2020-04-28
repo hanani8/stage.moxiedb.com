@@ -51,6 +51,16 @@ authenticatedRouteX.get('/roles', (req, res) => {
     Role.findOne({ "name": name }, (err, data) => {
         if (err) return console.log(err);
         res.json(data.users);
+        console.log(data.name)
+    }).catch(err => console.log(err))
+})
+
+authenticatedRouteX.get('/roles/respondent/:respondent', (req, res) => {
+    const name = req.params.respondent
+    console.log(name)
+    Role.findOne({ "name": name }, (err, data) => {
+        if (err) return console.log(err);
+        res.json(data);
     }).catch(err => console.log(err))
 })
 

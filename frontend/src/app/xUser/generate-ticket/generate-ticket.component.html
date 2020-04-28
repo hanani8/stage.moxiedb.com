@@ -25,7 +25,7 @@
 
               <form [formGroup]="genTkt" (ngSubmit)="onSubmit()">
                 <!-- {{ genTkt.value | json }} -->
-                <div class="card-body" >
+                <div class="card-body">
                   <mat-form-field>
                     <mat-label>Submit Request for</mat-label>
                     <mat-select formControlName="documentNames" multiple>
@@ -82,7 +82,7 @@
 
                   <mat-form-field>
                     <mat-label>Name</mat-label>
-                    <mat-select formControlName="respondentName" id="respondentName">
+                    <mat-select formControlName="respondentName" (selectionChange)="someMethod($event.value)" id="respondentName">
                       <mat-option *ngFor="let respondentName of respondentNames" [value]="respondentName">
                         {{ respondentName }}</mat-option>
                     </mat-select>
@@ -92,13 +92,13 @@
 
                   <mat-form-field>
                     <mat-label>E-mail Address</mat-label>
-                    <input matInput formControlName="respondentEmail"  id="respondentEmail">
+                    <input matInput formControlName="respondentEmail" value={{respondentDetails.email}}  id="respondentEmail">
                   </mat-form-field>
                   <br>
 
                   <mat-form-field>
                     <mat-label>Contact Number</mat-label>
-                    <input matInput formControlName="respondentContact">
+                    <input matInput value={{respondentDetails.phone}} formControlName="respondentContact">
                   </mat-form-field>
                 </div>
                 <button class="btn btn-success" [disabled]="genTkt.invalid" type="submit">Submit</button>

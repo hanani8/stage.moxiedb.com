@@ -81,7 +81,8 @@
 
                   <mat-form-field>
                     <mat-label>Name</mat-label>
-                    <mat-select formControlName="respondentName" [(ngModel)]="respondentDetails" (change)="giveDetails()" id="respondentName">
+                    <mat-select formControlName="respondentName" [(ngModel)]="respondentDetails"
+                      (change)="giveDetails()" id="respondentName">
                       <mat-option *ngFor="let respondentName of respondentNames" [value]="respondentName">
                         {{ respondentName }}</mat-option>
                     </mat-select>
