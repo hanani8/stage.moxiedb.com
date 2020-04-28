@@ -17,14 +17,31 @@
                   </div> -->
               </div>
               <div class="row">
+                <div class="col-md-3">
+               <h4 class="ml-4">Status</h4>
+                <select (change)="filter($event)">
+                  <option value=''></option>
+                  <option value="New Request">New Request</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Closed">Closed</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+               <h4 class="ml-4">Criticality</h4>
+                <select (change)="filter1($event)">
+                  <option value=''></option>
+                  <option value="Fast">Fast</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Advance">Advance</option>
+                </select>
+              </div>
+              </div>
+              <div class="row">
               <div class="col-md-3">
                 <div class="ml-2 form-group">
                     <h4 class="ml-4">Search by Organization:</h4>
                     <input class="form-control ml-2" type="text" [(ngModel)]="searchTerm" />
                 </div>
-              </div>
-              <div class="col-md-3">
-
               </div>
               <div class="col-md-3">
                 <div class="ml-2 form-group">
@@ -43,6 +60,7 @@
                       <tr>
                         <th>ID</th>
                         <th>Document Name</th>
+                        <th>Status</th>
                         <th>Organisation</th>
                         <th>Product</th>
                         <th>Requester</th>
@@ -59,10 +77,11 @@
                       <tr *ngFor="let request of requests | requestFilter: searchTerm |search:searchField ; index as i">
                         <td scope="row">{{ i + 1 }}</td>
                         <td><a href="/iuser/prg/{{request._id}}">{{ request.documentNames }}</a></td>
+                        <td>{{request.requestStatus}}</td>
                         <td><a>{{ request.vendorOrg | uppercase}}</a></td>
                         <td><a>{{ request.products  }}</a></td>
                         <td><a>{{ request.requesterName }}</a></td>
-                        <td><a>{{ request.date | date }}</a></td>
+                        <td><a>{{ request.date | date:'medium' }}</a></td>
                         <td><a>{{ request.criticality }}</a></td>
                         <td><a>{{ request.comment }}</a></td>
                         <td><a>{{ request.respondentName }}</a></td>
