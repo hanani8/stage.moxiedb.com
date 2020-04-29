@@ -122,6 +122,25 @@ authenticatedRouteR.post('/requestStatus/:id', (req, res) => {
   }
 })
 
+authenticatedRouteR.get('/dashboard-data', (req, res) => {
+  const name = res.locals.user['cognito:username'];
+  Request.find({"respondentName":name}, (err, data) => {
+    let p;
+    let n;
+    let c;
+    for(let element of data) {
+      if(element.requestStatus == 'Closed'){
+        c = c + 1;
+      } else if(element.requestStatus == 'New Request'){
+        n = n + 1
+      } else if(element.requestStatus) {
+        p = p + 1;
+      }
+    }
+    res.json({p, n, c});
+  })
+})
+
 
 
 

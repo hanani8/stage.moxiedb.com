@@ -5,8 +5,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { request } from 'src/app/model/request';
-// import {} from ''
-
+import { RequestsService } from 'src/app/services/requests.service';
 
 interface Request {
   documentsNames: string;
@@ -66,17 +65,17 @@ export class IuserMyRequestsComponent implements OnInit {
   // };
 
 
-constructor(private http: HttpClient) { }
+constructor(private http: HttpClient, private requestsService: RequestsService) { }
 
   ngOnInit(): void {
     var token = window.localStorage.getItem('tokenID');
     var header = {
     headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     }
-    this.http.get(this.baseURL + '/request', header).subscribe(request => {
-      this.cachedRequests = request['data'];
-      this.requests = this.cachedRequests;
-    });
+    this.requestsService.getData().subscribe(request => {
+    this.cachedRequests = request['data'];
+    this.requests = this.cachedRequests;
+    })
   }
 
   transfer() {
@@ -101,7 +100,7 @@ constructor(private http: HttpClient) { }
   this.requests = this.requests;
   }
   else{
-  this.requests = this.cachedRequests.filter((item) => item.requestStatus == $event.target.value);
+  this.requests = this.cachedRequests.filter((item) => item.criticality == $event.target.value);
   }
   }
 }
