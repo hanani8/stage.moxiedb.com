@@ -5,142 +5,126 @@
 
 
 
-		<div class="main-panel">
-			<div class="container">
-				<div class="panel-header bg-primary-gradient">
-					<div class="page-inner py-5">
-						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
-							<div>
+  <div class="main-panel">
+    <div class="container">
+      <div class="panel-header bg-primary-gradient">
+        <div class="page-inner py-5">
+          <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+            <div>
               <h2 class="text-white pb-2 fw-bold">Welcome! Your work all in one place</h2>
-							</div>
-							<div class="ml-md-auto py-2 py-md-0">
-								<a href="#" class="btn btn-white btn-border btn-round mr-2">Manage</a>
-								<a href="#" class="btn btn-secondary btn-round">Add Customer</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="page-inner mt--5">
-					<div class="row">
-						<div class="col-md-6">
-							<div class="card full-height">
-								<div class="card-header">
-									<div class="card-title">My request</div>
-								</div>
-								<div class="card-body">
-                  <google-chart #chart
-                  [title]="title"
-                  [type]="type"
-                  [data]="data"
-                  [columnNames]="columnNames"
-                  [options]="options"
-                  [width]="width"
-                  [height]="height">
-               </google-chart>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="card full-height">
-								<div class="card-header">
-									<div class="card-head-row">
-										<div class="card-title">Latest Requests</div>
-										<div class="card-tools">
-											<!-- <ul class="nav nav-pills nav-secondary nav-pills-no-bd nav-sm" id="pills-tab" role="tablist">
-												<li class="nav-item">
-													<a class="nav-link" id="pills-today" data-toggle="pill" href="#pills-today" role="tab" aria-selected="true">Today</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link active" id="pills-week" data-toggle="pill" href="#pills-week" role="tab" aria-selected="false">Week</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link" id="pills-month" data-toggle="pill" href="#pills-month" role="tab" aria-selected="false">Month</a>
-												</li>
-											</ul> -->
-										</div>
-									</div>
-								</div>
-								<div class="card-body" >
-									<div class="d-flex mt-4" *ngFor="let req of reverseRequest | slice:0:7; index as i">
-                    <!-- <td scope="row">{{ i - 1 }}</td> -->
-										<div class="avatar ">
-											<span class="avatar-title rounded-circle border border-white bg-info">N.R</span>
-										</div>
-										<div class="flex-1 ml-3 pt-1" >
-											<h6 class="text-uppercase fw-bold mb-1" >{{req.requesterName}}<span class="text-warning pl-3">{{req.requestStatus}}</span></h6>
-											<span class="text-muted">{{req.comment}}</span>
-										</div>
-										<div class="float-right pt-1">
-											<small class="text-muted">{{req.uploadDate | date:'medium'}}</small>
+            </div>
+            <div class="ml-md-auto py-2 py-md-0">
+              <a href="#" class="btn btn-white btn-border btn-round mr-2">Manage</a>
+              <a href="#" class="btn btn-secondary btn-round">Add Customer</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-inner mt--5">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card full-height">
+              <div class="card-header">
+                <div class="card-title">My request</div>
+              </div>
+              <div class="card-body">
+                <google-chart #chart [title]="title" [type]="type" [data]="data" [columnNames]="columnNames"
+                  [options]="options" [width]="width" [height]="height">
+                </google-chart>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card full-height">
+              <div class="card-header">
+                <div class="card-title">Feed Activity</div>
+              </div>
+              <div class="card-body">
+                <ol class="activity-feed"  *ngFor="let act of reverseActivity  | slice:0:7">
+                  <li class="feed-item feed-item-info">
+                    <time class="date" datetime="9-25">{{act.time | date:'medium'}}</time>
+                    <span class="text"> Notification from  {{ act.requesterName}} - {{act.interactions}}</span>
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card full-height">
+              <div class="card-header">
+                <div class="card-head-row">
+                  <div class="card-title">Latest Requests</div>
+                  <!-- <div class="card-tools">
+                    <ul class="nav nav-pills nav-secondary nav-pills-no-bd nav-sm" id="pills-tab" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link" id="pills-today" data-toggle="pill" href="#pills-today" role="tab"
+                          aria-selected="true">Today</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" id="pills-week" data-toggle="pill" href="#pills-week" role="tab"
+                          aria-selected="false">Week</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="pills-month" data-toggle="pill" href="#pills-month" role="tab"
+                          aria-selected="false">Month</a>
+                      </li>
+                    </ul>
+                  </div> -->
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="d-flex mt-4" *ngFor="let req of reverseRequest | slice:0:7; index as i">
+                  <!-- <td scope="row">{{ i - 1 }}</td> -->
+                  <div class="avatar ">
+                    <span class="avatar-title rounded-circle border border-white bg-info">N.R</span>
+                  </div>
+                  <div class="flex-1 ml-3 pt-1">
+                    <h6 class="text-uppercase fw-bold mb-1">{{req.requesterName}}<span
+                        class="text-warning pl-3">{{req.requestStatus}}</span></h6>
+                    <span class="text-muted">{{req.comment}}</span>
+                  </div>
+                  <div class="float-right pt-1">
+                    <small class="text-muted">{{req.uploadDate | date:'medium'}}</small>
+                  </div>
+
+
+                  <div class="separator-dashed"></div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card" style="height: 30rem;">
+              <div class="card-body">
+                <div class="card-title fw-mediumbold">Your Product</div>
+                <div class="card-list">
+                  <div class="item-list" *ngFor="let product of products">
+
+                    <div class="info-user ml-3">
+                      <h3>{{product}}</h3>
+                      <!-- <div class="username">{{product}}</div> -->
+                      <!-- <div class="status">Graphic Designer</div> -->
                     </div>
 
+                  </div>
 
-									<div class="separator-dashed"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-									</div>
+      </div>
+    </div>
 
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-8">
-							<div class="card">
-								<div class="card-header">
-									<div class="card-head-row">
-										<div class="card-title">Notifications</div>
-										<div class="card-tools">
-											<a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">
-												<span class="btn-label">
-													<i class="fa fa-pencil"></i>
-												</span>
-												Export
-											</a>
-											<a href="#" class="btn btn-info btn-border btn-round btn-sm">
-												<span class="btn-label">
-													<i class="fa fa-print"></i>
-												</span>
-												Print
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="card-body">
-									<div class="chart-container" style="min-height: 375px">
-										<canvas id="statisticsChart"></canvas>
-									</div>
-									<div id="myChartLegend"></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="card" style="height: 30rem;">
-								<div class="card-body">
-									<div class="card-title fw-mediumbold">Your Product</div>
-									<div class="card-list">
-										<div class="item-list" *ngFor="let product of products">
-
-											<div class="info-user ml-3">
-                        <h3>{{product}}</h3>
-												<!-- <div class="username">{{product}}</div> -->
-												<!-- <div class="status">Graphic Designer</div> -->
-											</div>
-
-										</div>
-
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-		</div>
-
-
-		<!-- Custom template | don't include it in your project! -->
 
   </div>
 
+
+  <!-- Custom template | don't include it in your project! -->
+
+</div>

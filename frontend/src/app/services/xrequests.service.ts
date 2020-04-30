@@ -31,7 +31,7 @@ export class XrequestsService {
   }
 
   getDataa(): Observable<any> {
-    console.log("dsd")
+    
     return this.http.get<any>(this.baseURL + '/xrequest/ex', this.header)
 
   }

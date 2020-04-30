@@ -12,12 +12,16 @@ import { RequestsService } from 'src/app/services/requests.service';
 export class IuserDashboardComponent implements OnInit {
 
   private baseURL = "/api/iuser"
+  private _url = "/api"
+
   private baseurl = "/api/request"
 
   constructor(private http: HttpClient, private requestsService: RequestsService) { }
 
   cachedRequests: any = [];
   reverseRequest: any = [];
+  activities: any = []
+  reverseActivity: any = []
 
   pending = 0;
   new = 0;
@@ -52,6 +56,11 @@ export class IuserDashboardComponent implements OnInit {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     }
     this.http.get(this.baseURL + '/products', header).subscribe(data => this.products = data)
+    this.http.get(this._url + '/activity').subscribe(data => {
+      this.activities = data
+    })
+
+
     this.requestsService.getData().subscribe(request => {
       this.cachedRequests = request['data'];
 
@@ -82,10 +91,16 @@ export class IuserDashboardComponent implements OnInit {
 
   reverse() {
     // console.log(this.cachedRequests)
-    for (let i = this.cachedRequests.length -1 ; i >= 0; i--) {
-      this.reverseRequest.push(this.cachedRequests[i])
+    for (let i = this.cachedRequests.length - 1; i >= 0; i--) {
+      if (this.cachedRequests[i].requestStatus == 'New Request') {
+        this.reverseRequest.push(this.cachedRequests[i])
+      }
     }
-    console.log(this.reverseRequest)
+
+    for (let j = this.activities.length - 1; j >= 0; j--) {
+      this.reverseActivity.push(this.activities[j])
+    }
+    // console.log(this.reverseRequest)
 
   }
 

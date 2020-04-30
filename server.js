@@ -13,6 +13,7 @@ const authenticatedRouteA = require("./routes/admin.js");
 const authenticatedRouteU = require("./routes/iUser.js");
 const authenticatedRouteX = require('./routes/xUser.js');
 const authenticatedRouteXR = require('./routes/xuserRequest.js');
+const authenticatedRouteIX = require('./routes/activity')
 const Request = require('./models/requestModel');
 
 const corsOptions = {
@@ -91,6 +92,10 @@ app.use('/api/iuser', authenticatedRouteU);
 app.use('/api/xuser', authenticatedRouteX);
 
 app.use('/api/xrequest', authenticatedRouteXR);
+
+app.use('/api/activity', authenticatedRouteIX)
+
+
 
 app.get('/api/docURL/:id/:key',async function(req,res){
   const aws = require('aws-sdk');

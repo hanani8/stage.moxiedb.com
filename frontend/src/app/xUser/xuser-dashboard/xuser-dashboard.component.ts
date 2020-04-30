@@ -11,6 +11,7 @@ import { XrequestsService } from 'src/app/services/xrequests.service'
 })
 export class XuserDashboardComponent implements OnInit {
   private baseURL = '/api/xuser';
+  private _url = '/api'
   products: any = [];
 
   constructor(private http: HttpClient, private requestsService: XrequestsService) { }
@@ -18,7 +19,8 @@ export class XuserDashboardComponent implements OnInit {
   // title = 'Requests (in numbers)';
   cachedRequests: any = [];
   reverseRequest: any = [];
-  statusClass: {};
+  activities: any = []
+  reverseActivity: any = []
 
 
   pending = 0;
@@ -49,10 +51,12 @@ export class XuserDashboardComponent implements OnInit {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     };
     // this.http.get(this.baseURL + '/products', header).subscribe(data => this.products = data);
+    this.http.get(this._url + '/activity').subscribe(data => {
+      this.activities = data
+    })
     this.requestsService.getDataa().subscribe(request => {
       this.cachedRequests = request['data'];
       this.reverse()
-      this.setClass()
       // console.log(this.cachedRequests)
       for (let i = 0; i < this.cachedRequests.length; i++) {
         if (this.cachedRequests[i].requestStatus == 'Pending') {
@@ -78,15 +82,15 @@ export class XuserDashboardComponent implements OnInit {
   reverse() {
     // console.log(this.cachedRequests)
     for (let i = this.cachedRequests.length - 1; i >= 0; i--) {
-      this.reverseRequest.push(this.cachedRequests[i])
-      console.log("")
+      if (this.cachedRequests[i].requestStatus == 'New Request') {
+        this.reverseRequest.push(this.cachedRequests[i])
+      }
+    }
+    for (let j = this.activities.length - 1; j >= 0; j--) {
+      this.reverseActivity.push(this.activities[j])
     }
   }
 
-  setClass() {
-    this.statusClass = {
 
-    }
-  }
 
 }
