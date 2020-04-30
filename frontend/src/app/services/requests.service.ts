@@ -13,6 +13,7 @@ export class RequestsService {
   private _urlcomment: string = "/api/request/comments/";
   private baseURL: string = "api";
 
+
   constructor(private http: HttpClient) { }
 
   token = window.localStorage.getItem('tokenID')
@@ -31,5 +32,6 @@ export class RequestsService {
   getData(): Observable<any> {
   return this.http.get<any>(this.baseURL + '/request', this.header)
   }
+
 }
 
