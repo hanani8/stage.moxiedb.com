@@ -47,22 +47,13 @@ authenticatedRouteR.post('/', (req, res) => {
 authenticatedRouteR.get('/', (req, res) => {
   const name = res.locals.user['cognito:username']
   if (res.locals.user['custom:role'] == 'iuser') {
-    Request.find({"respondentName":name}, (err, data) => {
+    Request.find({ "respondentName": name }, (err, data) => {
       res.json({ data });
     }).catch(err => console.log(err));
   }
 });
 
 
-
-authenticatedRouteR.get('/:id', (req, res) => {
-  if (res.locals.user['custom:role'] == 'iuser') {
-    var id = req.params.id;
-    Request.findById(id, function (err, data) {
-      res.json(data)
-    }).catch(err => console.log(err))
-  }
-})
 
 
 authenticatedRouteR.post('/:id', (req, res) => {
@@ -79,15 +70,15 @@ authenticatedRouteR.post('/:id', (req, res) => {
   }
 })
 
-authenticatedRouteR.post('/:id/upload', (req,res) => {
+authenticatedRouteR.post('/:id/upload', (req, res) => {
   if (res.locals.user['custom:role'] == 'iuser') {
     let filename = req.body.File;
     let id = req.params.id;
-    Request.findByIdAndUpdate(id, { $push: { uploads: filename}}, function(err,data) {
-      if(err) { console.log("Something went wrong")}
-        else {
-          console.log("upload seems okay for now")
-        }
+    Request.findByIdAndUpdate(id, { $push: { uploads: filename } }, function (err, data) {
+      if (err) { console.log("Something went wrong") }
+      else {
+        console.log("upload seems okay for now")
+      }
     })
   }
 })
@@ -123,6 +114,18 @@ authenticatedRouteR.post('/requestStatus/:id', (req, res) => {
 })
 
 
+authenticatedRouteR.get('/:id', (req, res) => {
+  if (res.locals.user['custom:role'] == 'iuser') {
+    var id = req.params.id;
+    Request.findById(id, function (err, data) {
+      res.json(data)
+    }).catch(err => console.log(err))
+  }
+})
+
+
+
+ 
 
 
 module.exports = authenticatedRouteR;

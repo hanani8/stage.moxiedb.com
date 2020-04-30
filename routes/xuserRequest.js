@@ -59,6 +59,17 @@ authenticatedRouteXR.get('/', (req, res) => {
 })
 
 
+authenticatedRouteXR.get('/ex', (req, res) => {
+  const name = res.locals.user['cognito:username']
+  console.log(name)
+  if (res.locals.user['custom:role'] == 'xuser') {
+    Request.find({ "requesterName": name }, (err, data) => {
+      res.json({ data });
+    }).catch(err => console.log(err));
+  }
+});
+
+
 
 authenticatedRouteXR.get('/:id', (req, res) => {
   if (res.locals.user['custom:role'] == 'xuser') {
@@ -123,5 +134,6 @@ authenticatedRouteXR.post('/requestStatus/:id', (req, res) => {
     }).catch(err => console.log(err))
   }
 });
+
 
 module.exports = authenticatedRouteXR;

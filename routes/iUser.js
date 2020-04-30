@@ -31,20 +31,24 @@ authenticatedRouteU.use(function (req, res, next) {
     });
 });
 
-authenticatedRouteU.get('/products', (req,res) => {
+authenticatedRouteU.get('/products', (req, res) => {
     const name = res.locals.user['cognito:username'];
-    Role.findOne({"name":name}, (err,data) => {
+    Role.findOne({ "name": name }, (err, data) => {
         res.json(data.products);
     }).catch(err => console.log(err))
 })
 
-authenticatedRouteU.get('/roles', (req,res) => {
+authenticatedRouteU.get('/roles', (req, res) => {
     const name = res.locals.user['cognito:username'];
     var responseData;
-    Role.findOne({"name":name}, (err,data) => {
-        if(err) console.log(err);
+    Role.findOne({ "name": name }, (err, data) => {
+        if (err) console.log(err);
         res.json(data.users);
     }).catch(err => console.log(err))
 })
+
+
+
+
 
 module.exports = authenticatedRouteU;

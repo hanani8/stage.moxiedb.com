@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-	selector: 'app-xuser-prg',
-	templateUrl: './xuser-prg.component.html',
-	styleUrls:['./xuser-prg.component.css']
+  selector: 'app-xuser-prg',
+  templateUrl: './xuser-prg.component.html',
+  styleUrls: ['./xuser-prg.component.css']
 })
 
 export class XuserPrgComponent implements OnInit {
@@ -25,15 +25,15 @@ export class XuserPrgComponent implements OnInit {
   disabled = false;
   status = 0;
   requestStatus;
-  requestID:any = '';
-  private baseURL;
+  requestID: any = '';
+  private baseURL ;
   private baseStatusURL;
   selectedFiles: FileList;
   currentFileUpload: File;
   progress: { percentage: number } = { percentage: 0 };
   downloadURL;
 
-  constructor(private fb: FormBuilder, private xrequestsService: XrequestsService, private interactionsService: InteractionsService, private http: HttpClient, private uploadDocService: UploadDocService, private router:Router,  private tos: ToastrService) { }
+  constructor(private fb: FormBuilder, private xrequestsService: XrequestsService, private interactionsService: InteractionsService, private http: HttpClient, private uploadDocService: UploadDocService, private router: Router, private tos: ToastrService) { }
 
   token = window.localStorage.getItem('tokenID')
   header = {
@@ -51,16 +51,16 @@ export class XuserPrgComponent implements OnInit {
       this.requestStatus = data.requestStatus;
       console.log(this.request);
       return this.request
-    },(error) => {
-    console.error(error)
+    }, (error) => {
+      console.error(error)
     });
 
     this.xrequestsService.getComments(this.requestID).subscribe(data => {
       this.interactions = data;
       console.log(this.interactions);
       return this.interactions
-    },(error) => {
-    console.error(error)
+    }, (error) => {
+      console.error(error)
     });
 
 
@@ -71,7 +71,7 @@ export class XuserPrgComponent implements OnInit {
       file: [null, Validators.required]
     })
     this.myFormDownload = this.fb.group({
-    serial: [null, Validators.required]
+      serial: [null, Validators.required]
     })
   }
 
@@ -180,8 +180,7 @@ export class XuserPrgComponent implements OnInit {
     console.error(error);
     })
     this.tos.success( 'Document Uploaded!');
-    // this.router.navigate([''])
- 
+    // this.router.navigate(['']
   }
 
   getDoc(id) {
@@ -195,7 +194,6 @@ export class XuserPrgComponent implements OnInit {
     console.error(error);
     })
     this.tos.success( 'Document Downloaded!');
-
   }
 }
 

@@ -1,11 +1,11 @@
 import { Component, OnInit, PipeTransform } from '@angular/core';
-import { HttpClient,HttpHeaders } from '@angular/common/http'
-import { DecimalPipe } from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { request } from 'src/app/model/request';
 import { RequestsService } from 'src/app/services/requests.service';
+
 
 interface Request {
   documentsNames: string;
@@ -32,7 +32,7 @@ export class IuserMyRequestsComponent implements OnInit {
 
   requests: any = [];
   cachedRequests: any = [];
-  public searchField:any = '';
+  public searchField: any = '';
   searchTerm: string;
   searchMarket: string;
 
@@ -70,28 +70,30 @@ constructor(private http: HttpClient, private requestsService: RequestsService) 
   ngOnInit(): void {
     var token = window.localStorage.getItem('tokenID');
     var header = {
-    headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
+      headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     }
     this.requestsService.getData().subscribe(request => {
+
     this.cachedRequests = request['data'];
     this.requests = this.cachedRequests;
+
     })
   }
 
   transfer() {
-  for(let request of this.cachedRequests){
-  this.requests.push(request);
-  }
+    for (let request of this.cachedRequests) {
+      this.requests.push(request);
+    }
   }
 
   filter($event) {
-  console.log($event.target.value);
-  if($event.target.value == ''){
-  this.requests = this.requests;
-  }
-  else{
-  this.requests = this.cachedRequests.filter((item) => item.requestStatus == $event.target.value);
-  }
+    console.log($event.target.value);
+    if ($event.target.value == '') {
+      this.requests = this.requests;
+    }
+    else {
+      this.requests = this.cachedRequests.filter((item) => item.requestStatus == $event.target.value);
+    }
   }
 
   filter1($event) {

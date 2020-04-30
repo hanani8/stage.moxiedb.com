@@ -65,12 +65,20 @@ export class RoleManagementComponent implements OnInit {
     this.confirmedStations = new Array<any>();
     this.sourceStations = new Array<any>();
 
-    for (let i = 0; i < this.stations.length; i++) {
-      for (let j = 0; j < this.exists.length; j++) {
-        if (this.exists[j] == this.stations[i]) {
-          this.confirmedStations.push(this.exists[j])
-        } else {
-          this.sourceStations.push(this.stations[i])
+    console.log(this.stations)
+    console.log(this.exists)
+    if (this.exists[0] == undefined) {
+      for (let e = 0; e < this.stations.length; e++) {
+        this.sourceStations.push(this.stations[e])
+      }
+    } else {
+      for (let i = 0; i < this.stations.length; i++) {
+        for (let j = 0; j <= this.exists.length; j++) {
+          if (this.exists[j] == this.stations[i]) {
+            this.confirmedStations.push(this.exists[j])
+          } else {
+            this.sourceStations.push(this.stations[i])
+          }
         }
       }
     }
@@ -81,22 +89,22 @@ export class RoleManagementComponent implements OnInit {
 
 
   private prepareUserStations() {
-    // this.userExists = JSON.parse(JSON.stringify(this.userStations));
-
     this.confirmedStations = new Array<any>();
     this.sourceStations = new Array<any>();
-    // console.log(JSON.stringify(this.userExists[0]))
-    // console.log(JSON.stringify(this.userStations[0]))
+
+    // console.log(this.userStations)
+    // console.log(this.userExists)
 
     for (let i = 0; i < this.userStations.length; i++) {
-      for (let j = 0; j < this.userExists.length; j++) {
+      for (let j = 0; j <= this.userExists.length; j++) {
         if (this.userExists[j] !== this.userStations[i]) {
           this.sourceStations.push(this.userStations[i])
+        } else {
+          this.confirmedStations.push(this.userExists[j])
         }
       }
     }
     // this.sourceStations.push(this.userStations)
-
     this.source = this.sourceStations;
     this.confirmed = this.userExists;
   }
@@ -110,8 +118,7 @@ export class RoleManagementComponent implements OnInit {
       this.prepareStation()
     } else if (this.roll.role == 'xuser') {
       this.userExists = this.roll.users;
-      console.log(this.userExists)
-      console.log(this.userStations)
+      // console.log(this.userExists)
       // console.log(this.userStations)
       this.prepareUserStations()
     }
@@ -131,6 +138,7 @@ export class RoleManagementComponent implements OnInit {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     }
     this.http.put(this.url + '/admin/roles', roleEdit.value, header).subscribe(role => {
+      console.log(roleEdit.value)
       this.ngOnInit();
 
     })
