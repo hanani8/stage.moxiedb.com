@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { request } from 'src/app/model/request';
 import { RequestsService } from 'src/app/services/requests.service';
-// import {} from ''
 
 
 interface Request {
@@ -66,7 +65,7 @@ export class IuserMyRequestsComponent implements OnInit {
   // };
 
 
-  constructor(private http: HttpClient, private requestsService: RequestsService) { }
+constructor(private http: HttpClient, private requestsService: RequestsService) { }
 
   ngOnInit(): void {
     var token = window.localStorage.getItem('tokenID');
@@ -74,8 +73,10 @@ export class IuserMyRequestsComponent implements OnInit {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     }
     this.requestsService.getData().subscribe(request => {
-      this.cachedRequests = request['data'];
-      this.requests = this.cachedRequests;
+
+    this.cachedRequests = request['data'];
+    this.requests = this.cachedRequests;
+
     })
   }
 
@@ -96,13 +97,13 @@ export class IuserMyRequestsComponent implements OnInit {
   }
 
   filter1($event) {
-    console.log($event.target.value);
-    if ($event.target.value == '') {
-      this.requests = this.requests;
-    }
-    else {
-      this.requests = this.cachedRequests.filter((item) => item.criticality == $event.target.value);
-    }
+  console.log($event.target.value);
+  if($event.target.value == ''){
+  this.requests = this.requests;
+  }
+  else{
+  this.requests = this.cachedRequests.filter((item) => item.criticality == $event.target.value);
+  }
   }
 }
 

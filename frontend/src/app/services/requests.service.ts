@@ -10,10 +10,8 @@ import { Interaction } from 'src/app/model/interaction';
 export class RequestsService {
 
   private _url: string = "/api/request/";
-  private _urlcomment: string = "/api/request/comments/"
-  private baseURL: string = "/api"
-
-  requests: any = [];
+  private _urlcomment: string = "/api/request/comments/";
+  private baseURL: string = "api";
 
   constructor(private http: HttpClient) { }
 
@@ -36,17 +34,6 @@ export class RequestsService {
   getData(): Observable<any> {
     return this.http.get<any>(this.baseURL + '/request', this.header)
   }
-
-  
-
-
-
-  // getDataa(): Observable<any> {
-  //   console.log("dsd")
-  //   return this.http.get<any>(this.baseURL + '/request/dash', this.header)
-
-  // }
-
 
 }
 

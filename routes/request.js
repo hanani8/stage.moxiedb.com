@@ -128,7 +128,4 @@ authenticatedRouteR.get('/:id', (req, res) => {
  
 
 
-
-
-
 module.exports = authenticatedRouteR;

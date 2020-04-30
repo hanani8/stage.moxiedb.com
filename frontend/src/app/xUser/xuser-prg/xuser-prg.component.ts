@@ -42,13 +42,10 @@ export class XuserPrgComponent implements OnInit {
 
 
   ngOnInit() {
-    this.requestID = (this.router.url).substring(11);
-    this.baseURL = `/api/xrequest/${this.requestID}`;
-    this.baseStatusURL = `/api/xrequest/requestStatus/${this.requestID}`;
-
-
-    // this.requestID = (this.router.url).substring(11);
-    console.log(this.baseURL);
+  this.requestID = (this.router.url).substring(11);
+  this.baseURL = `/api/xrequest/${this.requestID}`;
+  this.baseStatusURL = `/api/xrequest/requestStatus/${this.requestID}`;
+  console.log(this.baseURL);
     this.xrequestsService.getRequests(this.requestID).subscribe(data => {
       this.request = data;
       this.requestStatus = data.requestStatus;
@@ -84,18 +81,26 @@ export class XuserPrgComponent implements OnInit {
     this.currentFileUpload = this.selectedFiles.item(0);
   }
 
+  get Comment() {
+    return this.myFormComment.get('Comment');
+  }
+
   addComment() {
     console.log(this.myFormComment.value);
     this.disabled = true;
     this.nextStep();
     this.requestStatus = "Pending";
-    this.http.post(this.baseURL, this.myFormComment.value, this.header).subscribe();
+    this.http.post(this.baseURL, this.myFormComment.value, this.header).subscribe((error) => {
+    console.error(error);
+    });
     this.childAddComment();
   }
 
   childAddComment() {
     this.requestStatus = "Pending";
-    this.http.post(this.baseStatusURL, { requestStatus: this.requestStatus }, this.header).subscribe()
+    this.http.post(this.baseStatusURL, { requestStatus: this.requestStatus }, this.header).subscribe((error) => {
+    console.error(error);
+    })
   }
 
   setStep(index: number) {
@@ -113,26 +118,33 @@ export class XuserPrgComponent implements OnInit {
     this.disabled = true;
     this.nextStep();
     // this.interactions.push({Comment: "Request is closed"});
-    this.http.post(this.baseURL, { Comment: "Request is Closed" }, this.header).subscribe();
+    this.http.post(this.baseURL, { Comment: "Request is Closed" }, this.header).subscribe((error) => {
+    console.error(error);
+    });
     this.requestStatus = "Closed";
     this.childCloseRequest();
   }
 
   childCloseRequest() {
     this.requestStatus = "Closed";
-    this.http.post(this.baseStatusURL, { requestStatus: this.requestStatus }, this.header).subscribe();
+    this.http.post(this.baseStatusURL, { requestStatus: this.requestStatus }, this.header).subscribe((error) => {
+    console.error(error);
+    });
   }
 
   reOpenRequest() {
-    this.http.post(this.baseURL, { Comment: "Request is Re-Opened" }, this.header).subscribe();
+    this.http.post(this.baseURL, { Comment: "Request is Re-Opened" }, this.header).subscribe((error) => {
+    console.error(error);
+    });
     this.childReOpenRequest();
   }
 
   childReOpenRequest() {
     this.requestStatus = "Pending";
-    this.http.post(this.baseStatusURL, { requestStatus: this.requestStatus }, this.header).subscribe();
+    this.http.post(this.baseStatusURL, { requestStatus: this.requestStatus }, this.header).subscribe((error) => {
+    console.error(error);
+    });
   }
-
 
   setColor() {
     if (this.requestStatus == "Closed") {
@@ -161,21 +173,27 @@ export class XuserPrgComponent implements OnInit {
   uploadDoc() {
     const file = this.selectedFiles.item(0);
     this.uploadDocService.uploadFile(file);
-    this.http.post(this.baseURL, { Comment: `Document ${file.name} is Uploaded` }, this.header).subscribe();
-    this.http.post(this.baseURL + '/upload', { File: `${file.name}` }, this.header).subscribe(data => { console.log(data) })
-    this.tos.success('Document uploaded!');
-    // this.router.navigate(['/my-requests'])
+    this.http.post(this.baseURL, { Comment: `Document ${file.name} is Uploaded` }, this.header).subscribe((error) => {
+    console.error(error);
+    });
+    this.http.post(this.baseURL + '/upload', {File:`${file.name}`}, this.header).subscribe((data)=> {console.log(data)},(error) => {
+    console.error(error);
+    })
+    this.tos.success( 'Document Uploaded!');
+    // this.router.navigate(['']
   }
 
   getDoc(id) {
-    const key = this.myFormDownload.value.serial;
-    this.uploadDocService.downloadFile(id, key).subscribe(data => {
+  const key = this.myFormDownload.value.serial;
+  console.log(key);
+    this.uploadDocService.downloadFile(id, key).subscribe((data) => {
       this.downloadURL = data;
       console.log(data);
       console.log(id);
+    },(error) => {
+    console.error(error);
     })
-    this.tos.success('Document downloaded!');
-    // this.router.navigate(['/my-requests'])
+    this.tos.success( 'Document Downloaded!');
   }
 }
 

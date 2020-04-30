@@ -28,7 +28,6 @@ authenticatedRouteXR.use(function (req, res, next) {
     //Else API has been authenticated. Proceed.
     res.locals.user = response;
     console.log(response['custom:role'])
-    next();
   });
 });
 
@@ -36,10 +35,15 @@ authenticatedRouteXR.use(function (req, res, next) {
 authenticatedRouteXR.post('/', (req, res) => {
   const name = res.locals.user['cognito:username']
   if (res.locals.user['custom:role'] == 'xuser') {
+    if(req.body.respondentName){
     var request = new Request(req.body);
     request.requesterName = name
     console.log(request);
     request.save().catch(err => console.log(err));
+   }
+   else{
+    return false;
+   }
   }
 })
 
@@ -52,7 +56,7 @@ authenticatedRouteXR.get('/', (req, res) => {
       res.json({ data });
     }).catch(err => console.log(err));
   }
-});
+})
 
 
 authenticatedRouteXR.get('/ex', (req, res) => {
@@ -79,7 +83,6 @@ authenticatedRouteXR.get('/:id', (req, res) => {
 
 
 authenticatedRouteXR.post('/:id', (req, res) => {
-  if (res.locals.user['custom:role'] == 'xuser') {
     let comment = req.body.Comment;
     let id = req.params.id;
     console.log(id);
@@ -88,8 +91,7 @@ authenticatedRouteXR.post('/:id', (req, res) => {
       else {
         console.log("seems okay for now");
       }
-    }).catch(err => console.log(err));
-  }
+    });
 })
 
 authenticatedRouteXR.post('/:id/upload', (req,res) => {
@@ -115,7 +117,7 @@ authenticatedRouteXR.get('/comments/:id', (req, res) => {
 
     }).catch(err => console.log(err))
   }
-})
+});
 
 authenticatedRouteXR.post('/requestStatus/:id', (req, res) => {
   if (res.locals.user['custom:role'] == 'xuser') {
@@ -131,13 +133,7 @@ authenticatedRouteXR.post('/requestStatus/:id', (req, res) => {
       }
     }).catch(err => console.log(err))
   }
-})
-
-
-
-
-
-
+});
 
 
 module.exports = authenticatedRouteXR;

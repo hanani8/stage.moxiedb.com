@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RequestsService } from 'src/app/services/requests.service';
 import { XrequestsService } from 'src/app/services/xrequests.service'
 
-
 @Component({
   selector: 'app-xuser-dashboard',
   templateUrl: './xuser-dashboard.component.html',
@@ -44,8 +43,10 @@ export class XuserDashboardComponent implements OnInit {
   height = 520;
 
 
+  constructor(private http: HttpClient) { }
 
-  ngOnInit() {
+
+  ngOnInit(){
     var token = window.localStorage.getItem('tokenID');
     var header = {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
@@ -90,7 +91,4 @@ export class XuserDashboardComponent implements OnInit {
       this.reverseActivity.push(this.activities[j])
     }
   }
-
-
-
 }

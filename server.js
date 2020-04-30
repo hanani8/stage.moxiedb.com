@@ -81,6 +81,9 @@ app.use('/login', (req,res) => {
   res.sendFile(process.cwd()+"/mainLogin.html")
 });
 
+
+app.use('/api/xrequest', authenticatedRouteXR);
+
 app.use('/api/superAdmin', authenticatedRouteSA);
 
 app.use('/api/request', authenticatedRouteR);
@@ -94,8 +97,6 @@ app.use('/api/xuser', authenticatedRouteX);
 app.use('/api/xrequest', authenticatedRouteXR);
 
 app.use('/api/activity', authenticatedRouteIX)
-
-
 
 app.get('/api/docURL/:id/:key',async function(req,res){
   const aws = require('aws-sdk');

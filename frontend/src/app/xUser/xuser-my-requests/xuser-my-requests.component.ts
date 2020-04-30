@@ -5,6 +5,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { request } from 'src/app/model/request';
+import { SupplierService } from 'src/app/services/supplier.service';
 
 interface Request {
   documentsNames: string;
@@ -26,25 +27,16 @@ interface Request {
 })
 export class XuserMyRequestsComponent implements OnInit {
 
-  private baseURL: string = "/api"
-
   requests: any = [];
   public searchField: any = '';
   searchTerm: string;
   searchMarket: string;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private supplierService: SupplierService) { }
 
   ngOnInit() {
-    var token = window.localStorage.getItem('tokenID');
-    var header = {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
-    }
-
-
-    this.http.get(this.baseURL + '/xrequest', header).subscribe(request => {
-      this.requests = request['data']
-      // console.log(this.requests)
-    });
+    this.supplierService.getxData().subscribe(request => {
+    this.requests = request['data'];
+    })
   }
 
 }
