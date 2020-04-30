@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-	selector: 'app-xuser-prg',
-	templateUrl: './xuser-prg.component.html',
-	styleUrls:['./xuser-prg.component.css']
+  selector: 'app-xuser-prg',
+  templateUrl: './xuser-prg.component.html',
+  styleUrls: ['./xuser-prg.component.css']
 })
 
 export class XuserPrgComponent implements OnInit {
@@ -25,15 +25,15 @@ export class XuserPrgComponent implements OnInit {
   disabled = false;
   status = 0;
   requestStatus;
-  requestID:any = '';
-  private baseURL = `/api/xrequest/${this.requestID}`;
-  private baseStatusURL = `/api/xrequest/requestStatus/${this.requestID}`;
+  requestID: any = '';
+  private baseURL ;
+  private baseStatusURL;
   selectedFiles: FileList;
   currentFileUpload: File;
   progress: { percentage: number } = { percentage: 0 };
   downloadURL;
 
-  constructor(private fb: FormBuilder, private xrequestsService: XrequestsService, private interactionsService: InteractionsService, private http: HttpClient, private uploadDocService: UploadDocService, private router:Router,  private tos: ToastrService) { }
+  constructor(private fb: FormBuilder, private xrequestsService: XrequestsService, private interactionsService: InteractionsService, private http: HttpClient, private uploadDocService: UploadDocService, private router: Router, private tos: ToastrService) { }
 
   token = window.localStorage.getItem('tokenID')
   header = {
@@ -42,23 +42,28 @@ export class XuserPrgComponent implements OnInit {
 
 
   ngOnInit() {
-  this.requestID = (this.router.url).substring(11);
-  console.log(this.baseURL);
+    this.requestID = (this.router.url).substring(11);
+    this.baseURL = `/api/xrequest/${this.requestID}`;
+    this.baseStatusURL = `/api/xrequest/requestStatus/${this.requestID}`;
+
+
+    // this.requestID = (this.router.url).substring(11);
+    console.log(this.baseURL);
     this.xrequestsService.getRequests(this.requestID).subscribe(data => {
       this.request = data;
       this.requestStatus = data.requestStatus;
       console.log(this.request);
       return this.request
-    },(error) => {
-    console.error(error)
+    }, (error) => {
+      console.error(error)
     });
 
     this.xrequestsService.getComments(this.requestID).subscribe(data => {
       this.interactions = data;
       console.log(this.interactions);
       return this.interactions
-    },(error) => {
-    console.error(error)
+    }, (error) => {
+      console.error(error)
     });
 
 
@@ -69,7 +74,7 @@ export class XuserPrgComponent implements OnInit {
       file: [null, Validators.required]
     })
     this.myFormDownload = this.fb.group({
-    serial: [null, Validators.required]
+      serial: [null, Validators.required]
     })
   }
 
@@ -157,8 +162,8 @@ export class XuserPrgComponent implements OnInit {
     const file = this.selectedFiles.item(0);
     this.uploadDocService.uploadFile(file);
     this.http.post(this.baseURL, { Comment: `Document ${file.name} is Uploaded` }, this.header).subscribe();
-    this.http.post(this.baseURL + '/upload', {File:`${file.name}`}, this.header).subscribe(data => {console.log(data)})
-    this.tos.success( 'Document uploaded!');
+    this.http.post(this.baseURL + '/upload', { File: `${file.name}` }, this.header).subscribe(data => { console.log(data) })
+    this.tos.success('Document uploaded!');
     // this.router.navigate(['/my-requests'])
   }
 
@@ -169,7 +174,7 @@ export class XuserPrgComponent implements OnInit {
       console.log(data);
       console.log(id);
     })
-    this.tos.success( 'Document downloaded!');
+    this.tos.success('Document downloaded!');
     // this.router.navigate(['/my-requests'])
   }
 }

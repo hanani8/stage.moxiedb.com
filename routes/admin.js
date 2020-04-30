@@ -161,21 +161,23 @@ authenticatedRouteA.get('/roles', (req, res) => {
 
 authenticatedRouteA.put('/roles', (req, res) => {
     if (res.locals.user['custom:role'] == 'admin') {
-
-
         Role.findById(req.body._id, (err, data) => {
             if (err) return console.log(err);
+            console.log(req.body)
+            // console.log(data.users)
+            console.log(data.users)
 
-            let User = req.body.users
-            for (i = 0; i < User.length; i++) {
-                data.users.push(User[i])
-            }
+            // let User = req.body.users
+            // for (i = 0; i < User.length; i++) {
+            //     data.users.push(User[i])
+            // }
+            data.users = req.body.users
             data.products = req.body.products
             data.department = req.body.department;
             data.designation = req.body.designation;
             data.phone = req.body.phone;
             data.employeeID = req.body.emp;
-            data.phone = req.body.phone;
+            data.email = req.body.mail
 
             data.save().catch(err => console.log(err));
             res.status(201).send(data);

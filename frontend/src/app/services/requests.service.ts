@@ -11,6 +11,9 @@ export class RequestsService {
 
   private _url: string = "/api/request/";
   private _urlcomment: string = "/api/request/comments/"
+  private baseURL: string = "/api"
+
+  requests: any = [];
 
   constructor(private http: HttpClient) { }
 
@@ -21,10 +24,26 @@ export class RequestsService {
 
   getRequests(requestID): Observable<request> {
     return this.http.get<request>(`${this._url}${requestID}`, this.header)
+
   };
 
   getComments(requestID): Observable<Interaction> {
     return this.http.get<Interaction>(`${this._urlcomment}${requestID}`, this.header)
+  };
+
+
+
+  getData(): Observable<any> {
+    return this.http.get<any>(this.baseURL + '/request', this.header)
+
   }
+
+  // getDataa(): Observable<any> {
+  //   console.log("dsd")
+  //   return this.http.get<any>(this.baseURL + '/request/dash', this.header)
+
+  // }
+
+
 }
 

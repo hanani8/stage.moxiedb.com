@@ -48,7 +48,7 @@
                             }}</option>
                           </ng-template>
                           <ng-template #elseblock>
-                            <option *ngFor="let organization of organizations"  value="{{ organization.name }}">
+                            <option *ngFor="let organization of organizations" value="{{ organization.name }}">
                               {{ organization.name }}</option>
                           </ng-template>
                         </select>
@@ -59,7 +59,8 @@
                     <div class="col-md-6">
                       <div class="form-group form-group-default">
                         <label>Full Name</label>
-                        <input [ngModel] type="text" required class="form-control" name="name" placeholder="Eg: Hanani" />
+                        <input [ngModel] type="text" required class="form-control" name="name"
+                          placeholder="Eg: Hanani" />
                       </div>
                     </div>
                     <div class="col-md-4">
@@ -74,7 +75,8 @@
                     <div class="col-md-6">
                       <div class="form-group form-group-default">
                         <label>Employee ID</label>
-                        <input [ngModel] type="text" required class="form-control" name="employeeID" placeholder="Eg: 123-45" />
+                        <input [ngModel] type="text" required class="form-control" name="employeeID"
+                          placeholder="Eg: 123-45" />
                       </div>
                     </div>
 

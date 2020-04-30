@@ -11,6 +11,7 @@ export class XrequestsService {
 
   private _url: string = "/api/xrequest/";
   private _urlcomment: string = "/api/xrequest/comments/"
+  private baseURL: string = "/api"
 
   constructor(private http: HttpClient) { }
 
@@ -27,5 +28,11 @@ export class XrequestsService {
 
   getComments(requestID): Observable<Interaction> {
     return this.http.get<Interaction>(`${this._urlcomment}${requestID}`, this.header)
+  }
+
+  getDataa(): Observable<any> {
+    console.log("dsd")
+    return this.http.get<any>(this.baseURL + '/xrequest/ex', this.header)
+
   }
 }

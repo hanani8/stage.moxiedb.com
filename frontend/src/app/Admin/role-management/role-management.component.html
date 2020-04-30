@@ -39,7 +39,7 @@
                         <th>Designation</th>
                         <th>Department</th>
                         <th>Employee ID</th>
-                        <th>Admin</th>
+                        <!-- <th>Admin</th> -->
                         <th style="width: 10%">Action</th>
                       </tr>
                     </thead>
@@ -54,10 +54,10 @@
                         <td>{{role.designation}}</td>
                         <td>{{role.department}}</td>
                         <td>{{role.employeeID}}</td>
-                        <td>{{role.Admin}}</td>
+                        <!-- <td>{{role.Admin}}</td> -->
                         <td>
                           <div class="form-button-action">
-                            <button type="button" data-toggle="tooltip" data-target="#upmodel" data-toggle="modal"
+                            <button type="button"  data-target=".bd-example-modal-lg" data-toggle="modal"
                               (click)="toUpdate(role)" class="btn btn-link btn-primary btn-lg"
                               data-original-title="Edit Task">
                               <i class="material-icons">edit</i>
@@ -94,9 +94,9 @@
 
 
   <!-- Edit Model -->
-  <div class="modal fade right side-modal" id="upmodel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  <div class="modal bd-example-modal-lg fade right side-modal" id="upmodel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-side modal-top-right" role="document">
+    <div class="modal-dialog modal-lg modal-side modal-top-right" role="document">
       <div class="modal-content">
         <div style="background-color: rgb(18, 47, 86);" class="modal-header">
           <h2 class="modal-title w-100 text-white" id="myModalLabel">
@@ -143,7 +143,7 @@
             <div class="form-group">
               <div class="card-body">
                 <dual-list [ngModel] class="form-control" [source]="source" [(destination)]="confirmed"
-                  [format]="format" [filter]="filter" height="150px"></dual-list>
+                  [format]="format" [filter]="filter" height="170px"></dual-list>
               </div>
             </div>
           </div>
